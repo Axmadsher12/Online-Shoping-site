@@ -74,7 +74,7 @@ class computer(models.Model):
     Type = models.ForeignKey(type_compyuter, null=True, blank=True, on_delete=models.CASCADE)
     Time = models.DateTimeField(auto_now=True)
 
-class appliances(models.Model):
+class appliance(models.Model):
     Name = models.CharField(max_length=25)
     Old_price = models.IntegerField()
     New_price = models.IntegerField()
@@ -104,6 +104,7 @@ class signup(models.Model):
     ConfirmPassword = models.CharField(max_length=20)
     Time = models.DateTimeField(auto_now=True)
 
+"Adminga murojat"
 class Contact(models.Model):
      Your_name = models.CharField(max_length=25)
      Your_email = models.EmailField()
@@ -111,25 +112,30 @@ class Contact(models.Model):
      Send_message = models.TextField()
      Time = models.DateTimeField(auto_now=True)
 
-class TopBrents(models.Model):
+"Brentlar"
+class TopBrent(models.Model):
     Name = models.CharField(null=True,blank=True,max_length=25)
     Image = models.ImageField(null=True,blank=True,upload_to='media')
     Time = models.DateTimeField(auto_now=True)
 
+'Bizning jamoa'
 class MeetOurTeam(models.Model):
     Name = models.CharField(max_length=25)
     Image = models.ImageField(upload_to='media')
     occupation = models.CharField(max_length=25)
     Time = models.DateTimeField(auto_now=True)
 
+'Izox'
 class comment(models.Model):
     Name = models.CharField(max_length=25)
     Mail = models.EmailField()
     Telephone_no = models.IntegerField()
+    Image = models.ImageField(null=True,blank=True,upload_to='media')
     Add_Yuor_Review = models.TextField(null=True,blank=True)
     Time = models.DateTimeField(null=True,blank=True,auto_now=True)
 
-class Discounts_mobiles(models.Model):
+'Chegirmalar'
+class Discounts_mobile(models.Model):
     Percent = models.IntegerField()
     Time = models.DateTimeField(auto_now=True)
 
@@ -140,6 +146,3 @@ class Discounts_compyuter(models.Model):
 class Discounts_appliance(models.Model):
     Percent = models.IntegerField()
     Time = models.DateTimeField(auto_now=True)
-
-class ffff(models.Model):
-    com = models.CharField(max_length=25)

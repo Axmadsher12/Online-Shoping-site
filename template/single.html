@@ -69,9 +69,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 									<div class="tab-1 resp-tab-content" aria-labelledby="tab_item-0">
 										<div class="facts">
 											<div class="register">
-												<form action="#" method="post">			
-													<input name="Email" placeholder="Email Address" type="text" required="">						
-													<input name="Password" placeholder="Password" type="password" required="">										
+												<form action="{% url 'single' %}" method="post">
+													{% csrf_token %}
+													<input name="Mail3" placeholder="Email Address" type="text" required="">
+													<input name="Password3" placeholder="Password" type="password" required="">
 													<div class="sign-up">
 														<input type="submit" value="Sign in"/>
 													</div>
@@ -82,11 +83,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 									<div class="tab-2 resp-tab-content" aria-labelledby="tab_item-1">
 										<div class="facts">
 											<div class="register">
-												<form action="#" method="post">			
-													<input placeholder="Name" name="Name" type="text" required="">
-													<input placeholder="Email Address" name="Email" type="email" required="">	
-													<input placeholder="Password" name="Password" type="password" required="">	
-													<input placeholder="Confirm Password" name="Password" type="password" required="">
+												<form action="{% url 'single' %}" method="post">
+													{% csrf_token %}
+													<input placeholder="Name" name="Name2" type="text" required="">
+													<input placeholder="Email Address" name="Mail4" type="email" required="">
+													<input placeholder="Password" name="Password1" type="password" required="">
+													<input placeholder="Confirm Password" name="Password2" type="password" required="">
 													<div class="sign-up">
 														<input type="submit" value="Create Account"/>
 													</div>
@@ -416,13 +418,17 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						<h4>(2) Reviews</h4>
 
 						<div class="additional_info_sub_grids">
+							{% for i in com %}
 							<div class="col-xs-2 additional_info_sub_grid_left">
-								<img src="{% static 'images/t1.png' %}" alt=" " class="img-responsive" />
+								{% if i.Image %}
+								<img src="{{i.Image.url}}" name="Img com" alt=" " class="img-responsive" />
+							    {% endif %}
 							</div>
 							<div class="col-xs-10 additional_info_sub_grid_right">
+								{}
 								<div class="additional_info_sub_grid_rightl">
-									<a href="{% url 'single' %}">Laura</a>
-									<h5>Oct 06, 2016.</h5>
+									<a href="{% url 'single' %}">{{i.Name}}</a>
+									<h5>{{i.Time}}</h5>
 									<p>Quis autem vel eum iure reprehenderit qui in ea voluptate 
 										velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat 
 										quo voluptas nulla pariatur.</p>
@@ -449,42 +455,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 								</div>
 								<div class="clearfix"> </div>
 							</div>
-							<div class="clearfix"> </div>
-						</div>
-						<div class="additional_info_sub_grids">
-							<div class="col-xs-2 additional_info_sub_grid_left">
-								<img src="{% static 'images/t2.png' %}" alt=" " class="img-responsive" />
-							</div>
-							<div class="col-xs-10 additional_info_sub_grid_right">
-								<div class="additional_info_sub_grid_rightl">
-									<a href="{% url 'single' %}">Michael</a>
-									<h5>Oct 04, 2016.</h5>
-									<p>Quis autem vel eum iure reprehenderit qui in ea voluptate 
-										velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat 
-										quo voluptas nulla pariatur.</p>
-								</div>
-								<div class="additional_info_sub_grid_rightr">
-									<div class="rating">
-										<div class="rating-left">
-											<img src="{% static 'images/star-.png' %}" alt=" " class="img-responsive">
-										</div>
-										<div class="rating-left">
-											<img src="{% static 'images/star-.png' %}" alt=" " class="img-responsive">
-										</div>
-										<div class="rating-left">
-											<img src="{% static 'images/star.png' %}" alt=" " class="img-responsive">
-										</div>
-										<div class="rating-left">
-											<img src="{% static 'images/star.png' %}" alt=" " class="img-responsive">
-										</div>
-										<div class="rating-left">
-											<img src="{% static 'images/star.png' %}" alt=" " class="img-responsive">
-										</div>
-										<div class="clearfix"> </div>
-									</div>
-								</div>
-								<div class="clearfix"> </div>
-							</div>
+							{% endfor %}
 							<div class="clearfix"> </div>
 						</div>
 
