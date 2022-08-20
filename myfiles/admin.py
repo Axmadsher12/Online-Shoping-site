@@ -46,7 +46,7 @@ class admin_MeetOurTeam(admin.ModelAdmin):
     list_display = ['id','Name','Image','occupation','Time']
 
 class admin_comment(admin.ModelAdmin):
-    list_display = ['id','Name','Mail','Telephone_no','Add_Yuor_Review','Time']
+    list_display = ['id','Name','Mail','Image','Telephone_no','Add_Yuor_Review','Time']
 
 class admin_ram_mobile(admin.ModelAdmin):
     list_display = ['id','Ram']

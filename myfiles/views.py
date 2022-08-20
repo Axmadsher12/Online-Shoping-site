@@ -58,7 +58,8 @@ def index(h):
         email(Mail=Mail, Time=Time).save()
 
     brend = TopBrents.objects.all()
-    return render(h, 'index.html', {'tb': brend})
+    m = mobile.objects.all()
+    return render(h, 'index.html', {'tb': brend,'ms':m})
 
 
 def mail(m):
@@ -158,16 +159,17 @@ def single1(s):
         Name = s.POST.get('Name')
         Mail = s.POST.get('Mail2')
         Telephone_no = s.POST.get('Telephone')
+        Image = s.POST.get('Img')
         Add_You_Review = s.POST.get('Review')
         Time = s.POST.get('Time')
-        comment(Name=Name, Mail=Mail, Telephone_no=Telephone_no, Add_Yuor_Review=Add_You_Review, Time=Time).save()
+        comment(Name=Name, Mail=Mail, Telephone_no=Telephone_no, Image=Image, Add_Yuor_Review=Add_You_Review, Time=Time).save()
 
     elif s.method == "POST":
         Mail = s.POST.get('Mail')
         Time = s.POST.get('Time')
         email(Mail=Mail, Time=Time).save()
-    return render(s, 'single.html')
-
+    com = comment.objects.all()
+    return render(s, 'single.html',{'com':com})
 
 'single---------------------------------------------------------------------------'
 
@@ -175,7 +177,8 @@ def single1(s):
 def single_mobile(s, id):
     css = mobile.objects.get(id=id)
     rams = ram_mobile.objects.all()
-    return render(s, 'single.html', {'css': css, 'ra': rams})
+    com = comment.objects.all()
+    return render(s, 'single.html', {'css': css, 'ra': rams,'com':com})
 
 
 def single_compyuter(s, id):
@@ -183,12 +186,14 @@ def single_compyuter(s, id):
     rams = ram_compyuter.objects.all()
     corei = core_i.objects.all()
     gens = gen.objects.all()
-    return render(s, 'single.html', {'css': css, 'ra': rams, 'co': corei, 'gen': gens})
+    com = comment.objects.all()
+    return render(s, 'single.html', {'css': css, 'ra': rams, 'co': corei, 'gen': gens,'com':com})
 
 
 def single_appliance(s, id):
     css = appliance.objects.get(id=id)
-    return render(s, 'single.html', {'css': css})
+    com = comment.objects.all()
+    return render(s, 'single.html', {'css': css,'com':com})
 
 
 'color-----------------------------------------------------------------------------'

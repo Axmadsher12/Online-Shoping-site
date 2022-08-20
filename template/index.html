@@ -291,16 +291,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<div id="myTabContent" class="tab-content">
 						<div role="tabpanel" class="tab-pane fade active in" id="home" aria-labelledby="home-tab">
 							<div class="agile_ecommerce_tabs">
+								{% for m in ms %}
 								<div class="col-md-4 agile_ecommerce_tab_left">
 									<div class="hs-wrapper">
-										<img src="{% static 'images/3.jpg' %}" alt=" " class="img-responsive" />
-										<img src="{% static 'images/4.jpg' %}" alt=" " class="img-responsive" />
-										<img src="{% static 'images/5.jpg' %}" alt=" " class="img-responsive" />
-										<img src="{% static 'images/6.jpg' %}" alt=" " class="img-responsive" />
-										<img src="{% static 'images/7.jpg' %}" alt=" " class="img-responsive" />
-										<img src="{% static 'images/3.jpg' %}" alt=" " class="img-responsive" />
-										<img src="{% static 'images/4.jpg' %}" alt=" " class="img-responsive" />
-										<img src="{% static 'images/5.jpg' %}" alt=" " class="img-responsive" />
+										<img src="{{m.Image.url}}" alt=" " class="img-responsive" />
+										<img src="{{m.Image2.url}}" alt=" " class="img-responsive" />
+										<img src="{{m.Image3.url}}" alt=" " class="img-responsive" />
+										<img src="{{m.Image4.url}}" alt=" " class="img-responsive" />
+										<img src="{{m.Image5.url}}" alt=" " class="img-responsive" />
 										<div class="w3_hs_bottom">
 											<ul>
 												<li>
@@ -309,78 +307,19 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 											</ul>
 										</div>
 									</div> 
-									<h5><a href="{% url 'single' %}">Mobile Phone1</a></h5>
+									<h5><a href="{% url 'single' %}">{{m.Name}}</a></h5>
 									<div class="simpleCart_shelfItem">
-										<p><span>$380</span> <i class="item_price">$350</i></p>
+										<p><span>${{m.Old_price}}</span> <i class="item_price">${{m.New_price}}</i></p>
 										<form action="#" method="post">
 											<input type="hidden" name="cmd" value="_cart" />
 											<input type="hidden" name="add" value="1" /> 
-											<input type="hidden" name="w3ls_item" value="Mobile Phone1" /> 
-											<input type="hidden" name="amount" value="350.00" />   
+											<input type="hidden" name="w3ls_item" value="{{m.Name}}" />
+											<input type="hidden" name="amount" value="{{m.New_price}}" />
 											<button type="submit" class="w3ls-cart">Add to cart</button>
 										</form>  
 									</div>
 								</div>
-								<div class="col-md-4 agile_ecommerce_tab_left">
-									<div class="hs-wrapper">
-										<img src="{% static 'images/4.jpg' %}" alt=" " class="img-responsive" />
-										<img src="{% static 'images/5.jpg' %}" alt=" " class="img-responsive" />
-										<img src="{% static 'images/6.jpg' %}" alt=" " class="img-responsive" />
-										<img src="{% static 'images/7.jpg' %}" alt=" " class="img-responsive" />
-										<img src="{% static 'images/3.jpg' %}" alt=" " class="img-responsive" />
-										<img src="{% static 'images/4.jpg' %}" alt=" " class="img-responsive" />
-										<img src="{% static 'images/5.jpg' %}" alt=" " class="img-responsive" />
-										<img src="{% static 'images/6.jpg' %}" alt=" " class="img-responsive" />
-										<div class="w3_hs_bottom">
-											<ul>
-												<li>
-													<a href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
-												</li>
-											</ul>
-										</div>
-									</div>
-									<h5><a href="{% url 'single' %}">Mobile Phone2</a></h5>
-									<div class="simpleCart_shelfItem">
-										<p><span>$330</span> <i class="item_price">$302</i></p>
-										<form action="#" method="post">
-											<input type="hidden" name="cmd" value="_cart" />
-											<input type="hidden" name="add" value="1" /> 
-											<input type="hidden" name="w3ls_item" value="Mobile Phone2" /> 
-											<input type="hidden" name="amount" value="302.00" />   
-											<button type="submit" class="w3ls-cart">Add to cart</button>
-										</form>
-									</div>
-								</div>
-								<div class="col-md-4 agile_ecommerce_tab_left">
-									<div class="hs-wrapper">
-										<img src="{% static 'images/7.jpg' %}" alt=" " class="img-responsive" />
-										<img src="{% static 'images/6.jpg' %}" alt=" " class="img-responsive" />
-										<img src="{% static 'images/4.jpg' %}" alt=" " class="img-responsive" />
-										<img src="{% static 'images/3.jpg' %}" alt=" " class="img-responsive" />
-										<img src="{% static 'images/5.jpg' %}" alt=" " class="img-responsive" />
-										<img src="{% static 'images/7.jpg' %}" alt=" " class="img-responsive" />
-										<img src="{% static 'images/4.jpg' %}" alt=" " class="img-responsive" />
-										<img src="{% static 'images/6.jpg' %}" alt=" " class="img-responsive" />
-										<div class="w3_hs_bottom">
-											<ul>
-												<li>
-													<a href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
-												</li>
-											</ul>
-										</div>
-									</div>
-									<h5><a href="{% url 'single' %}">Mobile Phone3</a></h5>
-									<div class="simpleCart_shelfItem">
-										<p><span>$250</span> <i class="item_price">$245</i></p>
-										<form action="#" method="post">
-											<input type="hidden" name="cmd" value="_cart" />
-											<input type="hidden" name="add" value="1" /> 
-											<input type="hidden" name="w3ls_item" value="Mobile Phone3" /> 
-											<input type="hidden" name="amount" value="245.00"/>   
-											<button type="submit" class="w3ls-cart">Add to cart</button>
-										</form>
-									</div>
-								</div>
+								{% endfor %}
 								<div class="clearfix"> </div>
 							</div>
 						</div>

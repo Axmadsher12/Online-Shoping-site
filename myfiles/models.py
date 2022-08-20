@@ -126,6 +126,7 @@ class comment(models.Model):
     Name = models.CharField(max_length=25)
     Mail = models.EmailField()
     Telephone_no = models.IntegerField()
+    Image = models.ImageField(null=True,blank=True,upload_to='media')
     Add_Yuor_Review = models.TextField(null=True,blank=True)
     Time = models.DateTimeField(null=True,blank=True,auto_now=True)
 
