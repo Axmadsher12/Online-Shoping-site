@@ -27,16 +27,14 @@ urlpatterns = [
     path('icons/',icons,name='icons'),
     path('',index,name='index'),
     path('mail/',mail,name='mail'),
-    path('mobiles/',pro,name='products'),
-    path('gadgets/',pro1,name='products1'),
-    path('appliances/',pro2,name='products2'),
+    path('mobiles/<allf>/',pro,name='products'),
+    path('gadgets/<allf>/',pro1,name='products1'),
+    path('appliances/<allf>/',pro2,name='products2'),
     path('single/',single1,name='single'),
 
-    path('mobiles_color/<rang>/', color_mobils, name='color_mobiles'),
-    path('mobiles_price/<price>/', price_mobils, name='price_mobiles'),
-
-    path('compyuter_color/<rang1>/',color_Computer,name='color_compyuter'),
-    path('compyuter_price/<price1>/',price_compyuter,name='price_compyuter'),
+    path('mob_color/<rang>/',mobils, name='mobiles'),
+    path('com_color/<rang1>/',Computer,name='compyuter'),
+    path('app/<rang2>/',appliances,name='appliances'),
 
     path('single1/<id>/',single_mobile,name='single1'),
     path('single3/<id>/',single_compyuter,name='single3'),

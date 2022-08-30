@@ -67,7 +67,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 									<div class="tab-1 resp-tab-content" aria-labelledby="tab_item-0">
 										<div class="facts">
 											<div class="register">
-												<form action="{% url 'products1' %}" method="post">
+												<form action="{% url 'products1' allf='All' %}" method="post">
 													{% csrf_token %}
 													<input name="Mail3" placeholder="Email Address" type="text" required="">
 													<input name="Password3" placeholder="Password" type="password" required="">
@@ -81,7 +81,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 									<div class="tab-2 resp-tab-content" aria-labelledby="tab_item-1">
 										<div class="facts">
 											<div class="register">
-												<form action="{% url 'products1' %}" method="post">
+												<form action="{% url 'products1' allf='All' %}" method="post">
 													{% csrf_token %}
 													<input placeholder="Name" name="Name" type="text" required="">
 													<input placeholder="Email Address" name="Mail2" type="email" required="">
@@ -183,29 +183,29 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 									<div class="col-sm-3">
 										<ul class="multi-column-dropdown">
 											<h6>Mobiles</h6>
-											<li><a href="{% url 'products' %}">Mobile Phones</a></li>
-											<li><a href="{% url 'products' %}">Tablets<span>New</span></a></li>
-											<li><a href="{% url 'products' %}">Smart Watchs</a></li>
-											<li><a href="{% url 'products' %}">All Products<span>New</span></a></li>
+											<li><a href="{% url 'products' allf='Mobile Phone' %}">Mobile Phones</a></li>
+											<li><a href="{% url 'products' allf='Tablet' %}">Tablets<span>New</span></a></li>
+											<li><a href="{% url 'products' allf='Smart Watch' %}">Smart Watchs</a></li>
+											<li><a href="{% url 'products' allf='All' %}">All Products<span>New</span></a></li>
 										</ul>
 									</div>
 									<div class="col-sm-3">
 										<ul class="multi-column-dropdown">
 											<h6>Appliances</h6>
-											<li><a href="{% url 'products2' %}">Camera</a></li>
-											<li><a href="{% url 'products2' %}">Household</a></li>
-											<li><a href="{% url 'products2' %}">Mp3 Players</a></li>
-											<li><a href="{% url 'products2' %}">Kitchen</a></li>
-											<li><a href="{% url 'products2' %}">All Products<span>New</span></a></li>
-											<li><a href="{% url 'products2' %}"><i>Summer Technique</i></a></li>
+											<li><a href="{% url 'products2' allf='Camera' %}">Camera</a></li>
+											<li><a href="{% url 'products2' allf='Applinces Household' %}">Household</a></li>
+											<li><a href="{% url 'products2' allf='All' %}">Mp3 Players</a></li>
+											<li><a href="{% url 'products2' allf='Applinces Kitchen' %}">Kitchen</a></li>
+											<li><a href="{% url 'products2' allf='All' %}">All Products<span>New</span></a></li>
+											<li><a href="{% url 'products2' allf='All' %}"><i>Summer Technique</i></a></li>
 										</ul>
 									</div>
 									<div class="col-sm-3">
 										<ul class="multi-column-dropdown">
 											<h6>Accessories</h6>
-											<li><a href="{% url 'products1' %}">Laptop</a></li>
-											<li><a href="{% url 'products1' %}">Desktop</a></li>
-											<li><a href="{% url 'products1' %}">All Products<span>New</span></a></li>
+											<li><a href="{% url 'products1' allf='Laptop' %}">Laptop</a></li>
+											<li><a href="{% url 'products1' allf='Personal Computer' %}">Desktop</a></li>
+											<li><a href="{% url 'products1' allf='All' %}">All Products<span>New</span></a></li>
 										</ul>
 									</div>
 									<div class="col-sm-3">
@@ -272,11 +272,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 								<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
 								  <div class="panel-body panel_text">
 									<ul>
-										<li><a href="{% url 'products' %}">Mobiles</a></li>
-										<li><a href="{% url 'products1' %}">Laptop</a></li>
-										<li><a href="{% url 'products2' %}">Tv</a></li>
-										<li><a href="{% url 'products' %}">Wearables</a></li>
-										<li><a href="{% url 'products2' %}">Refrigerator</a></li>
+										<li><a href="{% url 'products' allf='Mobile Phone' %}">Mobile Phones</a></li>
+										<li><a href="{% url 'products1' allf='Laptop' %}">Laptops</a></li>
+										<li><a href="{% url 'products2' allf='Appliances Kitchen' %}">Kitchens</a></li>
+										<li><a href="{% url 'products2' allf='Appliances Household' %}">Households</a></li>
+										<li><a href="{% url 'products' allf='Tablet' %}">Tablets</a></li>
 									</ul>
 								  </div>
 								</div>
@@ -292,21 +292,21 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 								<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
 								   <div class="panel-body panel_text">
 									<ul>
-										<li><a href="{% url 'products2' %}">Grinder</a></li>
-										<li><a href="{% url 'products2' %}">Heater</a></li>
-										<li><a href="{% url 'products2' %}">Kid's Toys</a></li>
-										<li><a href="{% url 'products2' %}">Filters</a></li>
-										<li><a href="{% url 'products2' %}">AC</a></li>
+										<li><a href="{% url 'products' allf='Smart Watch' %}">Smart Watchs</a></li>
+										<li><a href="{% url 'products2' allf='Mp3 Player' %}">Mp3 Players</a></li>
+										<li><a href="{% url 'products2' allf='Camera' %}">Cameras</a></li>
+								        <li><a href="{% url 'products1' allf='All' %}">All Products</a></li>
+										<li><a href="{% url 'products1' allf='Personal Computer' %}">Personal Computer</a></li>
 									</ul>
 								  </div>
 								</div>
 							  </div>
 							</div>
 							<ul class="panel_bottom">
-								<li><a href="{% url 'products' %}">Summer Store</a></li>
-								<li><a href="{% url 'products' %}">Featured Brands</a></li>
-								<li><a href="{% url 'products' %}">Today's Deals</a></li>
-								<li><a href="{% url 'products' %}">Latest Watches</a></li>
+								<li><a href="{% url 'products' allf='All' %}">Default sorting</a></li>
+								<li><a href="{% url 'products' allf='All' %}">Sort by newness</a></li>
+								<li><a href="{% url 'products' allf='All' %}">Sort by price: low to high</a></li>
+								<li><a href="{% url 'products' allf='All' %}">Sort by price: high to low</a></li>
 							</ul>
 						</div>
 					</div>
@@ -315,12 +315,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						<div class="w3ls_mobiles_grid_left_grid_sub">
 							<div class="ecommerce_color">
 								<ul>
-									<li><a href="{% url 'color_compyuter' rang1='Red' %}"><i></i> Red</a></li>
-									<li><a href="{% url 'color_compyuter' rang1='Brown' %}"><i></i> Brown</a></li>
-									<li><a href="{% url 'color_compyuter' rang1='Yellow' %}"><i></i> Yellow</a></li>
-									<li><a href="{% url 'color_compyuter' rang1='Violet' %}"><i></i> Violet</a></li>
-									<li><a href="{% url 'color_compyuter' rang1='Orange' %}"><i></i> Orange</a></li>
-									<li><a href="{% url 'color_compyuter' rang1='Blue' %}"><i></i> Blue</a></li>
+									<li><a href="{% url 'compyuter' rang1='Red' %}"><i></i> Red</a></li>
+									<li><a href="{% url 'compyuter' rang1='Brown' %}"><i></i> Brown</a></li>
+									<li><a href="{% url 'compyuter' rang1='Yellow' %}"><i></i> Yellow</a></li>
+									<li><a href="{% url 'compyuter' rang1='Violet' %}"><i></i> Violet</a></li>
+									<li><a href="{% url 'compyuter' rang1='Orange' %}"><i></i> Orange</a></li>
+									<li><a href="{% url 'compyuter' rang1='Blue' %}"><i></i> Blue</a></li>
 								</ul>
 							</div>
 						</div>
@@ -330,11 +330,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						<div class="w3ls_mobiles_grid_left_grid_sub">
 							<div class="ecommerce_color ecommerce_size">
 								<ul>
-									<li><a href="#">Below $ 100</a></li>
-									<li><a href="#">$ 100-500</a></li>
-									<li><a href="#">$ 1k-10k</a></li>
-									<li><a href="#">$ 10k-20k</a></li>
-									<li><a href="#">$ Above 20k</a></li>
+									<li><a href="{% url 'compyuter' rang1='100' %}">Below $ 100</a></li>
+									<li><a href="{% url 'compyuter' rang1='100' %}">$ 100-500</a></li>
+									<li><a href="{% url 'compyuter' rang1='100' %}">$ 1k-10k</a></li>
+									<li><a href="{% url 'compyuter' rang1='100' %}">$ 10k-20k</a></li>
+									<li><a href="{% url 'compyuter' rang1='100' %}">$ Above 20k</a></li>
 								</ul>
 							</div>
 						</div>
@@ -371,6 +371,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 								<option>Sort by newness</option>
 								<option>Sort by price: low to high</option>
 								<option>Sort by price: high to low</option>
+							    1 Standart tartiblash
+								4 Yangiligi bo'yicha saralash
+								5 Narx bo'yicha saralash: pastdan yuqoriga
+								6 Narx bo'yicha saralash: yuqoridan pastgacha
 							</select>
 						</div>
 						<div class="clearfix"> </div>
@@ -410,6 +414,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 							</div>
 						</div>
 						{% endfor %}
+
 						<div class="clearfix"> </div>
 					</div>
 				</div>
@@ -1064,7 +1069,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				<p>Excepteur sint occaecat cupidatat non proident sunt.</p>
 			</div>
 			<div class="col-md-6 w3agile_newsletter_right">
-				<form action="{% url 'products1' %}" method="post">
+				<form action="{% url 'products1' allf='All' %}" method="post">
 					{% csrf_token %}
 					<input type="email" name="Mail" placeholder="Email" required="">
 					<input type="submit" value="" />
@@ -1082,44 +1087,43 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<h3>Contact</h3>
 					<p>Duis aute irure dolor in reprehenderit in voluptate velit esse.</p>
 					<ul class="address">
-						<li><i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>1234k Avenue, 4th block, <span>New York City.</span></li>
-						<li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a href="mailto:info@example.com">info@example.com</a></li>
-						<li><i class="glyphicon glyphicon-earphone" aria-hidden="true"></i>+1234 567 567</li>
+						<li><i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>1234k Avenue, 4th block, <span>Margilon City.</span></li>
+						<li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a href="mailto:Ahmadsheretm@gmail.com">Ahmadsheretm@gmail.com</a></li>
+						<li><i class="glyphicon glyphicon-earphone" aria-hidden="true"></i>+998 90 040 04 53</li>
 					</ul>
 				</div>
 				<div class="col-md-3 w3_footer_grid">
 					<h3>Information</h3>
-					<ul class="info"> 
+					<ul class="info">
 						<li><a href="{% url 'about' %}">About Us</a></li>
 						<li><a href="{% url 'mail' %}">Contact Us</a></li>
 						<li><a href="{% url 'codes' %}">Short Codes</a></li>
 						<li><a href="{% url 'faq' %}">FAQ's</a></li>
-						<li><a href="{% url 'products' %}">Special Products</a></li>
 					</ul>
 				</div>
 				<div class="col-md-3 w3_footer_grid">
 					<h3>Category</h3>
-					<ul class="info"> 
-						<li><a href="{% url 'products' %}">Mobiles</a></li>
-						<li><a href="{% url 'products1' %}">Laptops</a></li>
-						<li><a href="{% url 'products' %}">Purifiers</a></li>
-						<li><a href="{% url 'products1' %}">Wearables</a></li>
-						<li><a href="{% url 'products2' %}">Kitchen</a></li>
+					<ul class="info">
+						<li><a href="{% url 'products' allf='Mobile Phone' %}">Mobiles</a></li>
+						<li><a href="{% url 'products1' allf='Laptop' %}">Laptops</a></li>
+						<li><a href="{% url 'products' allf='Smart Watch' %}">Smart Watchs</a></li>
+						<li><a href="{% url 'products1' allf='Personal Computer' %}">Desktops</a></li>
+						<li><a href="{% url 'products2' allf='Appliances Kitchen' %}">Kitchens</a></li>
+						<li><a href="{% url 'products' allf='Tablet' %}">Tablets</a></li>
 					</ul>
 				</div>
 				<div class="col-md-3 w3_footer_grid">
 					<h3>Profile</h3>
-					<ul class="info"> 
+					<ul class="info">
 						<li><a href="{% url 'index' %}">Home</a></li>
-						<li><a href="{% url 'products' %}">Today's Deals</a></li>
 					</ul>
 					<h4>Follow Us</h4>
 					<div class="agileits_social_button">
 						<ul>
 							<li><a href="#" class="facebook"> </a></li>
 							<li><a href="#" class="twitter"> </a></li>
-							<li><a href="#" class="google"> </a></li>
-							<li><a href="#" class="pinterest"> </a></li>
+							<li><a href="mailto:Ahmadsheretm@gmail.com" class="google"> </a></li>
+							<li><a href="https://www.pinterest.com/" class="pinterest"> </a></li>
 						</ul>
 					</div>
 				</div>

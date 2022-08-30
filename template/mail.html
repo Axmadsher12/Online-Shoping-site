@@ -181,29 +181,29 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 									<div class="col-sm-3">
 										<ul class="multi-column-dropdown">
 											<h6>Mobiles</h6>
-											<li><a href="{% url 'products' %}">Mobile Phones</a></li>
-											<li><a href="{% url 'products' %}">Tablets<span>New</span></a></li>
-											<li><a href="{% url 'products' %}">Smart Watchs</a></li>
-											<li><a href="{% url 'products' %}">All Products<span>New</span></a></li>
+											<li><a href="{% url 'products' allf='Mobile Phone' %}">Mobile Phones</a></li>
+											<li><a href="{% url 'products' allf='Tablet' %}">Tablets<span>New</span></a></li>
+											<li><a href="{% url 'products' allf='Smart Watch' %}">Smart Watchs</a></li>
+											<li><a href="{% url 'products' allf='All' %}">All Products<span>New</span></a></li>
 										</ul>
 									</div>
 									<div class="col-sm-3">
 										<ul class="multi-column-dropdown">
 											<h6>Appliances</h6>
-											<li><a href="{% url 'products2' %}">Camera</a></li>
-											<li><a href="{% url 'products2' %}">Household</a></li>
-											<li><a href="{% url 'products2' %}">Mp3 Players</a></li>
-											<li><a href="{% url 'products2' %}">Kitchen</a></li>
-											<li><a href="{% url 'products2' %}">All Products<span>New</span></a></li>
-											<li><a href="{% url 'products2' %}"><i>Summer Technique</i></a></li>
+											<li><a href="{% url 'products2' allf='Camera' %}">Camera</a></li>
+											<li><a href="{% url 'products2' allf='Applinces Household' %}">Household</a></li>
+											<li><a href="{% url 'products2' allf='All' %}">Mp3 Players</a></li>
+											<li><a href="{% url 'products2' allf='Applinces Kitchen' %}">Kitchen</a></li>
+											<li><a href="{% url 'products2' allf='All' %}">All Products<span>New</span></a></li>
+											<li><a href="{% url 'products2' allf='All' %}"><i>Summer Technique</i></a></li>
 										</ul>
 									</div>
 									<div class="col-sm-3">
 										<ul class="multi-column-dropdown">
 											<h6>Accessories</h6>
-											<li><a href="{% url 'products1' %}">Laptop</a></li>
-											<li><a href="{% url 'products1' %}">Desktop</a></li>
-											<li><a href="{% url 'products1' %}">All Products<span>New</span></a></li>
+											<li><a href="{% url 'products1' allf='Laptop' %}">Laptop</a></li>
+											<li><a href="{% url 'products1' allf='Personal Computer' %}">Desktop</a></li>
+											<li><a href="{% url 'products1' allf='All' %}">All Products<span>New</span></a></li>
 										</ul>
 									</div>
 									<div class="col-sm-3">
@@ -311,44 +311,43 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<h3>Contact</h3>
 					<p>Duis aute irure dolor in reprehenderit in voluptate velit esse.</p>
 					<ul class="address">
-						<li><i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>1234k Avenue, 4th block, <span>New York City.</span></li>
-						<li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a href="mailto:info@example.com">info@example.com</a></li>
-						<li><i class="glyphicon glyphicon-earphone" aria-hidden="true"></i>+1234 567 567</li>
+						<li><i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>1234k Avenue, 4th block, <span>Margilon City.</span></li>
+						<li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a href="mailto:Ahmadsheretm@gmail.com">Ahmadsheretm@gmail.com</a></li>
+						<li><i class="glyphicon glyphicon-earphone" aria-hidden="true"></i>+998 90 040 04 53</li>
 					</ul>
 				</div>
 				<div class="col-md-3 w3_footer_grid">
 					<h3>Information</h3>
-					<ul class="info"> 
+					<ul class="info">
 						<li><a href="{% url 'about' %}">About Us</a></li>
 						<li><a href="{% url 'mail' %}">Contact Us</a></li>
 						<li><a href="{% url 'codes' %}">Short Codes</a></li>
 						<li><a href="{% url 'faq' %}">FAQ's</a></li>
-						<li><a href="{% url 'products' %}">Special Products</a></li>
 					</ul>
 				</div>
 				<div class="col-md-3 w3_footer_grid">
 					<h3>Category</h3>
-					<ul class="info"> 
-						<li><a href="{% url 'products' %}">Mobiles</a></li>
-						<li><a href="{% url 'products1' %}">Laptops</a></li>
-						<li><a href="{% url 'products' %}">Purifiers</a></li>
-						<li><a href="{% url 'products1' %}">Wearables</a></li>
-						<li><a href="{% url 'products2' %}">Kitchen</a></li>
+					<ul class="info">
+						<li><a href="{% url 'products' allf='Mobile Phone' %}">Mobiles</a></li>
+						<li><a href="{% url 'products1' allf='Laptop' %}">Laptops</a></li>
+						<li><a href="{% url 'products' allf='Smart Watch' %}">Smart Watchs</a></li>
+						<li><a href="{% url 'products1' allf='Personal Computer' %}">Desktops</a></li>
+						<li><a href="{% url 'products2' allf='Appliances Kitchen' %}">Kitchens</a></li>
+						<li><a href="{% url 'products' allf='Tablet' %}">Tablets</a></li>
 					</ul>
 				</div>
 				<div class="col-md-3 w3_footer_grid">
 					<h3>Profile</h3>
-					<ul class="info"> 
+					<ul class="info">
 						<li><a href="{% url 'index' %}">Home</a></li>
-						<li><a href="{% url 'products' %}">Today's Deals</a></li>
 					</ul>
 					<h4>Follow Us</h4>
 					<div class="agileits_social_button">
 						<ul>
 							<li><a href="#" class="facebook"> </a></li>
 							<li><a href="#" class="twitter"> </a></li>
-							<li><a href="#" class="google"> </a></li>
-							<li><a href="#" class="pinterest"> </a></li>
+							<li><a href="mailto:Ahmadsheretm@gmail.com" class="google"> </a></li>
+							<li><a href="https://www.pinterest.com/" class="pinterest"> </a></li>
 						</ul>
 					</div>
 				</div>
