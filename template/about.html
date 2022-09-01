@@ -68,9 +68,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 									<div class="tab-1 resp-tab-content" aria-labelledby="tab_item-0">
 										<div class="facts">
 											<div class="register">
-												<form action="#" method="post">			
-													<input name="Email" placeholder="Email Address" type="text" required="">						
-													<input name="Password" placeholder="Password" type="password" required="">										
+												<form action="{% url 'about' %}" method="post">
+													{% csrf_token %}
+													<input name="Mail3" placeholder="Email Address" type="text" required="">
+													<input name="Password3" placeholder="Password" type="password" required="">
 													<div class="sign-up">
 														<input type="submit" value="Sign in"/>
 													</div>
@@ -81,11 +82,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 									<div class="tab-2 resp-tab-content" aria-labelledby="tab_item-1">
 										<div class="facts">
 											<div class="register">
-												<form action="#" method="post">			
+												<form action="{% url 'about' %}" method="post">
+													{% csrf_token %}
 													<input placeholder="Name" name="Name" type="text" required="">
-													<input placeholder="Email Address" name="Email" type="email" required="">	
-													<input placeholder="Password" name="Password" type="password" required="">	
-													<input placeholder="Confirm Password" name="Password" type="password" required="">
+													<input placeholder="Email Address" name="Mail2" type="email" required="">
+													<input placeholder="Password" name="Password1" type="password" required="">
+													<input placeholder="Confirm Password" name="Password2" type="password" required="">
 													<div class="sign-up">
 														<input type="submit" value="Create Account"/>
 													</div>
@@ -291,58 +293,21 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<div class="container">
 			<h3>Meet Our Team</h3>
 			<div class="wthree_team_grids">
+				{% for mot in Meet %}
 				<div class="col-md-3 wthree_team_grid">
-					<img src="{% static 'images/t4.png' %}" alt=" " class="img-responsive" />
-					<h4>Smith Allen <span>Manager</span></h4>
+					<img src="{{mot.Image.url}}" alt=" " class="img-responsive" />
+					<h4>{{mot.Name}} <span>{{mot.occupation}}</span></h4>
 					<div class="agileits_social_button">
 						<ul>
-							<li><a href="#" class="facebook"> </a></li>
-							<li><a href="#" class="twitter"> </a></li>
-							<li><a href="#" class="google"> </a></li>
-							<li><a href="#" class="pinterest"> </a></li>
+							<li><a href="#{{mot.Facebook}}" class="facebook"> </a></li>
+							<li><a href="#{{mot.Twitter}}" class="twitter"> </a></li>
+							<li><a href="#{{mot.Google}}" class="google"> </a></li>
+							<li><a href="#{{mot.Pinterest}}" class="pinterest"> </a></li>
 						</ul>
 					</div>
 				</div>
-				<div class="col-md-3 wthree_team_grid">
-					<img src="{% static 'images/t5.png' %}" alt=" " class="img-responsive" />
-					<h4>Laura James <span>Designer</span></h4>
-					<div class="agileits_social_button">
-						<ul>
-							<li><a href="#" class="facebook"> </a></li>
-							<li><a href="#" class="twitter"> </a></li>
-							<li><a href="#" class="google"> </a></li>
-							<li><a href="#" class="pinterest"> </a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-md-3 wthree_team_grid">
-					<img src="{% static 'images/t6.png' %}" alt=" " class="img-responsive" />
-					<h4>Crisp Doe <span>Director</span></h4>
-					<div class="agileits_social_button">
-						<ul>
-							<li><a href="#" class="facebook"> </a></li>
-							<li><a href="#" class="twitter"> </a></li>
-							<li><a href="#" class="google"> </a></li>
-							<li><a href="#" class="pinterest"> </a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-md-3 wthree_team_grid">
-					<img src="{% static 'images/t7.png' %}" alt=" " class="img-responsive" />
-					<h4>Linda Rosy <span>Quality Checker</span></h4>
-					<div class="agileits_social_button">
-						<ul>
-							<li><a href="#" class="facebook"> </a></li>
-							<li><a href="#" class="twitter"> </a></li>
-							<li><a href="#" class="google"> </a></li>
-							<li><a href="#" class="pinterest"> </a></li>
-						</ul>
-					</div>
-				</div>
+				{% endfor %}
 				<div class="clearfix"> </div>
-				<p>Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis 
-					voluptatibus maiores alias consequatur aut perferendis doloribus asperiores 
-					repellat.</p>
 			</div>
 		</div>
 	</div>
@@ -350,11 +315,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<!-- team-bottom -->
 	<div class="team-bottom">
 		<div class="container">
-			<h3>Are You Ready For Deals? Flat <span>30% Offer </span>on Mobiles</h3>
-			<p>Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis 
-				voluptatibus maiores alias consequatur aut perferendis doloribus asperiores 
-				repellat.</p>
-			<a href="{% url 'products' %}">Shop Now</a>
+			{% for c in ch %}
+			<h3>Are You Ready For Deals? Flat <span>{{c.Percent}}% Offer </span>on Mobiles</h3>
+			<p>{{c.comment}}</p>
+			<!-- Bu imkoniyatni boy bermang. HOZIR SOTIB OL tugmasini bosing va buyurtma bering. -->
+			{% endfor %}
+			<a href="{% url 'products' allf='All' %}">Shop Now</a>
 		</div>
 	</div>
 	<!-- //team-bottom -->

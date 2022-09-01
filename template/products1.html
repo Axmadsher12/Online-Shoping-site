@@ -262,40 +262,25 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						<div class="w3ls_mobiles_grid_left_grid_sub">
 							<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 							  <div class="panel panel-default">
-								<div class="panel-heading" role="tab" id="headingOne">
-								  <h4 class="panel-title asd">
-									<a class="pa_italic" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-									  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span><i class="glyphicon glyphicon-minus" aria-hidden="true"></i>New Arrivals
-									</a>
-								  </h4>
-								</div>
-								<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-								  <div class="panel-body panel_text">
-									<ul>
-										<li><a href="{% url 'products' allf='Mobile Phone' %}">Mobile Phones</a></li>
-										<li><a href="{% url 'products1' allf='Laptop' %}">Laptops</a></li>
-										<li><a href="{% url 'products2' allf='Appliances Kitchen' %}">Kitchens</a></li>
-										<li><a href="{% url 'products2' allf='Appliances Household' %}">Households</a></li>
-										<li><a href="{% url 'products' allf='Tablet' %}">Tablets</a></li>
-									</ul>
-								  </div>
-								</div>
-							  </div>
-							  <div class="panel panel-default">
 								<div class="panel-heading" role="tab" id="headingTwo">
 								  <h4 class="panel-title asd">
 									<a class="pa_italic collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-									  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span><i class="glyphicon glyphicon-minus" aria-hidden="true"></i>Accessories
+									  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span><i class="glyphicon glyphicon-minus" aria-hidden="true"></i>Filter By Type
 									</a>
 								  </h4>
 								</div>
 								<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
 								   <div class="panel-body panel_text">
 									<ul>
+										<li><a href="{% url 'products' allf='Mobile Phone' %}">Mobile Phones</a></li>
+										<li><a href="{% url 'products1' allf='Laptop' %}">Laptops</a></li>
+										<li><a href="{% url 'products2' allf='Appliances Kitchen' %}">Kitchens</a></li>
+										<li><a href="{% url 'products2' allf='Appliances Household' %}">Households</a></li>
+										<li><a href="{% url 'products' allf='Tablet' %}">Tablets</a></li>
 										<li><a href="{% url 'products' allf='Smart Watch' %}">Smart Watchs</a></li>
 										<li><a href="{% url 'products2' allf='Mp3 Player' %}">Mp3 Players</a></li>
 										<li><a href="{% url 'products2' allf='Camera' %}">Cameras</a></li>
-								        <li><a href="{% url 'products1' allf='All' %}">All Products</a></li>
+								        <li><a href="{% url 'products' allf='All' %}">All Products</a></li>
 										<li><a href="{% url 'products1' allf='Personal Computer' %}">Personal Computer</a></li>
 									</ul>
 								  </div>
@@ -303,10 +288,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 							  </div>
 							</div>
 							<ul class="panel_bottom">
-								<li><a href="{% url 'products' allf='All' %}">Default sorting</a></li>
-								<li><a href="{% url 'products' allf='All' %}">Sort by newness</a></li>
-								<li><a href="{% url 'products' allf='All' %}">Sort by price: low to high</a></li>
-								<li><a href="{% url 'products' allf='All' %}">Sort by price: high to low</a></li>
+								<li><a href="{% url 'products'  allf='All' %}">Default sorting</a></li>
+								<li><a href="{% url 'products'  allf='All' %}">Sort by newness</a></li>
+								<li><a href="{% url 'products'  allf='All' %}">Sort by average rating</a></li>
+								<li><a href="{% url 'products'  allf='All' %}">Sort by price: low to high</a></li>
+								<li><a href="{% url 'products'  allf='All' %}">Sort by price: high to low</a></li>
 							</ul>
 						</div>
 					</div>

@@ -4,7 +4,7 @@ from myfiles.models import *
 class admin_type_mobile(admin.ModelAdmin):
     list_display = ['id','Name']
 
-class admin_type_compyuter(admin.ModelAdmin):
+class admin_type_computer(admin.ModelAdmin):
     list_display = ['id','Name']
 
 class admin_type_appliance(admin.ModelAdmin):
@@ -15,13 +15,16 @@ class admin_core_i(admin.ModelAdmin):
 
 class admin_gen(admin.ModelAdmin):
     list_display = ['id','Gen']
+
+'----------------'
+
 class admin_color(admin.ModelAdmin):
     list_display = ['id','Name']
 
 class admin_mobile(admin.ModelAdmin):
     list_display = ['id','Name','Old_price','New_price','Image','Image2','Image3','Image4','Image5','Product_Information','Color','Ram','Type','Time']
 
-class admin_gadget(admin.ModelAdmin):
+class admin_computer(admin.ModelAdmin):
     list_display = ['id','Name','Old_price','New_price','Core_i','Gen','Image','Image2','Image3','Image4','Image5','Product_Information','Color','Ram','Type','Time']
 
 class admin_appliance(admin.ModelAdmin):
@@ -39,11 +42,14 @@ class admin_signup(admin.ModelAdmin):
 class admin_Contact(admin.ModelAdmin):
     list_display = ['id','Your_name','Your_email','Telephone_no','Send_message','Time']
 
+class admin_Contact_Answer(admin.ModelAdmin):
+    list_display = ['id','Answer','Time']
+
 class admin_TopBrent(admin.ModelAdmin):
     list_display = ['id','Name','Image','Time']
 
 class admin_MeetOurTeam(admin.ModelAdmin):
-    list_display = ['id','Name','Image','occupation','Time']
+    list_display = ['id','Name','Image','occupation','Facebook','Twitter','Google','Pinterest','Time']
 
 class admin_comment(admin.ModelAdmin):
     list_display = ['id','Name','Mail','Image','Telephone_no','Add_Yuor_Review','Time']
@@ -55,35 +61,29 @@ class admin_ram_compyuter(admin.ModelAdmin):
     list_display = ['id','Ram']
 
 class admin_Discounts_mobile(admin.ModelAdmin):
-    list_display = ['id','Percent','Time']
-
-class admin_Discounts_compyuter(admin.ModelAdmin):
-    list_display = ['id','Percent','Time']
-
-class admin_Discounts_appliance(admin.ModelAdmin):
-    list_display = ['id','Percent','Time']
+    list_display = ['id','Percent','comment','Time']
 
 admin.site.register(mobile,admin_mobile)
-admin.site.register(computer,admin_gadget)
+admin.site.register(computer,admin_computer)
 admin.site.register(appliance,admin_appliance)
 admin.site.register(email,admin_email)
 admin.site.register(signin,admin_signin)
 admin.site.register(signup,admin_signup)
 admin.site.register(Contact,admin_Contact)
+admin.site.register(Contact_Answer,admin_Contact_Answer)
 admin.site.register(type_mobile,admin_type_mobile)
-admin.site.register(type_compyuter,admin_type_compyuter)
+admin.site.register(type_computer,admin_type_computer)
 admin.site.register(type_appliance,admin_type_appliance)
 admin.site.register(color,admin_color)
 admin.site.register(TopBrent,admin_TopBrent)
 admin.site.register(MeetOurTeam,admin_MeetOurTeam)
 admin.site.register(comment,admin_comment)
 admin.site.register(ram_mobile,admin_ram_mobile)
-admin.site.register(ram_compyuter,admin_ram_compyuter)
+admin.site.register(ram_computer,admin_ram_compyuter)
 admin.site.register(gen,admin_gen)
+admin.site.register(ratings)
 admin.site.register(core_i,admin_core_i)
 admin.site.register(Discounts_mobile,admin_Discounts_mobile)
-admin.site.register(Discounts_compyuter,admin_Discounts_compyuter)
-admin.site.register(Discounts_appliance,admin_Discounts_appliance)
 
 '''
 Rank	Brand	Brand Value % change from 2020

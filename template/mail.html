@@ -68,9 +68,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 									<div class="tab-1 resp-tab-content" aria-labelledby="tab_item-0">
 										<div class="facts">
 											<div class="register">
-												<form action="#" method="post">			
-													<input name="Email" placeholder="Email Address" type="text" required="">						
-													<input name="Password" placeholder="Password" type="password" required="">										
+												<form action="{% url 'mail' %}" method="post">
+													{% csrf_token %}
+													<input name="Mail3" placeholder="Email Address" type="text" required="">
+													<input name="Password3" placeholder="Password" type="password" required="">
 													<div class="sign-up">
 														<input type="submit" value="Sign in"/>
 													</div>
@@ -81,11 +82,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 									<div class="tab-2 resp-tab-content" aria-labelledby="tab_item-1">
 										<div class="facts">
 											<div class="register">
-												<form action="#" method="post">			
+												<form action="{% url 'mail' %}" method="post">
+													{% csrf_token %}
 													<input placeholder="Name" name="Name" type="text" required="">
-													<input placeholder="Email Address" name="Email" type="email" required="">	
-													<input placeholder="Password" name="Password" type="password" required="">	
-													<input placeholder="Confirm Password" name="Password" type="password" required="">
+													<input placeholder="Email Address" name="Mail2" type="email" required="">
+													<input placeholder="Password" name="Password1" type="password" required="">
+													<input placeholder="Confirm Password" name="Password2" type="password" required="">
 													<div class="sign-up">
 														<input type="submit" value="Create Account"/>
 													</div>
@@ -267,7 +269,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				</div>
 				<div class="col-md-7 contact-left">
 					<h4>Contact Form</h4>
-					<form action="#" method="post">
+					<form action="{% url 'mail' %}" method="post">
 						{% csrf_token %}
 						<input type="text" name="Your_Name" placeholder="Your Name" required="">
 						<input type="email" name="Your_Email" placeholder="Your Email" required="">

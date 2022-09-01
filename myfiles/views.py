@@ -5,11 +5,27 @@ from django.db.models import Q
 
 # Create your views here.
 def about(b):
-    if b.method == "POST":
+    if 'Mail3' in b.POST:
+        EmailAddress = b.POST.get('Mail3')
+        Password = b.POST.get('Password3')
+        Time = b.POST.get('Time')
+        signin(EmailAddress=EmailAddress, Password=Password, Time=Time).save()
+
+    elif 'Name' in b.POST:
+        Name = b.POST.get('Name')
+        EmailAddress = b.POST.get('Mail2')
+        Password = b.POST.get('Password1')
+        ConfirmPassword = b.POST.get('Password2')
+        Time = b.POST.get('Time')
+        signup(Name=Name, EmailAddress=EmailAddress, Password=Password, ConfirmPassword=ConfirmPassword,Time=Time).save()
+
+    elif b.method == "POST":
         Mail = b.POST.get('Mail')
         Time = b.POST.get('Time')
         email(Mail=Mail, Time=Time).save()
-    return render(b, 'about.html')
+    chegirma = Discounts_mobile.objects.all()
+    Meet = MeetOurTeam.objects.all()
+    return render(b, 'about.html',{'ch':chegirma,'Meet':Meet})
 
 
 def codes(c):
@@ -17,7 +33,8 @@ def codes(c):
         Mail = c.POST.get('Mail')
         Time = c.POST.get('Time')
         email(Mail=Mail, Time=Time).save()
-    return render(c, 'codes.html')
+    chegirma = Discounts_mobile.objects.all()
+    return render(c, 'codes.html',{'ch':chegirma})
 
 
 def faq(f):
@@ -25,7 +42,8 @@ def faq(f):
         Mail = f.POST.get('Mail')
         Time = f.POST.get('Time')
         email(Mail=Mail, Time=Time).save()
-    return render(f, 'faq.html')
+    chegirma = Discounts_mobile.objects.all()
+    return render(f, 'faq.html',{'ch':chegirma})
 
 
 def icons(i):
@@ -33,7 +51,8 @@ def icons(i):
         Mail = i.POST.get('Mail')
         Time = i.POST.get('Time')
         email(Mail=Mail, Time=Time).save()
-    return render(i, 'icons.html')
+    chegirma = Discounts_mobile.objects.all()
+    return render(i, 'icons.html', {'ch':chegirma})
 
 
 def index(h):
@@ -119,18 +138,45 @@ def index(h):
         New_p = appliance.objects.filter(Type=ta_m.id).order_by('-Time')[0]
     else:
         New_p = 1
+    chegirma = Discounts_mobile.objects.all()
+    comment1 = comment.objects.all()
     return render(h, 'index.html', {'tb': brend,'ms':m,'app1':app_audio,'app2':app_camera,'com':com,'apph':app_Household,'appk':app_Kitchen,
                                     't':New_t,'m':New_m,'w':New_s,
                                     'l':New_l,
-                                    'h':New_h,'k':New_k,'c':New_c,'p':New_p})
+                                    'h':New_h,'k':New_k,'c':New_c,'p':New_p,
+                                    'ch':chegirma,'comment':comment1})
 
 
 def mail(m):
-    if m.method == "POST":
+    if 'Your_Name' in m.POST:
+        Your_Name = m.POST.get('Your_Name')
+        Your_email = m.POST.get('Your_Email')
+        Telephone_no = m.POST.get('Telephone_No')
+        Send_message = m.POST.get('Message')
+        Time = m.POST.get('Time')
+        Contact(Your_name=Your_Name,Your_email=Your_email,Telephone_no=Telephone_no,Send_message=Send_message,Time=Time).save()
+
+    elif 'Mail3' in m.POST:
+        EmailAddress = m.POST.get('Mail3')
+        Password = m.POST.get('Password3')
+        Time = m.POST.get('Time')
+        signin(EmailAddress=EmailAddress, Password=Password, Time=Time).save()
+
+    elif 'Name' in m.POST:
+        Name = m.POST.get('Name')
+        EmailAddress = m.POST.get('Mail2')
+        Password = m.POST.get('Password1')
+        ConfirmPassword = m.POST.get('Password2')
+        Time = m.POST.get('Time')
+        signup(Name=Name, EmailAddress=EmailAddress, Password=Password, ConfirmPassword=ConfirmPassword,Time=Time).save()
+
+    elif m.method == "POST":
         Mail = m.POST.get('Mail')
         Time = m.POST.get('Time')
         email(Mail=Mail, Time=Time).save()
-    return render(m, 'mail.html')
+    chegirma = Discounts_mobile.objects.all()
+    con = Contact.objects.all()
+    return render(m, 'mail.html',{'ch':chegirma,'con':con})
 
 
 def pro(p,allf):
@@ -324,7 +370,8 @@ def single_mobile(s, id):
     y = 0
     for st in com:
         y = y + 1
-    return render(s, 'single.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3,'css': css, 'ra': rams, 'ch': chegirma,'com':com})
+    obj = ratings.objects.filter(score=0).order_by('?').first()
+    return render(s, 'single.html',{'obj':obj,'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3,'css': css, 'ra': rams, 'ch': chegirma,'com':com})
 
 
 def single_compyuter(s, id):
@@ -414,7 +461,7 @@ def single_appliance(s, id):
 
 'p'
 def mobils(r, rang):
-    chegirma = Discounts_compyuter.objects.all()
+    chegirma = Discounts_mobile.objects.all()
     if rang == 'Red' or rang == 'Brown' or rang == 'Yellow' or rang == 'Violet' or rang == 'Orange' or rang == 'Blue':
         col = color.objects.get(Name=rang)
         colors = mobile.objects.filter(Color=col.id)
@@ -429,7 +476,7 @@ def mobils(r, rang):
 
 'p1'
 def Computer(r, rang1):
-    chegirma = Discounts_compyuter.objects.all()
+    chegirma = Discounts_mobile.objects.all()
     if rang1 == 'Red' or rang1 == 'Brown' or rang1 == 'Yellow' or rang1 == 'Violet' or rang1 == 'Orange' or rang1 == 'Blue':
         col = color.objects.get(Name=rang1)
         colors = mobile.objects.filter(Color=col.id)
@@ -444,7 +491,7 @@ def Computer(r, rang1):
 
 'p2'
 def appliances(r, rang2):
-    chegirma = Discounts_compyuter.objects.all()
+    chegirma = Discounts_mobile.objects.all()
     if rang2 == 'Red' or rang2 == 'Brown' or rang2 == 'Yellow' or rang2 == 'Violet' or rang2 == 'Orange' or rang2 == 'Blue':
         col = color.objects.get(Name=rang2)
         colors = mobile.objects.filter(Color=col.id)

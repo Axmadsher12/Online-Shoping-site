@@ -7,7 +7,7 @@ class type_mobile(models.Model):
     def __str__(self):
         return self.Name
 
-class type_compyuter(models.Model):
+class type_computer(models.Model):
     Name = models.CharField(null=True, blank=True,max_length=25)
     def __str__(self):
         return self.Name
@@ -27,6 +27,19 @@ class gen(models.Model):
     def __str__(self):
         return str(self.Gen)
 
+#myinstance.rating.add(score=1, user=request.user, ip_address=request.META['REMOTE_ADDR']) # last param is optional - only if you use COOKIES-auth
+from django.core.validators import MaxValueValidator,MinValueValidator
+class ratings(models.Model):
+    Image = models.ImageField(upload_to='media')
+    score = models.IntegerField(default=0,
+        validators = [
+            MaxValueValidator(5),
+            MaxValueValidator(0),
+        ]
+    )
+    def __str__(self):
+        return str(self.pk)
+'-----------------------------'
 class color(models.Model):
     Name = models.CharField(max_length=25)
     def __str__(self):
@@ -37,11 +50,12 @@ class ram_mobile(models.Model):
     def __str__(self):
         return str(self.Ram)
 
-class ram_compyuter(models.Model):
+class ram_computer(models.Model):
     Ram = models.IntegerField(null=True,blank=True)
     def __str__(self):
         return str(self.Ram)
 
+'-------------Asosiy---------------'
 class mobile(models.Model):
     Name = models.CharField(max_length=25)
     Old_price = models.IntegerField()
@@ -55,7 +69,7 @@ class mobile(models.Model):
     Color = models.ForeignKey(color, null=True, blank=True, on_delete=models.CASCADE)
     Ram = models.ForeignKey(ram_mobile, null=True, blank=True, on_delete=models.CASCADE)
     Type = models.ForeignKey(type_mobile, null=True, blank=True, on_delete=models.CASCADE)
-    Time = models.DateTimeField(auto_now=True)
+    Time = models.DateTimeField(auto_now=True,blank=True,null=True)
 
 class computer(models.Model):
     Name = models.CharField(max_length=25)
@@ -70,9 +84,9 @@ class computer(models.Model):
     Image5 = models.ImageField(null=True,blank=True,upload_to='media')
     Product_Information = models.TextField(null=True,blank=True)
     Color = models.ForeignKey(color, null=True, blank=True, on_delete=models.CASCADE)
-    Ram = models.ForeignKey(ram_compyuter, null=True, blank=True, on_delete=models.CASCADE)
-    Type = models.ForeignKey(type_compyuter, null=True, blank=True, on_delete=models.CASCADE)
-    Time = models.DateTimeField(auto_now=True)
+    Ram = models.ForeignKey(ram_computer, null=True, blank=True, on_delete=models.CASCADE)
+    Type = models.ForeignKey(type_computer, null=True, blank=True, on_delete=models.CASCADE)
+    Time = models.DateTimeField(auto_now=True,blank=True,null=True)
 
 class appliance(models.Model):
     Name = models.CharField(max_length=25)
@@ -86,7 +100,8 @@ class appliance(models.Model):
     Product_Information = models.TextField(null=True,blank=True)
     Color = models.ForeignKey(color,null=True, blank=True,on_delete=models.CASCADE)
     Type = models.ForeignKey(type_appliance, null=True, blank=True, on_delete=models.CASCADE)
-    Time = models.DateTimeField(auto_now=True)
+    Time = models.DateTimeField(auto_now=True,blank=True,null=True)
+'----------------------------------'
 """
 <-- Ob’ektiv -->
 Optik kattalashtirish -- x
@@ -138,11 +153,15 @@ class signup(models.Model):
 
 "Adminga murojat"
 class Contact(models.Model):
-     Your_name = models.CharField(max_length=25)
-     Your_email = models.EmailField()
-     Telephone_no = models.IntegerField()
-     Send_message = models.TextField()
-     Time = models.DateTimeField(auto_now=True)
+    Your_name = models.CharField(max_length=25)
+    Your_email = models.EmailField()
+    Telephone_no = models.IntegerField()
+    Send_message = models.TextField()
+    Time = models.DateTimeField(auto_now=True)
+
+class Contact_Answer(models.Model):
+    Answer = models.TextField()
+    Time = models.DateTimeField(auto_now=True)
 
 "Brentlar"
 class TopBrent(models.Model):
@@ -155,6 +174,10 @@ class MeetOurTeam(models.Model):
     Name = models.CharField(max_length=25)
     Image = models.ImageField(upload_to='media')
     occupation = models.CharField(max_length=25)
+    Facebook = models.EmailField(null=True,blank=True)
+    Twitter = models.EmailField(null=True, blank=True)
+    Google = models.EmailField(null=True, blank=True)
+    Pinterest = models.EmailField(null=True, blank=True)
     Time = models.DateTimeField(auto_now=True)
 
 'Izox'
@@ -169,12 +192,6 @@ class comment(models.Model):
 'Chegirmalar'
 class Discounts_mobile(models.Model):
     Percent = models.IntegerField()
+    comment = models.TextField(null=True, blank=True)
     Time = models.DateTimeField(auto_now=True)
 
-class Discounts_compyuter(models.Model):
-    Percent = models.IntegerField()
-    Time = models.DateTimeField(auto_now=True)
-
-class Discounts_appliance(models.Model):
-    Percent = models.IntegerField()
-    Time = models.DateTimeField(auto_now=True)
