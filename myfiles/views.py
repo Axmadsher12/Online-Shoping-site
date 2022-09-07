@@ -141,22 +141,6 @@ def index(h):
         New_p = 1
     chegirma = Discounts_mobile.objects.all()
     comment1 = comment.objects.all()
-
-    if up1 == 'sign in ':
-        form = forms.LoginForm()
-        message = ''
-        if request.method == 'POST':
-            form = forms.LoginForm(request.POST)
-            if form.is_valid():
-                user = authenticate(
-                    username=form.cleaned_data['username'],
-                    password=form.cleaned_data['password'],
-                )
-                if user is not None:
-                    login(request, user)
-                    return redirect('home')
-            message = 'Login failed!'
-
     return render(h, 'index.html', {'tb': brend,'ms':m,'app1':app_audio,'app2':app_camera,'com':com,'apph':app_Household,'appk':app_Kitchen,
                                     't':New_t,'m':New_m,'w':New_s,
                                     'l':New_l,
