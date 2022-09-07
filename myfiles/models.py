@@ -27,18 +27,7 @@ class gen(models.Model):
     def __str__(self):
         return str(self.Gen)
 
-#myinstance.rating.add(score=1, user=request.user, ip_address=request.META['REMOTE_ADDR']) # last param is optional - only if you use COOKIES-auth
 from django.core.validators import MaxValueValidator,MinValueValidator
-class ratings(models.Model):
-    Image = models.ImageField(upload_to='media')
-    score = models.IntegerField(default=0,
-        validators = [
-            MaxValueValidator(5),
-            MaxValueValidator(0),
-        ]
-    )
-    def __str__(self):
-        return str(self.pk)
 '-----------------------------'
 class color(models.Model):
     Name = models.CharField(max_length=25)
@@ -65,6 +54,7 @@ class mobile(models.Model):
     Image3 = models.ImageField(null=True,blank=True,upload_to='media')
     Image4 = models.ImageField(null=True,blank=True,upload_to='media')
     Image5 = models.ImageField(null=True,blank=True,upload_to='media')
+    Rating = models.IntegerField(null=True,blank=True)
     Product_Information = models.TextField(null=True,blank=True)
     Color = models.ForeignKey(color, null=True, blank=True, on_delete=models.CASCADE)
     Ram = models.ForeignKey(ram_mobile, null=True, blank=True, on_delete=models.CASCADE)
@@ -82,6 +72,7 @@ class computer(models.Model):
     Image3 = models.ImageField(null=True,blank=True,upload_to='media')
     Image4 = models.ImageField(null=True,blank=True,upload_to='media')
     Image5 = models.ImageField(null=True,blank=True,upload_to='media')
+    Rating = models.IntegerField(null=True,blank=True)
     Product_Information = models.TextField(null=True,blank=True)
     Color = models.ForeignKey(color, null=True, blank=True, on_delete=models.CASCADE)
     Ram = models.ForeignKey(ram_computer, null=True, blank=True, on_delete=models.CASCADE)
@@ -97,6 +88,7 @@ class appliance(models.Model):
     Image3 = models.ImageField(null=True,blank=True,upload_to='media')
     Image4 = models.ImageField(null=True,blank=True,upload_to='media')
     Image5 = models.ImageField(null=True,blank=True,upload_to='media')
+    Rating = models.IntegerField(null=True,blank=True)
     Product_Information = models.TextField(null=True,blank=True)
     Color = models.ForeignKey(color,null=True, blank=True,on_delete=models.CASCADE)
     Type = models.ForeignKey(type_appliance, null=True, blank=True, on_delete=models.CASCADE)

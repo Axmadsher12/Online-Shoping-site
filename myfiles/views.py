@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from myfiles.models import *
 from django.db.models import Q
 
@@ -54,7 +54,7 @@ def icons(i):
     chegirma = Discounts_mobile.objects.all()
     return render(i, 'icons.html', {'ch':chegirma})
 
-
+from django.contrib.auth.forms import UserCreationForm,UserChangeForm
 def index(h):
     if 'Mail3' in h.POST:
         EmailAddress = h.POST.get('Mail3')
@@ -76,6 +76,7 @@ def index(h):
         Time = h.POST.get('Time')
         email(Mail=Mail, Time=Time).save()
 
+    'Tab'
     brend = TopBrent.objects.all()
     m = mobile.objects.all()
     ta_a = type_appliance.objects.get(Name='Mp3 Player')
@@ -140,6 +141,22 @@ def index(h):
         New_p = 1
     chegirma = Discounts_mobile.objects.all()
     comment1 = comment.objects.all()
+
+    if up1 == 'sign in ':
+        form = forms.LoginForm()
+        message = ''
+        if request.method == 'POST':
+            form = forms.LoginForm(request.POST)
+            if form.is_valid():
+                user = authenticate(
+                    username=form.cleaned_data['username'],
+                    password=form.cleaned_data['password'],
+                )
+                if user is not None:
+                    login(request, user)
+                    return redirect('home')
+            message = 'Login failed!'
+
     return render(h, 'index.html', {'tb': brend,'ms':m,'app1':app_audio,'app2':app_camera,'com':com,'apph':app_Household,'appk':app_Kitchen,
                                     't':New_t,'m':New_m,'w':New_s,
                                     'l':New_l,

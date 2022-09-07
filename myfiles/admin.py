@@ -22,13 +22,13 @@ class admin_color(admin.ModelAdmin):
     list_display = ['id','Name']
 
 class admin_mobile(admin.ModelAdmin):
-    list_display = ['id','Name','Old_price','New_price','Image','Image2','Image3','Image4','Image5','Product_Information','Color','Ram','Type','Time']
+    list_display = ['id','Name','Old_price','New_price','Image','Image2','Image3','Image4','Image5','Rating','Product_Information','Color','Ram','Type','Time']
 
 class admin_computer(admin.ModelAdmin):
-    list_display = ['id','Name','Old_price','New_price','Core_i','Gen','Image','Image2','Image3','Image4','Image5','Product_Information','Color','Ram','Type','Time']
+    list_display = ['id','Name','Old_price','New_price','Core_i','Gen','Image','Image2','Image3','Image4','Image5','Rating','Product_Information','Color','Ram','Type','Time']
 
 class admin_appliance(admin.ModelAdmin):
-    list_display = ['id','Name','Old_price','New_price','Image','Image2','Image3','Image4','Image5','Product_Information','Color','Type','Time']
+    list_display = ['id','Name','Old_price','New_price','Image','Image2','Image3','Image4','Image5','Rating','Product_Information','Color','Type','Time']
 
 class admin_email(admin.ModelAdmin):
     list_display = ['id','Mail','Time']
@@ -81,7 +81,6 @@ admin.site.register(comment,admin_comment)
 admin.site.register(ram_mobile,admin_ram_mobile)
 admin.site.register(ram_computer,admin_ram_compyuter)
 admin.site.register(gen,admin_gen)
-admin.site.register(ratings)
 admin.site.register(core_i,admin_core_i)
 admin.site.register(Discounts_mobile,admin_Discounts_mobile)
 
