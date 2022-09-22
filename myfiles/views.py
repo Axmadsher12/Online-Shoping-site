@@ -1,25 +1,15 @@
 from django.shortcuts import render,redirect
+from django.http import HttpResponse,request
+from django.forms import inlineformset_factory
 from myfiles.models import *
+from django.contrib.auth.forms import UserCreationForm,AuthenticationForm,User
+from .forms import UserCreateFormShop
 from django.db.models import Q
-
+from django.forms import *
 
 # Create your views here.
 def about(b):
-    if 'Mail3' in b.POST:
-        EmailAddress = b.POST.get('Mail3')
-        Password = b.POST.get('Password3')
-        Time = b.POST.get('Time')
-        signin(EmailAddress=EmailAddress, Password=Password, Time=Time).save()
-
-    elif 'Name' in b.POST:
-        Name = b.POST.get('Name')
-        EmailAddress = b.POST.get('Mail2')
-        Password = b.POST.get('Password1')
-        ConfirmPassword = b.POST.get('Password2')
-        Time = b.POST.get('Time')
-        signup(Name=Name, EmailAddress=EmailAddress, Password=Password, ConfirmPassword=ConfirmPassword,Time=Time).save()
-
-    elif b.method == "POST":
+    if b.method == "POST":
         Mail = b.POST.get('Mail')
         Time = b.POST.get('Time')
         email(Mail=Mail, Time=Time).save()
@@ -54,29 +44,40 @@ def icons(i):
     chegirma = Discounts_mobile.objects.all()
     return render(i, 'icons.html', {'ch':chegirma})
 
-from django.contrib.auth.forms import UserCreationForm,UserChangeForm
+from django.contrib import messages
+from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth.decorators import login_required
+@login_required(login_url='index')
 def index(h):
-    if 'Mail3' in h.POST:
-        EmailAddress = h.POST.get('Mail3')
-        Password = h.POST.get('Password3')
-        Time = h.POST.get('Time')
-        signin(EmailAddress=EmailAddress, Password=Password, Time=Time).save()
-
-    elif 'Name' in h.POST:
-        Name = h.POST.get('Name')
-        EmailAddress = h.POST.get('Mail2')
-        Password = h.POST.get('Password1')
-        ConfirmPassword = h.POST.get('Password2')
-        Time = h.POST.get('Time')
-        signup(Name=Name, EmailAddress=EmailAddress, Password=Password, ConfirmPassword=ConfirmPassword,
-               Time=Time).save()
-
-    elif h.method == "POST":
+    form = UserCreateFormShop()
+    if 'Mail' in h.POST:
         Mail = h.POST.get('Mail')
         Time = h.POST.get('Time')
         email(Mail=Mail, Time=Time).save()
 
-    'Tab'
+    elif 'sign in' in h.POST:
+        username = h.POST.get('username')
+        password = h.POST.get('password')
+        user1 = authenticate(h,username=username,password=password)
+        if user1 is not None:
+            login(h,user1)
+            return redirect('index')
+        else:
+            messages.info(h,'Username OR Password is incorrect')
+
+    elif h.method == 'POST':
+        form = UserCreateFormShop(h.POST)
+        print('post')
+        if form.is_valid():
+            print('is_valid')
+            form.save()
+            user = form.cleaned_data.get('username')
+            messages.success(h, 'Account was created for' + user)
+            return redirect('index')
+
+
+
+    'Type All Get'
     brend = TopBrent.objects.all()
     m = mobile.objects.all()
     ta_a = type_appliance.objects.get(Name='Mp3 Player')
@@ -145,31 +146,24 @@ def index(h):
                                     't':New_t,'m':New_m,'w':New_s,
                                     'l':New_l,
                                     'h':New_h,'k':New_k,'c':New_c,'p':New_p,
-                                    'ch':chegirma,'comment':comment1})
+                                    'ch':chegirma,'comment':comment1,'form1':form})
 
+
+def logout_wiev(h):
+    logout(h)
+    return redirect('index')
+
+def signin_wiev(h):
+    return render(h,'signin.html')
 
 def mail(m):
     if 'Your_Name' in m.POST:
-        Your_Name = m.POST.get('Your_Name')
+        Your_name = m.POST.get('Your_Name')
         Your_email = m.POST.get('Your_Email')
         Telephone_no = m.POST.get('Telephone_No')
         Send_message = m.POST.get('Message')
         Time = m.POST.get('Time')
-        Contact(Your_name=Your_Name,Your_email=Your_email,Telephone_no=Telephone_no,Send_message=Send_message,Time=Time).save()
-
-    elif 'Mail3' in m.POST:
-        EmailAddress = m.POST.get('Mail3')
-        Password = m.POST.get('Password3')
-        Time = m.POST.get('Time')
-        signin(EmailAddress=EmailAddress, Password=Password, Time=Time).save()
-
-    elif 'Name' in m.POST:
-        Name = m.POST.get('Name')
-        EmailAddress = m.POST.get('Mail2')
-        Password = m.POST.get('Password1')
-        ConfirmPassword = m.POST.get('Password2')
-        Time = m.POST.get('Time')
-        signup(Name=Name, EmailAddress=EmailAddress, Password=Password, ConfirmPassword=ConfirmPassword,Time=Time).save()
+        Contact(Your_name=Your_name,Your_email=Your_email,Telephone_no=Telephone_no,Send_message=Send_message,Time=Time).save()
 
     elif m.method == "POST":
         Mail = m.POST.get('Mail')
@@ -181,20 +175,43 @@ def mail(m):
 
 
 def pro(p,allf):
-    if 'Mail3' in p.POST:
-        EmailAddress = p.POST.get('Mail3')
-        Password = p.POST.get('Password3')
-        Time = p.POST.get('Time')
-        signin(EmailAddress=EmailAddress, Password=Password, Time=Time).save()
-
-    elif 'Name' in p.POST:
-        Name = p.POST.get('Name')
-        EmailAddress = p.POST.get('Mail2')
-        Password = p.POST.get('Password1')
-        ConfirmPassword = p.POST.get('Password2')
-        Time = p.POST.get('Time')
-        signup(Name=Name, EmailAddress=EmailAddress, Password=Password, ConfirmPassword=ConfirmPassword,
-               Time=Time).save()
+    if 'select_item' in p.POST :
+        sort = p.POST.get('select_item')
+        if sort == "Default":
+            maxsulot = mobile.objects.all().order_by('-id')
+            maxsulot2 = appliance.objects.all()
+            maxsulot3 = computer.objects.all()
+            chegirma = Discounts_mobile.objects.all()
+            selects = 'Default'
+            return render(p, 'products.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,'select':selects})
+        elif sort == "Rating":
+            maxsulot = mobile.objects.all().order_by('-Rating')
+            maxsulot2 = appliance.objects.all()
+            maxsulot3 = computer.objects.all()
+            chegirma = Discounts_mobile.objects.all()
+            selects = 'Rating'
+            return render(p, 'products.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,'select':selects})
+        elif sort == "Newness":
+            maxsulot = mobile.objects.all().order_by('-Time')
+            maxsulot2 = appliance.objects.all()
+            maxsulot3 = computer.objects.all()
+            chegirma = Discounts_mobile.objects.all()
+            selects = 'Newness'
+            return render(p, 'products.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,'select':selects})
+        elif sort == "low to high":
+            maxsulot = mobile.objects.all().order_by('New_price')
+            maxsulot2 = appliance.objects.all()
+            maxsulot3 = computer.objects.all()
+            chegirma = Discounts_mobile.objects.all()
+            selects = 'low to high'
+            return render(p, 'products.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,'select':selects})
+        elif sort == "high to low":
+            maxsulot = mobile.objects.all().order_by('-New_price')
+            maxsulot2 = appliance.objects.all()
+            maxsulot3 = computer.objects.all()
+            chegirma = Discounts_mobile.objects.all()
+            selects = 'high to low'
+            return render(p, 'products.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,'select':selects})
 
     elif p.method == "POST":
         Mail = p.POST.get('Mail')
@@ -204,7 +221,31 @@ def pro(p,allf):
         'Filter----------------------------------------------|'
     elif allf == 'Mobile Phone' or allf == 'Smart Watch' or allf == 'Tablet':
         tmf = type_mobile.objects.get(Name=allf)
-        maxsulot = mobile.objects.filter(Type=tmf)
+        maxsulot = mobile.objects.filter(Type=tmf.id)
+        maxsulot2 = appliance.objects.all()
+        maxsulot3 = computer.objects.all()
+        chegirma = Discounts_mobile.objects.all()
+        return render(p, 'products.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma})
+    elif allf == 'New':
+        maxsulot = mobile.objects.all().order_by('-Time')
+        maxsulot2 = appliance.objects.all()
+        maxsulot3 = computer.objects.all()
+        chegirma = Discounts_mobile.objects.all()
+        return render(p, 'products.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma})
+    elif allf == 'Rating':
+        maxsulot = mobile.objects.all().order_by('-Rating')
+        maxsulot2 = appliance.objects.all()
+        maxsulot3 = computer.objects.all()
+        chegirma = Discounts_mobile.objects.all()
+        return render(p, 'products.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma})
+    elif allf == 'low to high':
+        maxsulot = mobile.objects.all().order_by('New_price')
+        maxsulot2 = appliance.objects.all()
+        maxsulot3 = computer.objects.all()
+        chegirma = Discounts_mobile.objects.all()
+        return render(p, 'products.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma})
+    elif allf == 'high to low':
+        maxsulot = mobile.objects.all().order_by('-New_price')
         maxsulot2 = appliance.objects.all()
         maxsulot3 = computer.objects.all()
         chegirma = Discounts_mobile.objects.all()
@@ -218,20 +259,44 @@ def pro(p,allf):
 
 
 def pro1(p,allf):
-    if 'Mail3' in p.POST:
-        EmailAddress = p.POST.get('Mail3')
-        Password = p.POST.get('Password3')
-        Time = p.POST.get('Time')
-        signin(EmailAddress=EmailAddress, Password=Password, Time=Time).save()
 
-    elif 'Name' in p.POST:
-        Name = p.POST.get('Name')
-        EmailAddress = p.POST.get('Mail2')
-        Password = p.POST.get('Password1')
-        ConfirmPassword = p.POST.get('Password2')
-        Time = p.POST.get('Time')
-        signup(Name=Name, EmailAddress=EmailAddress, Password=Password, ConfirmPassword=ConfirmPassword,
-               Time=Time).save()
+    if 'select_item1' in p.POST :
+        sort = p.POST.get('select_item1')
+        if sort == "Default":
+            maxsulot = mobile.objects.all()
+            maxsulot2 = appliance.objects.all()
+            maxsulot3 = computer.objects.all().order_by('-id')
+            chegirma = Discounts_mobile.objects.all()
+            selects = 'Default'
+            return render(p, 'products1.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,'select':selects})
+        elif sort == "Rating":
+            maxsulot = mobile.objects.all()
+            maxsulot2 = appliance.objects.all()
+            maxsulot3 = computer.objects.all().order_by('-Rating')
+            chegirma = Discounts_mobile.objects.all()
+            selects = 'Rating'
+            return render(p, 'products1.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,'select':selects})
+        elif sort == "Newness":
+            maxsulot = mobile.objects.all()
+            maxsulot2 = appliance.objects.all()
+            maxsulot3 = computer.objects.all().order_by('-Time')
+            chegirma = Discounts_mobile.objects.all()
+            selects = 'Newness'
+            return render(p, 'products1.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,'select':selects})
+        elif sort == "low to high":
+            maxsulot = mobile.objects.all()
+            maxsulot2 = appliance.objects.all()
+            maxsulot3 = computer.objects.all().order_by('New_price')
+            chegirma = Discounts_mobile.objects.all()
+            selects = 'low to high'
+            return render(p, 'products1.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,'select':selects})
+        elif sort == "high to low":
+            maxsulot = mobile.objects.all()
+            maxsulot2 = appliance.objects.all()
+            maxsulot3 = computer.objects.all().order_by('-New_price')
+            chegirma = Discounts_mobile.objects.all()
+            selects = 'high to low'
+            return render(p, 'products1.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,'select':selects})
 
     elif p.method == "POST":
         Mail = p.POST.get('Mail')
@@ -240,12 +305,36 @@ def pro1(p,allf):
 
         'Filter----------------------------------------------|'
     elif allf == 'Laptop' or allf == 'Personal Computer':
-        tmf = type_compyuter.objects.get(Name=allf)
+        tmf = type_computer.objects.get(Name=allf)
         maxsulot = mobile.objects.all()
         maxsulot2 = appliance.objects.all()
-        maxsulot3 = computer.objects.filter(Type=tmf)
+        maxsulot3 = computer.objects.filter(Type=tmf.id)
         chegirma = Discounts_mobile.objects.all()
         return render(p, 'products1.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma})
+    elif allf == 'New1':
+        maxsulot = mobile.objects.all()
+        maxsulot2 = appliance.objects.all()
+        maxsulot3 = computer.objects.all().order_by('-Time')
+        chegirma = Discounts_mobile.objects.all()
+        return render(p, 'products.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma})
+    elif allf == 'Rating1':
+        maxsulot = mobile.objects.all()
+        maxsulot2 = appliance.objects.all()
+        maxsulot3 = computer.objects.all().order_by('-Rating')
+        chegirma = Discounts_mobile.objects.all()
+        return render(p, 'products.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma})
+    elif allf == 'low to high1':
+        maxsulot = mobile.objects.all()
+        maxsulot2 = appliance.objects.all()
+        maxsulot3 = computer.objects.all().order_by('New_price')
+        chegirma = Discounts_mobile.objects.all()
+        return render(p, 'products.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma})
+    elif allf == 'high to low1':
+        maxsulot = mobile.objects.all()
+        maxsulot2 = appliance.objects.all()
+        maxsulot3 = computer.objects.all().order_by('-New_price')
+        chegirma = Discounts_mobile.objects.all()
+        return render(p, 'products.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma})
     else:
         maxsulot = mobile.objects.all()
         maxsulot2 = appliance.objects.all()
@@ -255,20 +344,43 @@ def pro1(p,allf):
 
 
 def pro2(p,allf):
-    if 'Mail3' in p.POST:
-        EmailAddress = p.POST.get('Mail3')
-        Password = p.POST.get('Password3')
-        Time = p.POST.get('Time')
-        signin(EmailAddress=EmailAddress, Password=Password, Time=Time).save()
-
-    elif 'Name' in p.POST:
-        Name = p.POST.get('Name')
-        EmailAddress = p.POST.get('Mail2')
-        Password = p.POST.get('Password1')
-        ConfirmPassword = p.POST.get('Password2')
-        Time = p.POST.get('Time')
-        signup(Name=Name, EmailAddress=EmailAddress, Password=Password, ConfirmPassword=ConfirmPassword,
-               Time=Time).save()
+    if 'select_item2' in p.POST :
+        sort = p.POST.get('select_item2')
+        if sort == "Default":
+            maxsulot = mobile.objects.all().order_by('-id')
+            maxsulot2 = appliance.objects.all()
+            maxsulot3 = computer.objects.all()
+            chegirma = Discounts_mobile.objects.all()
+            selects = 'Default'
+            return render(p, 'products2.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,'select':selects})
+        elif sort == "Rating":
+            maxsulot = mobile.objects.all().order_by('-Rating')
+            maxsulot2 = appliance.objects.all()
+            maxsulot3 = computer.objects.all()
+            chegirma = Discounts_mobile.objects.all()
+            selects = 'Rating'
+            return render(p, 'products2.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,'select':selects})
+        elif sort == "Newness":
+            maxsulot = mobile.objects.all().order_by('-Time')
+            maxsulot2 = appliance.objects.all()
+            maxsulot3 = computer.objects.all()
+            chegirma = Discounts_mobile.objects.all()
+            selects = 'Newness'
+            return render(p, 'products2.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,'select':selects})
+        elif sort == "low to high":
+            maxsulot = mobile.objects.all().order_by('New_price')
+            maxsulot2 = appliance.objects.all()
+            maxsulot3 = computer.objects.all()
+            chegirma = Discounts_mobile.objects.all()
+            selects = 'low to high'
+            return render(p, 'products2.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,'select':selects})
+        elif sort == "high to low":
+            maxsulot = mobile.objects.all().order_by('-New_price')
+            maxsulot2 = appliance.objects.all()
+            maxsulot3 = computer.objects.all()
+            chegirma = Discounts_mobile.objects.all()
+            selects = 'high to low'
+            return render(p, 'products2.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,'select':selects})
 
     elif p.method == "POST":
         Mail = p.POST.get('Mail')
@@ -279,10 +391,34 @@ def pro2(p,allf):
     elif allf == 'Appliances Kitchen' or allf == 'Appliances Household' or allf == 'Camera' or allf == 'Mp3 Player':
         tmf = type_appliance.objects.get(Name=allf)
         maxsulot = mobile.objects.all()
-        maxsulot2 = appliance.objects.filter(Type=tmf)
+        maxsulot2 = appliance.objects.filter(Type=tmf.id)
         maxsulot3 = computer.objects.all()
         chegirma = Discounts_mobile.objects.all()
         return render(p, 'products2.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma})
+    elif allf == 'New1':
+        maxsulot = mobile.objects.all().order_by('-Time')
+        maxsulot2 = appliance.objects.all()
+        maxsulot3 = computer.objects.all()
+        chegirma = Discounts_mobile.objects.all()
+        return render(p, 'products.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma})
+    elif allf == 'Rating1':
+        maxsulot = mobile.objects.all().order_by('-Rating')
+        maxsulot2 = appliance.objects.all()
+        maxsulot3 = computer.objects.all()
+        chegirma = Discounts_mobile.objects.all()
+        return render(p, 'products.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma})
+    elif allf == 'low to high1':
+        maxsulot = mobile.objects.all().order_by('New_price')
+        maxsulot2 = appliance.objects.all()
+        maxsulot3 = computer.objects.all()
+        chegirma = Discounts_mobile.objects.all()
+        return render(p, 'products.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma})
+    elif allf == 'high to low1':
+        maxsulot = mobile.objects.all().order_by('-New_price')
+        maxsulot2 = appliance.objects.all()
+        maxsulot3 = computer.objects.all()
+        chegirma = Discounts_mobile.objects.all()
+        return render(p, 'products.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma})
     else:
         maxsulot = mobile.objects.all()
         maxsulot2 = appliance.objects.all()
@@ -299,21 +435,6 @@ def single1(s):
         Add_You_Review = s.POST.get('Review')
         Time = s.POST.get('Time')
         comment(Name=Name, Mail=Mail, Telephone_no=Telephone_no, Add_Yuor_Review=Add_You_Review, Time=Time).save()
-
-    elif 'Mail3' in s.POST:
-        EmailAddress = s.POST.get('Mail3')
-        Password = s.POST.get('Password3')
-        Time = s.POST.get('Time')
-        signin(EmailAddress=EmailAddress, Password=Password, Time=Time).save()
-
-    elif 'Name2' in s.POST:
-        Name = s.POST.get('Name2')
-        EmailAddress = s.POST.get('Mail4')
-        Password = s.POST.get('Password1')
-        ConfirmPassword = s.POST.get('Password2')
-        Time = s.POST.get('Time')
-        signup(Name=Name, EmailAddress=EmailAddress, Password=Password, ConfirmPassword=ConfirmPassword,
-               Time=Time).save()
 
     elif s.method == "POST":
         Mail = s.POST.get('Mail')
@@ -342,20 +463,6 @@ def single_mobile(s, id):
         Time = s.POST.get('Time')
         comment(Name=Name, Mail=Mail, Telephone_no=Telephone_no, Add_Yuor_Review=Add_You_Review, Time=Time).save()
 
-    elif 'Mail3' in s.POST:
-        EmailAddress = s.POST.get('Mail3')
-        Password = s.POST.get('Password3')
-        Time = s.POST.get('Time')
-        signin(EmailAddress=EmailAddress, Password=Password, Time=Time).save()
-
-    elif 'Name2' in s.POST:
-        Name = s.POST.get('Name2')
-        EmailAddress = s.POST.get('Mail4')
-        Password = s.POST.get('Password1')
-        ConfirmPassword = s.POST.get('Password2')
-        Time = s.POST.get('Time')
-        signup(Name=Name, EmailAddress=EmailAddress, Password=Password, ConfirmPassword=ConfirmPassword,Time=Time).save()
-
     elif s.method == "POST":
         Mail = s.POST.get('Mail')
         Time = s.POST.get('Time')
@@ -368,11 +475,7 @@ def single_mobile(s, id):
     maxsulot3 = computer.objects.all()
     chegirma = Discounts_mobile.objects.all()
     com = comment.objects.all()
-    y = 0
-    for st in com:
-        y = y + 1
-    obj = ratings.objects.filter(score=0).order_by('?').first()
-    return render(s, 'single.html',{'obj':obj,'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3,'css': css, 'ra': rams, 'ch': chegirma,'com':com})
+    return render(s, 'single.html',{'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3,'css': css, 'ra': rams, 'ch': chegirma,'com':com})
 
 
 def single_compyuter(s, id):
@@ -383,20 +486,6 @@ def single_compyuter(s, id):
         Add_You_Review = s.POST.get('Review')
         Time = s.POST.get('Time')
         comment(Name=Name, Mail=Mail, Telephone_no=Telephone_no, Add_Yuor_Review=Add_You_Review, Time=Time).save()
-
-    elif 'Mail3' in s.POST:
-        EmailAddress = s.POST.get('Mail3')
-        Password = s.POST.get('Password3')
-        Time = s.POST.get('Time')
-        signin(EmailAddress=EmailAddress, Password=Password, Time=Time).save()
-
-    elif 'Name2' in s.POST:
-        Name = s.POST.get('Name2')
-        EmailAddress = s.POST.get('Mail4')
-        Password = s.POST.get('Password1')
-        ConfirmPassword = s.POST.get('Password2')
-        Time = s.POST.get('Time')
-        signup(Name=Name, EmailAddress=EmailAddress, Password=Password, ConfirmPassword=ConfirmPassword,Time=Time).save()
 
     elif s.method == "POST":
         Mail = s.POST.get('Mail')
@@ -427,19 +516,6 @@ def single_appliance(s, id):
         Time = s.POST.get('Time')
         comment(Name=Name, Mail=Mail, Telephone_no=Telephone_no, Add_Yuor_Review=Add_You_Review, Time=Time).save()
 
-    elif 'Mail3' in s.POST:
-        EmailAddress = s.POST.get('Mail3')
-        Password = s.POST.get('Password3')
-        Time = s.POST.get('Time')
-        signin(EmailAddress=EmailAddress, Password=Password, Time=Time).save()
-
-    elif 'Name2' in s.POST:
-        Name = s.POST.get('Name2')
-        EmailAddress = s.POST.get('Mail4')
-        Password = s.POST.get('Password1')
-        ConfirmPassword = s.POST.get('Password2')
-        Time = s.POST.get('Time')
-        signup(Name=Name, EmailAddress=EmailAddress, Password=Password, ConfirmPassword=ConfirmPassword,Time=Time).save()
 
     elif s.method == "POST":
         Mail = s.POST.get('Mail')
@@ -466,41 +542,46 @@ def mobils(r, rang):
     if rang == 'Red' or rang == 'Brown' or rang == 'Yellow' or rang == 'Violet' or rang == 'Orange' or rang == 'Blue':
         col = color.objects.get(Name=rang)
         colors = mobile.objects.filter(Color=col.id)
-        colors2 = computer.objects.filter(Color=col.id)
-        colors3 = appliance.objects.filter(Color=col.id)
-        return render(r, 'products2.html', {'Max': colors, 'Max2': colors2, 'Max3': colors3, 'ch': chegirma})
+        colors2 = appliance.objects.all()
+        colors3 = computer.objects.all()
+        return render(r, 'products.html', {'Max': colors, 'Max2': colors2, 'Max3': colors3, 'ch': chegirma})
     else:
-        prices = mobile.objects.filter(New_price=rang)
-        prices2 = computer.objects.filter(New_price=rang)
-        prices3 = appliance.objects.filter(New_price=rang)
-        return render(r, 'products2.html', {'Max': prices, 'Max2': prices2, 'Max3': prices3, 'ch': chegirma})
+        if rang == '100':
+            prices = mobile.objects.all()
+            prices2 = appliance.objects.all()
+            prices3 = computer.objects.all()
+        else:
+            prices = mobile.objects.filter(New_price=rang)
+            prices2 = appliance.objects.all()
+            prices3 = computer.objects.all()
+        return render(r, 'products.html', {'Max': prices, 'Max2': prices2, 'Max3': prices3, 'ch': chegirma})
 
 'p1'
 def Computer(r, rang1):
     chegirma = Discounts_mobile.objects.all()
     if rang1 == 'Red' or rang1 == 'Brown' or rang1 == 'Yellow' or rang1 == 'Violet' or rang1 == 'Orange' or rang1 == 'Blue':
         col = color.objects.get(Name=rang1)
-        colors = mobile.objects.filter(Color=col.id)
-        colors2 = computer.objects.filter(Color=col.id)
-        colors3 = appliance.objects.filter(Color=col.id)
-        return render(r, 'products2.html', {'Max': colors, 'Max2': colors2, 'Max3': colors3, 'ch': chegirma})
+        colors = mobile.objects.all()
+        colors2 = appliance.objects.all()
+        colors3 = computer.objects.filter(Color=col.id)
+        return render(r, 'products1.html', {'Max': colors, 'Max2': colors2, 'Max3': colors3, 'ch': chegirma})
     else:
-        prices = mobile.objects.filter(New_price=rang1)
-        prices2 = computer.objects.filter(New_price=rang1)
-        prices3 = appliance.objects.filter(New_price=rang1)
-        return render(r, 'products2.html', {'Max': prices, 'Max2': prices2, 'Max3': prices3, 'ch': chegirma})
+        prices = mobile.objects.all()
+        prices2 = appliance.objects.all()
+        prices3 = computer.objects.filter(New_price=rang1)
+        return render(r, 'products1.html', {'Max': prices, 'Max2': prices2, 'Max3': prices3, 'ch': chegirma})
 
 'p2'
 def appliances(r, rang2):
     chegirma = Discounts_mobile.objects.all()
     if rang2 == 'Red' or rang2 == 'Brown' or rang2 == 'Yellow' or rang2 == 'Violet' or rang2 == 'Orange' or rang2 == 'Blue':
         col = color.objects.get(Name=rang2)
-        colors = mobile.objects.filter(Color=col.id)
-        colors2 = computer.objects.filter(Color=col.id)
-        colors3 = appliance.objects.filter(Color=col.id)
+        colors = mobile.objects.all()
+        colors2 = appliance.objects.filter(Color=col.id)
+        colors3 = computer.objects.all()
         return render(r, 'products2.html', {'Max': colors, 'Max2': colors2, 'Max3': colors3, 'ch': chegirma})
     else:
-        prices = mobile.objects.filter(New_price=rang2)
-        prices2 = computer.objects.filter(New_price=rang2)
-        prices3 = appliance.objects.filter(New_price=rang2)
+        prices = mobile.objects.all()
+        prices2 = appliance.objects.filter(New_price=rang2)
+        prices3 = computer.objects.all()
         return render(r, 'products2.html', {'Max': prices, 'Max2': prices2, 'Max3': prices3, 'ch': chegirma})

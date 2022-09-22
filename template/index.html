@@ -67,11 +67,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 									<ul>
 										<li class="resp-tab-item" aria-controls="tab_item-0"><span>Sign in</span></li>
 										<li class="resp-tab-item" aria-controls="tab_item-1"><span>Sign up</span></li>
-									</ul>		
+									</ul>
 									<div class="tab-1 resp-tab-content" aria-labelledby="tab_item-0">
 										<div class="facts">
 											<div class="register">
-												<form action="{% url 'index' %}" method="post">
+												<form name="sign in" action="{% url 'index' %}" method="post">
 													{% csrf_token %}
 													<input name="Mail3" placeholder="EmailAddress" type="email" required="">
 													<input name="Password3" placeholder="Password" type="password" required="">
@@ -80,25 +80,37 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 													</div>
 												</form>
 											</div>
+											{% for message in messages %}
+											    <p id="messages">{{message}}</p>
+											{% endfor %}
 										</div> 
-									</div>	 
+									</div>
 									<div class="tab-2 resp-tab-content" aria-labelledby="tab_item-1">
 										<div class="facts">
 											<div class="register">
-												<form action="{% url 'index' %}" method="post">
+												<form name="sign up" method="POST" action="{% url 'index' %}">
 													{% csrf_token %}
-													<input placeholder="Name" name="Name" type="text" required="">
-													<input placeholder="EmailAddress" name="Mail2" type="email" required="">
-													<input placeholder="Password" name="Password1" type="password" required="">
-													<input placeholder="ConfirmPassword" name="Password2" type="password" required="">
+
+                                                    {{ form1.username.label }}
+                                                    {{ form1.username }}
+
+                                                    {{ form1.email.label }}
+                                                    {{ form1.email }}
+
+                                                    {{ form1.password1.label }}
+                                                    {{ form1.password1 }}
+
+                                                    {{ form1.password2.label }}
+                                                    {{ form1.password2 }}
 													<div class="sign-up">
 														<input type="submit" value="Create Account"/>
 													</div>
 												</form>
 											</div>
+											{{form1.errors}}
 										</div>
 									</div> 			        					            	      
-								</div>	
+								</div>
 							</div>
 							<script src="{% static 'js/easyResponsiveTabs.js' %}" type="text/javascript"></script>
 							<script type="text/javascript">
@@ -149,7 +161,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				<input class="search_box" type="checkbox" id="search_box">
 				<label class="icon-search" for="search_box"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></label>
 				<div class="search_form">
-					<form action="#" method="post">
+					<form onchange="this.form.submit" action="#" method="post">
+						{% csrf_token %}
 						<input type="text" name="Search" placeholder="Search...">
 						<input type="submit" value="Send">
 					</form>
@@ -950,9 +963,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				<div class="col-md-7 w3agile_special_deals_grid_left">
 					<div class="w3agile_special_deals_grid_left_grid">
 						<img src="{% static 'images/21.jpg' %}" alt=" " class="img-responsive" />
+						{% for c in ch %}
 						<div class="w3agile_special_deals_grid_left_grid_pos1">
-							<h5>30%<span>Off/-</span></h5>
+							<h5>{{c.Percent}}}%<span>Off/-</span></h5>
 						</div>
+						{% endfor %}
 						<div class="w3agile_special_deals_grid_left_grid_pos">
 							<h4>We Offer <span>Best Products</span></h4>
 						</div>
@@ -963,7 +978,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 							<article style="position: absolute; width: 100%; opacity: 0;"> 
 								<div class="banner-wrap">
 									<div class="w3agile_special_deals_grid_left_grid1">
-										<img src="#" alt=" " class="img-responsive" />
+
 										<p>{{c.Add_Yuor_Review}}</p>
 										<h4>{{c.Name}}</h4>
 									</div>

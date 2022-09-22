@@ -33,12 +33,6 @@ class admin_appliance(admin.ModelAdmin):
 class admin_email(admin.ModelAdmin):
     list_display = ['id','Mail','Time']
 
-class admin_signin(admin.ModelAdmin):
-    list_display = ['id','EmailAddress','Password','Time']
-
-class admin_signup(admin.ModelAdmin):
-    list_display = ['id','Name','EmailAddress','Password','ConfirmPassword','Time']
-
 class admin_Contact(admin.ModelAdmin):
     list_display = ['id','Your_name','Your_email','Telephone_no','Send_message','Time']
 
@@ -52,7 +46,7 @@ class admin_MeetOurTeam(admin.ModelAdmin):
     list_display = ['id','Name','Image','occupation','Facebook','Twitter','Google','Pinterest','Time']
 
 class admin_comment(admin.ModelAdmin):
-    list_display = ['id','Name','Mail','Image','Telephone_no','Add_Yuor_Review','Time']
+    list_display = ['id','Name','Mail','Telephone_no','Add_Yuor_Review','Time']
 
 class admin_ram_mobile(admin.ModelAdmin):
     list_display = ['id','Ram']
@@ -67,8 +61,6 @@ admin.site.register(mobile,admin_mobile)
 admin.site.register(computer,admin_computer)
 admin.site.register(appliance,admin_appliance)
 admin.site.register(email,admin_email)
-admin.site.register(signin,admin_signin)
-admin.site.register(signup,admin_signup)
 admin.site.register(Contact,admin_Contact)
 admin.site.register(Contact_Answer,admin_Contact_Answer)
 admin.site.register(type_mobile,admin_type_mobile)

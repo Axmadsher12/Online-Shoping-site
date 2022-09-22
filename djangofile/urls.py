@@ -18,8 +18,14 @@ from django.urls import path
 from myfiles.views import *
 from djangofile import settings
 from django.conf.urls import static
+'----USERS----'
+
+'-------------'
 
 urlpatterns = [
+    path('logout/',logout_wiev,name='logout'),
+    path('signin/',signin_wiev,name='signin'),
+    #$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     path('admin/', admin.site.urls),
     path('about/',about,name='about'),
     path('codes/',codes,name='codes'),
@@ -32,9 +38,9 @@ urlpatterns = [
     path('appliances/<allf>/',pro2,name='products2'),
     path('single/',single1,name='single'),
 
-    path('mob_color/<rang>/',mobils, name='mobiles'),
-    path('com_color/<rang1>/',Computer,name='compyuter'),
-    path('app/<rang2>/',appliances,name='appliances'),
+    path('mobile/<rang>/',mobils, name='mobiles'),
+    path('computer/<rang1>/',Computer,name='compyuter'),
+    path('appliance/<rang2>/',appliances,name='appliances'),
 
     path('single1/<id>/',single_mobile,name='single1'),
     path('single3/<id>/',single_compyuter,name='single3'),

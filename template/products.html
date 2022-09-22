@@ -284,6 +284,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 										<li><a href="{% url 'products2' allf='Camera' %}">Cameras</a></li>
 								        <li><a href="{% url 'products' allf='All' %}">All Products</a></li>
 										<li><a href="{% url 'products1' allf='Personal Computer' %}">Personal Computer</a></li>
+										<li><a href="{% url 'products1' allf='Todays Praducts' %}">Today's Praducts</a></li>
 									</ul>
 								  </div>
 								</div>
@@ -291,10 +292,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 							</div>
 							<ul class="panel_bottom">
 								<li><a href="{% url 'products'  allf='All' %}">Default sorting</a></li>
-								<li><a href="{% url 'products'  allf='All' %}">Sort by newness</a></li>
-								<li><a href="{% url 'products'  allf='All' %}">Sort by average rating</a></li>
-								<li><a href="{% url 'products'  allf='All' %}">Sort by price: low to high</a></li>
-								<li><a href="{% url 'products'  allf='All' %}">Sort by price: high to low</a></li>
+								<li><a href="{% url 'products'  allf='New' %}">Sort by newness</a></li>
+								<li><a href="{% url 'products'  allf='Rating' %}">Sort by average rating</a></li>
+								<li><a href="{% url 'products'  allf='low to high' %}">Sort by price: low to high</a></li>
+								<li><a href="{% url 'products'  allf='high to low' %}">Sort by price: high to low</a></li>
 							</ul>
 						</div>
 					</div>
@@ -318,11 +319,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						<div class="w3ls_mobiles_grid_left_grid_sub">
 							<div class="ecommerce_color ecommerce_size">
 								<ul>
-									<li><a href="{% url 'mobiles' rang=115 %}">Below $ 100</a></li>
-									<li><a href="{% url 'mobiles' rang='160' %}">$ 100-500</a></li>
-									<li><a href="{% url 'mobiles' rang='178' %}">$ 1k-10k</a></li>
-									<li><a href="{% url 'mobiles' rang='190' %}">$ 10k-20k</a></li>
-									<li><a href="{% url 'mobiles' rang='200' %}">$ Above 20k</a></li>
+									<li><a href="{% url 'mobiles' rang='100' %}">Below $ 100</a></li>
+									<li><a href="{% url 'mobiles' rang='100 : 500' %}">$ 100-500</a></li>
+									<li><a href="{% url 'mobiles' rang='1000 : 10000' %}">$ 1k-10k</a></li>
+									<li><a href="{% url 'mobiles' rang='10000 : 20000' %}">$ 10k-20k</a></li>
+									<li><a href="{% url 'mobiles' rang='< 20000' %}">$ Above 20k</a></li>
 								</ul>
 							</div>
 						</div>
@@ -351,19 +352,41 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 							<h3>Showing Results: 0-1</h3>
 						</div>
 						<div class="w3ls_mobiles_grid_right_grid2_right">
-							<select name="select_item" class="select_item">
-								<option selected="selected">Default sorting</option>
-								<option>Sort by popularity</option>
-								<option>Sort by average rating</option>
-								<option>Sort by newness</option>
-								<option>Sort by price: low to high</option>
-								<option>Sort by price: high to low</option>
-							    1 Standart tartiblash
-								4 Yangiligi bo'yicha saralash
-								5 Narx bo'yicha saralash: pastdan yuqoriga
-								6 Narx bo'yicha saralash: yuqoridan pastgacha
-							</select>
-						</div>
+							<form action="{% url 'products' allf='Select_item' %}" method="POST">
+								{% csrf_token %}
+								<select name="select_item" class="select_item" onchange="this.form.submit()">
+									{% if select == 'Default' %}
+								    <option value="Default" selected="selected">Default sorting</option>
+									{% else %}
+									<option value="Default">Default sorting</option>
+									{% endif %}
+
+									{% if select == 'Rating' %}
+ 								    <option value="Rating" selected="selected">Sort by average rating</option>
+									{% else %}
+									<option value="Rating">Sort by average rating</option>
+									{% endif %}
+
+									{% if select == 'Newness' %}
+								    <option value="Newness" selected="selected">Sort by newness</option>
+									{% else %}
+									<option value="Newness">Sort by newness</option>
+									{% endif %}
+
+									{% if select == 'low to high' %}
+								    <option value="low to high" selected="selected">Sort by price: low to high</option>
+									{% else %}
+									<option value="low to high">Sort by price: low to high</option>
+									{% endif %}
+
+									{% if select == 'high to low' %}
+								    <option value="high to low" selected="selected">Sort by price: high to low</option>
+									{% else %}
+									<option value="high to low">Sort by price: high to low</option>
+									{% endif %}
+							    </select>
+							</form>
+							</div>
 						<div class="clearfix"> </div>
 					</div>
 					<div class="w3ls_mobiles_grid_right_grid3">

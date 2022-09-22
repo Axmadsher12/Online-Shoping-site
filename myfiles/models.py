@@ -93,55 +93,12 @@ class appliance(models.Model):
     Color = models.ForeignKey(color,null=True, blank=True,on_delete=models.CASCADE)
     Type = models.ForeignKey(type_appliance, null=True, blank=True, on_delete=models.CASCADE)
     Time = models.DateTimeField(auto_now=True,blank=True,null=True)
-'----------------------------------'
-"""
-<-- Ob’ektiv -->
-Optik kattalashtirish -- x
-Fokus masofasi -- 0.0 - 0.0
-Diafragma -- F0 - F0
-<-- Ob’ektiv end -->
------------------------------------------------------;
-<-- Kamera matrisasi -->
-Matritsa -- 0.0 Mpiks
-Matritsa turi -- ...
-Matritsa soni -- 0
-<-- Kamera matrisasi end -->
------------------------------------------------------;
-<-- Rasmga tushirish rejimlari -->
-Avtoekspozitsiya -- bor yoki yo'q
-Sensorli displey -- bor yoki yo'q
-Video formatlari -- 0 p
-Tungi tasvirlash rejimi -- bor yoki yo'q
-JK-ekran -- Mavjud (3", 460800 piks.)
-Keng ekranli tasvir rejimi -- bor yoki yo'q
-Rejim Time-lapse -- bor yoki yo'q
-<-- Rasmga tushirish rejimlari end -->
------------------------------------------------------;
-<-- Kameraning ekspozitsiyasi -->
-Diafragma va tortish tezligini qo’lda sozlash -- bor yoki yoq
-<-- Kameraning ekspozitsiyasi end -->
------------------------------------------------------;
-<-- Fokusi -->
-Qo’lda fokuslash -- bor yoki yoq
-Avtofokus yoritgichi -- bor yoki yoq
-<-- Fokusi end -->
------------------------------------------------------;
-"""
+
+
 class email(models.Model):
     Mail = models.EmailField()
     Time = models.DateTimeField(auto_now=True)
 
-class signin(models.Model):
-    EmailAddress = models.EmailField()
-    Password = models.CharField(max_length=20)
-    Time = models.DateTimeField(auto_now=True)
-
-class signup(models.Model):
-    Name = models.CharField(max_length=25)
-    EmailAddress = models.EmailField()
-    Password = models.CharField(max_length=20)
-    ConfirmPassword = models.CharField(max_length=20)
-    Time = models.DateTimeField(auto_now=True)
 
 "Adminga murojat"
 class Contact(models.Model):
@@ -177,7 +134,6 @@ class comment(models.Model):
     Name = models.CharField(max_length=25)
     Mail = models.EmailField()
     Telephone_no = models.IntegerField()
-    Image = models.ImageField(null=True,blank=True,upload_to='media')
     Add_Yuor_Review = models.TextField(null=True,blank=True)
     Time = models.DateTimeField(null=True,blank=True,auto_now=True)
 
