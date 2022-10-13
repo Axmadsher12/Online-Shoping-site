@@ -417,13 +417,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					</div>
 
 					<div class="tab-2 resp-tab-content additional_info_grid" aria-labelledby="tab_item-1">
-						<h4>() Reviews</h4>
+						<h4>({{y}}) Reviews</h4>
 
 						<div class="additional_info_sub_grids">
 							{% for i in com %}
 							<div class="col-xs-2 additional_info_sub_grid_left">
 								{% if i.Image %}
 								<img src="{{i.Image.url}}" name="Img com" alt=" " class="img-responsive" />
+								{% else %}
+								<!--None-->
 							    {% endif %}
 							</div>
 							<div class="col-xs-10 additional_info_sub_grid_right">

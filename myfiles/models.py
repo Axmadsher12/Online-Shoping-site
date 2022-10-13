@@ -133,7 +133,7 @@ class MeetOurTeam(models.Model):
 class comment(models.Model):
     Name = models.CharField(max_length=25)
     Mail = models.EmailField()
-    Telephone_no = models.IntegerField()
+    Telephone_no = models.IntegerField(null=True,blank=True)
     Add_Yuor_Review = models.TextField(null=True,blank=True)
     Time = models.DateTimeField(null=True,blank=True,auto_now=True)
 

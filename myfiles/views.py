@@ -95,24 +95,28 @@ def index(h):
     New_t = mobile.objects.filter(Type=tm_t.id)
     if New_t:
         New_t = mobile.objects.filter(Type=tm_t.id).order_by('-Time')[0]
+        print("New_t = mobile.objects.filter(Type=tm_t.id).order_by('-Time')[0]")
     else:
         New_t = 1
     tm_s = type_mobile.objects.get(Name='Smart Watch')
     New_s = mobile.objects.filter(Type=tm_s.id)
     if New_s:
         New_s = mobile.objects.filter(Type=tm_s.id).order_by('-Time')[0]
+        print("New_s = mobile.objects.filter(Type=tm_s.id).order_by('-Time')[0]")
     else:
         New_s = 1
     tm_m = type_mobile.objects.get(Name='Mobile Phone')
     New_m = mobile.objects.filter(Type=tm_m.id)
     if New_m:
         New_m = mobile.objects.filter(Type=tm_m.id).order_by('-Time')[0]
+        print("New_m = mobile.objects.filter(Type=tm_m.id).order_by('-Time')[0]")
     else:
         New_m = 1
     "<-- 2 Compyuter -->"
     New_l = computer.objects.all()
     if New_l:
         New_l = computer.objects.all().order_by('-Time')[0]
+        print("New_l = computer.objects.all().order_by('-Time')[0]")
     else:
         New_l = 1
     "<-- 3 Appliances -->"
@@ -120,24 +124,28 @@ def index(h):
     New_h = appliance.objects.filter(Type=ta_h.id)
     if New_h:
         New_h = appliance.objects.filter(Type=ta_h.id).order_by('-Time')[0]
+        print("New_h = appliance.objects.filter(Type=ta_h.id).order_by('-Time')[0]")
     else:
         New_h = 1
     ta_k = type_appliance.objects.get(Name='Appliances Kitchen')
     New_k = appliance.objects.filter(Type=ta_k.id)
     if New_k:
         New_k = appliance.objects.filter(Type=ta_k.id).order_by('-Time')[0]
+        print("New_k = appliance.objects.filter(Type=ta_k.id).order_by('-Time')[0]")
     else:
         New_k = 1
     ta_c = type_appliance.objects.get(Name='Camera')
     New_c = appliance.objects.filter(Type=ta_c.id)
     if New_c:
         New_c = appliance.objects.filter(Type=ta_c.id).order_by('-Time')[0]
+        print("New_c = appliance.objects.filter(Type=ta_c.id).order_by('-Time')[0]")
     else:
         New_c = 1
     ta_m = type_appliance.objects.get(Name='Mp3 Player')
     New_p = appliance.objects.filter(Type=ta_m.id)
     if New_p:
         New_p = appliance.objects.filter(Type=ta_m.id).order_by('-Time')[0]
+        print("New_p = appliance.objects.filter(Type=ta_m.id).order_by('-Time')[0]")
     else:
         New_p = 1
     chegirma = Discounts_mobile.objects.all()
@@ -178,7 +186,7 @@ def pro(p,allf):
     if 'select_item' in p.POST :
         sort = p.POST.get('select_item')
         if sort == "Default":
-            maxsulot = mobile.objects.all().order_by('-id')
+            maxsulot = mobile.objects.all().order_by('Time')
             maxsulot2 = appliance.objects.all()
             maxsulot3 = computer.objects.all()
             chegirma = Discounts_mobile.objects.all()
@@ -265,7 +273,7 @@ def pro1(p,allf):
         if sort == "Default":
             maxsulot = mobile.objects.all()
             maxsulot2 = appliance.objects.all()
-            maxsulot3 = computer.objects.all().order_by('-id')
+            maxsulot3 = computer.objects.all().order_by('Time')
             chegirma = Discounts_mobile.objects.all()
             selects = 'Default'
             return render(p, 'products1.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,'select':selects})
@@ -396,26 +404,26 @@ def pro2(p,allf):
         chegirma = Discounts_mobile.objects.all()
         return render(p, 'products2.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma})
     elif allf == 'New1':
-        maxsulot = mobile.objects.all().order_by('-Time')
-        maxsulot2 = appliance.objects.all()
+        maxsulot = mobile.objects.all()
+        maxsulot2 = appliance.objects.all().order_by('-Time')
         maxsulot3 = computer.objects.all()
         chegirma = Discounts_mobile.objects.all()
         return render(p, 'products.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma})
     elif allf == 'Rating1':
-        maxsulot = mobile.objects.all().order_by('-Rating')
-        maxsulot2 = appliance.objects.all()
+        maxsulot = mobile.objects.all()
+        maxsulot2 = appliance.objects.all().order_by('-Rating')
         maxsulot3 = computer.objects.all()
         chegirma = Discounts_mobile.objects.all()
         return render(p, 'products.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma})
     elif allf == 'low to high1':
-        maxsulot = mobile.objects.all().order_by('New_price')
-        maxsulot2 = appliance.objects.all()
+        maxsulot = mobile.objects.all()
+        maxsulot2 = appliance.objects.all().order_by('New_price')
         maxsulot3 = computer.objects.all()
         chegirma = Discounts_mobile.objects.all()
         return render(p, 'products.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma})
     elif allf == 'high to low1':
-        maxsulot = mobile.objects.all().order_by('-New_price')
-        maxsulot2 = appliance.objects.all()
+        maxsulot = mobile.objects.all()
+        maxsulot2 = appliance.objects.all().order_by('-New_price')
         maxsulot3 = computer.objects.all()
         chegirma = Discounts_mobile.objects.all()
         return render(p, 'products.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma})
@@ -448,8 +456,9 @@ def single1(s):
     com = comment.objects.all()
     y = 0
     for st in com:
-        y = y + 1
-    return render(s, 'single.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,'com':com,'y':y})
+        y += 1
+    a = y
+    return render(s, 'single.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,'com':com,'y':a})
 
 'single---------------------------------------------------------------------------'
 
@@ -475,7 +484,11 @@ def single_mobile(s, id):
     maxsulot3 = computer.objects.all()
     chegirma = Discounts_mobile.objects.all()
     com = comment.objects.all()
-    return render(s, 'single.html',{'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3,'css': css, 'ra': rams, 'ch': chegirma,'com':com})
+    y = 0
+    for st in com:
+        y += 1
+    a = y
+    return render(s, 'single.html',{'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3,'css': css, 'ra': rams, 'ch': chegirma,'com':com,'y':a})
 
 
 def single_compyuter(s, id):
@@ -504,7 +517,7 @@ def single_compyuter(s, id):
     y = 0
     for st in com:
         y = y + 1
-    return render(s, 'single.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3,'css': css, 'ch': chegirma, 'ra': rams, 'co': corei, 'gen': gens,'com':com})
+    return render(s, 'single.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3,'css': css, 'ch': chegirma, 'ra': rams, 'co': corei, 'gen': gens,'com':com,'y':y})
 
 
 def single_appliance(s, id):
@@ -531,7 +544,7 @@ def single_appliance(s, id):
     y = 0
     for st in com:
         y = y + 1
-    return render(s, 'single.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3,'css': css, 'ch': chegirma,'com':com})
+    return render(s, 'single.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3,'css': css, 'ch': chegirma,'com':com,'y':y})
 
 
 'color--prices---------------------------------------------------------------------'
@@ -546,15 +559,51 @@ def mobils(r, rang):
         colors3 = computer.objects.all()
         return render(r, 'products.html', {'Max': colors, 'Max2': colors2, 'Max3': colors3, 'ch': chegirma})
     else:
-        if rang == '100':
+        if rang == 'yk':
+            mobile_list = list(mobile.objects.all())
+            for prices in mobile_list:
+                if prices == 0 and prices < 100:
+                    prices = mobile.objects.filter(New_price=prices)
+                    prices2 = appliance.objects.all()
+                    prices3 = computer.objects.all()
+                    return render(r, 'products.html', {'Max': prices, 'Max2': prices2, 'Max3': prices3, 'ch': chegirma})
+        elif rang == 'yb':
+            mobile_list = list(mobile.objects.all())
+            for prices in mobile_list:
+                if prices == 0 and prices < 100:
+                    prices = mobile.objects.filter(New_price=prices)
+                    prices2 = appliance.objects.all()
+                    prices3 = computer.objects.all()
+                    return render(r, 'products.html', {'Max': prices, 'Max2': prices2, 'Max3': prices3, 'ch': chegirma})
+        elif rang == 'mom':
+            mobile_list = list(mobile.objects.all())
+            for prices in mobile_list:
+                if prices == 0 and prices < 100:
+                    prices = mobile.objects.filter(New_price=prices)
+                    prices2 = appliance.objects.all()
+                    prices3 = computer.objects.all()
+                    return render(r, 'products.html', {'Max': prices, 'Max2': prices2, 'Max3': prices3, 'ch': chegirma})
+        elif rang == 'omym':
+            mobile_list = list(mobile.objects.all())
+            for prices in mobile_list:
+                if prices == 0 and prices < 100:
+                    prices = mobile.objects.filter(New_price=prices)
+                    prices2 = appliance.objects.all()
+                    prices3 = computer.objects.all()
+                    return render(r, 'products.html', {'Max': prices, 'Max2': prices2, 'Max3': prices3, 'ch': chegirma})
+        elif rang == 'ymk':
+            mobile_list = list(mobile.objects.all())
+            for prices in mobile_list:
+                if prices == 0 and prices < 100:
+                    prices = mobile.objects.filter(New_price=prices)
+                    prices2 = appliance.objects.all()
+                    prices3 = computer.objects.all()
+                    return render(r, 'products.html', {'Max': prices, 'Max2': prices2, 'Max3': prices3, 'ch': chegirma})
+        else:
             prices = mobile.objects.all()
             prices2 = appliance.objects.all()
             prices3 = computer.objects.all()
-        else:
-            prices = mobile.objects.filter(New_price=rang)
-            prices2 = appliance.objects.all()
-            prices3 = computer.objects.all()
-        return render(r, 'products.html', {'Max': prices, 'Max2': prices2, 'Max3': prices3, 'ch': chegirma})
+            return render(r, 'products.html', {'Max': prices, 'Max2': prices2, 'Max3': prices3, 'ch': chegirma})
 
 'p1'
 def Computer(r, rang1):

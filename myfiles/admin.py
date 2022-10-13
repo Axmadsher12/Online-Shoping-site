@@ -57,6 +57,7 @@ class admin_ram_compyuter(admin.ModelAdmin):
 class admin_Discounts_mobile(admin.ModelAdmin):
     list_display = ['id','Percent','comment','Time']
 
+
 admin.site.register(mobile,admin_mobile)
 admin.site.register(computer,admin_computer)
 admin.site.register(appliance,admin_appliance)
