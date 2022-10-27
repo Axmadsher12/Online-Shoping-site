@@ -47,6 +47,8 @@ def icons(i):
 from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
+import random as rd
+
 @login_required(login_url='index')
 def index(h):
     form = UserCreateFormShop()
@@ -79,46 +81,52 @@ def index(h):
 
     'Type All Get'
     brend = TopBrent.objects.all()
-    m = mobile.objects.all()
+
+    ty_m1 = type_mobile.objects.get(Name='Mobile Phone')
+    m1 = mobile.objects.filter(Type=ty_m1).order_by('?')[0:3]
+
     ta_a = type_appliance.objects.get(Name='Mp3 Player')
-    app_audio = appliance.objects.filter(Type=ta_a.id).order_by('-id')
-    ta_c = type_appliance.objects.get(Name='Camera')
-    app_camera = appliance.objects.filter(Type=ta_c.id).order_by('-id')
-    com = computer.objects.all().order_by('-id')
+    app_audio = appliance.objects.filter(Type=ta_a).order_by('?')[0:3]
+
+    ta_l = type_computer.objects.get(Name='Laptop')
+    com = computer.objects.filter(Type=ta_l).order_by('?')[0:3]
+
     app_hou = type_appliance.objects.get(Name='Appliances Household')
-    app_Household = appliance.objects.filter(Type=app_hou.id).order_by('-id')
+    app_Household = appliance.objects.filter(Type=app_hou).order_by('?')[0:3]
+
     app_kit = type_appliance.objects.get(Name='Appliances Kitchen')
-    app_Kitchen = appliance.objects.filter(Type=app_kit.id).order_by('-id')
+    app_Kitchen = appliance.objects.filter(Type=app_kit).order_by('?')[0:3]
+
     "<-- New_products -->"
     "<-- 1 Mobiles -->"
     tm_t = type_mobile.objects.get(Name='Tablet')
     New_t = mobile.objects.filter(Type=tm_t.id)
     if New_t:
         New_t = mobile.objects.filter(Type=tm_t.id).order_by('-Time')[0]
-        print("New_t = mobile.objects.filter(Type=tm_t.id).order_by('-Time')[0]")
     else:
-        New_t = 1
+        New_t = 'T'
     tm_s = type_mobile.objects.get(Name='Smart Watch')
     New_s = mobile.objects.filter(Type=tm_s.id)
     if New_s:
         New_s = mobile.objects.filter(Type=tm_s.id).order_by('-Time')[0]
         print("New_s = mobile.objects.filter(Type=tm_s.id).order_by('-Time')[0]")
     else:
-        New_s = 1
+        New_s = 'W'
     tm_m = type_mobile.objects.get(Name='Mobile Phone')
     New_m = mobile.objects.filter(Type=tm_m.id)
     if New_m:
         New_m = mobile.objects.filter(Type=tm_m.id).order_by('-Time')[0]
         print("New_m = mobile.objects.filter(Type=tm_m.id).order_by('-Time')[0]")
     else:
-        New_m = 1
+        New_m = 'M'
     "<-- 2 Compyuter -->"
-    New_l = computer.objects.all()
+    tm_c = type_computer.objects.get(Name='Laptop')
+    New_l = computer.objects.filter(Type=tm_c.id)
     if New_l:
-        New_l = computer.objects.all().order_by('-Time')[0]
+        New_l = computer.objects.filter(Type=tm_c.id).order_by('-Time')[0]
         print("New_l = computer.objects.all().order_by('-Time')[0]")
     else:
-        New_l = 1
+        New_l ='L'
     "<-- 3 Appliances -->"
     ta_h = type_appliance.objects.get(Name='Appliances Household')
     New_h = appliance.objects.filter(Type=ta_h.id)
@@ -126,43 +134,36 @@ def index(h):
         New_h = appliance.objects.filter(Type=ta_h.id).order_by('-Time')[0]
         print("New_h = appliance.objects.filter(Type=ta_h.id).order_by('-Time')[0]")
     else:
-        New_h = 1
+        New_h = 'H'
     ta_k = type_appliance.objects.get(Name='Appliances Kitchen')
     New_k = appliance.objects.filter(Type=ta_k.id)
     if New_k:
         New_k = appliance.objects.filter(Type=ta_k.id).order_by('-Time')[0]
         print("New_k = appliance.objects.filter(Type=ta_k.id).order_by('-Time')[0]")
     else:
-        New_k = 1
+        New_k = 'K'
     ta_c = type_appliance.objects.get(Name='Camera')
     New_c = appliance.objects.filter(Type=ta_c.id)
     if New_c:
         New_c = appliance.objects.filter(Type=ta_c.id).order_by('-Time')[0]
         print("New_c = appliance.objects.filter(Type=ta_c.id).order_by('-Time')[0]")
     else:
-        New_c = 1
+        New_c = 'C'
     ta_m = type_appliance.objects.get(Name='Mp3 Player')
     New_p = appliance.objects.filter(Type=ta_m.id)
     if New_p:
         New_p = appliance.objects.filter(Type=ta_m.id).order_by('-Time')[0]
         print("New_p = appliance.objects.filter(Type=ta_m.id).order_by('-Time')[0]")
     else:
-        New_p = 1
+        New_p = 'P'
     chegirma = Discounts_mobile.objects.all()
     comment1 = comment.objects.all()
-    return render(h, 'index.html', {'tb': brend,'ms':m,'app1':app_audio,'app2':app_camera,'com':com,'apph':app_Household,'appk':app_Kitchen,
+    return render(h, 'indexs.html', {'tb': brend,'ms1':m1,'app1':app_audio,'com':com,'apph':app_Household,'appk':app_Kitchen,
                                     't':New_t,'m':New_m,'w':New_s,
                                     'l':New_l,
                                     'h':New_h,'k':New_k,'c':New_c,'p':New_p,
                                     'ch':chegirma,'comment':comment1,'form1':form})
 
-
-def logout_wiev(h):
-    logout(h)
-    return redirect('index')
-
-def signin_wiev(h):
-    return render(h,'signin.html')
 
 def mail(m):
     if 'Your_Name' in m.POST:
@@ -181,259 +182,1208 @@ def mail(m):
     con = Contact.objects.all()
     return render(m, 'mail.html',{'ch':chegirma,'con':con})
 
-
-def pro(p,allf):
-    if 'select_item' in p.POST :
-        sort = p.POST.get('select_item')
-        if sort == "Default":
-            maxsulot = mobile.objects.all().order_by('Time')
-            maxsulot2 = appliance.objects.all()
-            maxsulot3 = computer.objects.all()
-            chegirma = Discounts_mobile.objects.all()
-            selects = 'Default'
-            return render(p, 'products.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,'select':selects})
-        elif sort == "Rating":
-            maxsulot = mobile.objects.all().order_by('-Rating')
-            maxsulot2 = appliance.objects.all()
-            maxsulot3 = computer.objects.all()
-            chegirma = Discounts_mobile.objects.all()
-            selects = 'Rating'
-            return render(p, 'products.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,'select':selects})
-        elif sort == "Newness":
+#  pro ---------- ---------- ----------
+def pro_all(p,allf,allf2):
+    if p.method == "POST":
+        Mail = p.POST.get('Mail')
+        Time = p.POST.get('Time')
+        email(Mail=Mail, Time=Time).save()
+        'Filter----------------------------------------------|'
+    elif allf != '':
+        chegirma = Discounts_mobile.objects.all().order_by('-id')[0:1]
+        if allf2 == 'New':
             maxsulot = mobile.objects.all().order_by('-Time')
-            maxsulot2 = appliance.objects.all()
-            maxsulot3 = computer.objects.all()
-            chegirma = Discounts_mobile.objects.all()
-            selects = 'Newness'
-            return render(p, 'products.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,'select':selects})
-        elif sort == "low to high":
-            maxsulot = mobile.objects.all().order_by('New_price')
-            maxsulot2 = appliance.objects.all()
-            maxsulot3 = computer.objects.all()
-            chegirma = Discounts_mobile.objects.all()
-            selects = 'low to high'
-            return render(p, 'products.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,'select':selects})
-        elif sort == "high to low":
-            maxsulot = mobile.objects.all().order_by('-New_price')
-            maxsulot2 = appliance.objects.all()
-            maxsulot3 = computer.objects.all()
-            chegirma = Discounts_mobile.objects.all()
-            selects = 'high to low'
-            return render(p, 'products.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,'select':selects})
-
-    elif p.method == "POST":
-        Mail = p.POST.get('Mail')
-        Time = p.POST.get('Time')
-        email(Mail=Mail, Time=Time).save()
-
-        'Filter----------------------------------------------|'
-    elif allf == 'Mobile Phone' or allf == 'Smart Watch' or allf == 'Tablet':
-        tmf = type_mobile.objects.get(Name=allf)
-        maxsulot = mobile.objects.filter(Type=tmf.id)
-        maxsulot2 = appliance.objects.all()
-        maxsulot3 = computer.objects.all()
-        chegirma = Discounts_mobile.objects.all()
-        return render(p, 'products.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma})
-    elif allf == 'New':
-        maxsulot = mobile.objects.all().order_by('-Time')
-        maxsulot2 = appliance.objects.all()
-        maxsulot3 = computer.objects.all()
-        chegirma = Discounts_mobile.objects.all()
-        return render(p, 'products.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma})
-    elif allf == 'Rating':
-        maxsulot = mobile.objects.all().order_by('-Rating')
-        maxsulot2 = appliance.objects.all()
-        maxsulot3 = computer.objects.all()
-        chegirma = Discounts_mobile.objects.all()
-        return render(p, 'products.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma})
-    elif allf == 'low to high':
-        maxsulot = mobile.objects.all().order_by('New_price')
-        maxsulot2 = appliance.objects.all()
-        maxsulot3 = computer.objects.all()
-        chegirma = Discounts_mobile.objects.all()
-        return render(p, 'products.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma})
-    elif allf == 'high to low':
-        maxsulot = mobile.objects.all().order_by('-New_price')
-        maxsulot2 = appliance.objects.all()
-        maxsulot3 = computer.objects.all()
-        chegirma = Discounts_mobile.objects.all()
-        return render(p, 'products.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma})
-    else:
-        maxsulot = mobile.objects.all()
-        maxsulot2 = appliance.objects.all()
-        maxsulot3 = computer.objects.all()
-        chegirma = Discounts_mobile.objects.all()
-        return render(p, 'products.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma})
-
-
-def pro1(p,allf):
-
-    if 'select_item1' in p.POST :
-        sort = p.POST.get('select_item1')
-        if sort == "Default":
-            maxsulot = mobile.objects.all()
-            maxsulot2 = appliance.objects.all()
-            maxsulot3 = computer.objects.all().order_by('Time')
-            chegirma = Discounts_mobile.objects.all()
-            selects = 'Default'
-            return render(p, 'products1.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,'select':selects})
-        elif sort == "Rating":
-            maxsulot = mobile.objects.all()
-            maxsulot2 = appliance.objects.all()
-            maxsulot3 = computer.objects.all().order_by('-Rating')
-            chegirma = Discounts_mobile.objects.all()
-            selects = 'Rating'
-            return render(p, 'products1.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,'select':selects})
-        elif sort == "Newness":
-            maxsulot = mobile.objects.all()
-            maxsulot2 = appliance.objects.all()
-            maxsulot3 = computer.objects.all().order_by('-Time')
-            chegirma = Discounts_mobile.objects.all()
-            selects = 'Newness'
-            return render(p, 'products1.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,'select':selects})
-        elif sort == "low to high":
-            maxsulot = mobile.objects.all()
-            maxsulot2 = appliance.objects.all()
-            maxsulot3 = computer.objects.all().order_by('New_price')
-            chegirma = Discounts_mobile.objects.all()
-            selects = 'low to high'
-            return render(p, 'products1.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,'select':selects})
-        elif sort == "high to low":
-            maxsulot = mobile.objects.all()
-            maxsulot2 = appliance.objects.all()
-            maxsulot3 = computer.objects.all().order_by('-New_price')
-            chegirma = Discounts_mobile.objects.all()
-            selects = 'high to low'
-            return render(p, 'products1.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,'select':selects})
-
-    elif p.method == "POST":
-        Mail = p.POST.get('Mail')
-        Time = p.POST.get('Time')
-        email(Mail=Mail, Time=Time).save()
-
-        'Filter----------------------------------------------|'
-    elif allf == 'Laptop' or allf == 'Personal Computer':
-        tmf = type_computer.objects.get(Name=allf)
-        maxsulot = mobile.objects.all()
-        maxsulot2 = appliance.objects.all()
-        maxsulot3 = computer.objects.filter(Type=tmf.id)
-        chegirma = Discounts_mobile.objects.all()
-        return render(p, 'products1.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma})
-    elif allf == 'New1':
-        maxsulot = mobile.objects.all()
-        maxsulot2 = appliance.objects.all()
-        maxsulot3 = computer.objects.all().order_by('-Time')
-        chegirma = Discounts_mobile.objects.all()
-        return render(p, 'products.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma})
-    elif allf == 'Rating1':
-        maxsulot = mobile.objects.all()
-        maxsulot2 = appliance.objects.all()
-        maxsulot3 = computer.objects.all().order_by('-Rating')
-        chegirma = Discounts_mobile.objects.all()
-        return render(p, 'products.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma})
-    elif allf == 'low to high1':
-        maxsulot = mobile.objects.all()
-        maxsulot2 = appliance.objects.all()
-        maxsulot3 = computer.objects.all().order_by('New_price')
-        chegirma = Discounts_mobile.objects.all()
-        return render(p, 'products.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma})
-    elif allf == 'high to low1':
-        maxsulot = mobile.objects.all()
-        maxsulot2 = appliance.objects.all()
-        maxsulot3 = computer.objects.all().order_by('-New_price')
-        chegirma = Discounts_mobile.objects.all()
-        return render(p, 'products.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma})
-    else:
-        maxsulot = mobile.objects.all()
-        maxsulot2 = appliance.objects.all()
-        maxsulot3 = computer.objects.all()
-        chegirma = Discounts_mobile.objects.all()
-        return render(p, 'products1.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma})
-
-
-def pro2(p,allf):
-    if 'select_item2' in p.POST :
-        sort = p.POST.get('select_item2')
-        if sort == "Default":
-            maxsulot = mobile.objects.all().order_by('-id')
-            maxsulot2 = appliance.objects.all()
-            maxsulot3 = computer.objects.all()
-            chegirma = Discounts_mobile.objects.all()
-            selects = 'Default'
-            return render(p, 'products2.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,'select':selects})
-        elif sort == "Rating":
+            maxsulot1 = mobile.objects.all().order_by('?')
+            maxsulot2 = appliance.objects.all().order_by('?')
+            maxsulot3 = computer.objects.all().order_by('?')
+            return render(p, 'products.html', {'Max': maxsulot,'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,'allt':allf})
+        elif allf2 == 'Rating':
             maxsulot = mobile.objects.all().order_by('-Rating')
-            maxsulot2 = appliance.objects.all()
-            maxsulot3 = computer.objects.all()
-            chegirma = Discounts_mobile.objects.all()
-            selects = 'Rating'
-            return render(p, 'products2.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,'select':selects})
-        elif sort == "Newness":
-            maxsulot = mobile.objects.all().order_by('-Time')
-            maxsulot2 = appliance.objects.all()
-            maxsulot3 = computer.objects.all()
-            chegirma = Discounts_mobile.objects.all()
-            selects = 'Newness'
-            return render(p, 'products2.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,'select':selects})
-        elif sort == "low to high":
+            maxsulot1 = mobile.objects.all().order_by('?')
+            maxsulot2 = appliance.objects.all().order_by('?')
+            maxsulot3 = computer.objects.all().order_by('?')
+            return render(p, 'products.html', {'Max': maxsulot,'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,'allt':allf})
+        elif allf2 == 'low to high':
             maxsulot = mobile.objects.all().order_by('New_price')
-            maxsulot2 = appliance.objects.all()
-            maxsulot3 = computer.objects.all()
-            chegirma = Discounts_mobile.objects.all()
-            selects = 'low to high'
-            return render(p, 'products2.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,'select':selects})
-        elif sort == "high to low":
+            maxsulot1 = mobile.objects.all().order_by('?')
+            maxsulot2 = appliance.objects.all().order_by('?')
+            maxsulot3 = computer.objects.all().order_by('?')
+            return render(p, 'products.html', {'Max': maxsulot,'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,'allt':allf})
+        elif allf2 == 'high to low':
             maxsulot = mobile.objects.all().order_by('-New_price')
-            maxsulot2 = appliance.objects.all()
-            maxsulot3 = computer.objects.all()
-            chegirma = Discounts_mobile.objects.all()
-            selects = 'high to low'
-            return render(p, 'products2.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,'select':selects})
+            maxsulot1 = mobile.objects.all().order_by('?')
+            maxsulot2 = appliance.objects.all().order_by('?')
+            maxsulot3 = computer.objects.all().order_by('?')
+            return render(p, 'products.html', {'Max': maxsulot,'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,'allt':allf})
+        elif allf2 == 'select_item_all':
+            if 'select_item_all' in p.POST:
+                sort = p.POST.get('select_item_all')
+                if sort == "Default":
+                    maxsulot = mobile.objects.all().order_by('Time')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    selects = 'Default'
+                    return render(p, 'products.html', {'Max': maxsulot,'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,'select': selects,'allt':allf})
+                elif sort == "Rating":
+                    maxsulot = mobile.objects.all().order_by('-Rating')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    selects = 'Rating'
+                    return render(p, 'products.html', {'Max': maxsulot,'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,'select': selects,'allt':allf})
+                elif sort == "Newness":
+                    maxsulot = mobile.objects.all().order_by('-Time')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    selects = 'Newness'
+                    return render(p, 'products.html', {'Max': maxsulot,'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,'select': selects,'allt':allf})
+                elif sort == "low to high":
+                    maxsulot = mobile.objects.all().order_by('New_price')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    selects = 'low to high'
+                    return render(p, 'products.html', {'Max': maxsulot,'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,'select': selects,'allt':allf})
+                elif sort == "-high to low":
+                    maxsulot = mobile.objects.all().order_by('-New_price')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    selects = '-high to low'
+                    return render(p, 'products.html', {'Max': maxsulot,'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,'select': selects,'allt':allf})
+                else:
+                    maxsulot = mobile.objects.all().order_by('?')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    return render(p, 'products.html',
+                                  {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                                   'ch': chegirma, 'allt': allf})
+        else:
+            maxsulot = mobile.objects.all().order_by('?')
+            maxsulot1 = mobile.objects.all().order_by('?')
+            maxsulot2 = appliance.objects.all().order_by('?')
+            maxsulot3 = computer.objects.all().order_by('?')
+            return render(p, 'products.html', {'Max': maxsulot,'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,'allt':allf})
 
-    elif p.method == "POST":
+    elif allf == 'Mobile Phone':
+        chegirma = Discounts_mobile.objects.all().order_by('-id')[0:1]
+        ty_m = type_mobile.objects.get(Name=allf)
+        if allf2 == 'New':
+            maxsulot = mobile.objects.filter(Type=ty_m).order_by('-Time')
+            maxsulot1 = mobile.objects.all().order_by('?')
+            maxsulot2 = appliance.objects.all().order_by('?')
+            maxsulot3 = computer.objects.all().order_by('?')
+            return render(p, 'products.html',
+                          {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,
+                           'allt': allf})
+        elif allf2 == 'Rating':
+            maxsulot = mobile.objects.filter(Type=ty_m).order_by('-Rating')
+            maxsulot1 = mobile.objects.all().order_by('?')
+            maxsulot2 = appliance.objects.all().order_by('?')
+            maxsulot3 = computer.objects.all().order_by('?')
+            return render(p, 'products.html',
+                          {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,
+                           'allt': allf})
+        elif allf2 == 'low to high':
+            maxsulot = mobile.objects.filter(Type=ty_m).order_by('New_price')
+            maxsulot1 = mobile.objects.all().order_by('?')
+            maxsulot2 = appliance.objects.all().order_by('?')
+            maxsulot3 = computer.objects.all().order_by('?')
+            return render(p, 'products.html',
+                          {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,
+                           'allt': allf})
+        elif allf2 == 'high to low':
+            maxsulot = mobile.objects.filter(Type=ty_m).order_by('-New_price')
+            maxsulot1 = mobile.objects.all().order_by('?')
+            maxsulot2 = appliance.objects.all().order_by('?')
+            maxsulot3 = computer.objects.all().order_by('?')
+            return render(p, 'products.html',
+                          {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,
+                           'allt': allf})
+        elif allf2 == 'select_item_mob':
+            if 'select_item_mob' in p.POST:
+                sort = p.POST.get('select_item_mob')
+                if sort == "Default":
+                    maxsulot = mobile.objects.filter(Type=ty_m).order_by('Time')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    selects = 'Default'
+                    return render(p, 'products.html',
+                                  {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                                   'ch': chegirma, 'select': selects, 'allt': allf})
+                elif sort == "Rating":
+                    maxsulot = mobile.objects.filter(Type=ty_m).order_by('-Rating')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    selects = 'Rating'
+                    return render(p, 'products.html',
+                                  {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                                   'ch': chegirma, 'select': selects, 'allt': allf})
+                elif sort == "Newness":
+                    maxsulot = mobile.objects.filter(Type=ty_m).order_by('-Time')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    selects = 'Newness'
+                    return render(p, 'products.html',
+                                  {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                                   'ch': chegirma, 'select': selects, 'allt': allf})
+                elif sort == "low to high":
+                    maxsulot = mobile.objects.filter(Type=ty_m).order_by('New_price')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    selects = 'low to high'
+                    return render(p, 'products.html',
+                                  {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                                   'ch': chegirma, 'select': selects, 'allt': allf})
+                elif sort == "-high to low":
+                    maxsulot = mobile.objects.filter(Type=ty_m).order_by('-New_price')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    selects = '-high to low'
+                    return render(p, 'products.html',
+                                  {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                                   'ch': chegirma, 'select': selects, 'allt': allf})
+                else:
+                    maxsulot = mobile.objects.filter(Type=ty_m).order_by('?')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    return render(p, 'products.html',
+                                  {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                                   'ch': chegirma, 'allt': allf})
+        else:
+            maxsulot = mobile.objects.filter(Type=ty_m).order_by('?')
+            maxsulot1 = mobile.objects.all().order_by('?')
+            maxsulot2 = appliance.objects.all().order_by('?')
+            maxsulot3 = computer.objects.all().order_by('?')
+            return render(p, 'products.html',
+                          {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                           'ch': chegirma, 'allt': allf})
+
+    elif allf == 'Tablet':
+        chegirma = Discounts_mobile.objects.all().order_by('-id')[0:1]
+        ty_m = type_mobile.objects.get(Name=allf)
+        if allf2 == 'New':
+            maxsulot = mobile.objects.filter(Type=ty_m).order_by('-Time')
+            maxsulot1 = mobile.objects.all().order_by('?')
+            maxsulot2 = appliance.objects.all().order_by('?')
+            maxsulot3 = computer.objects.all().order_by('?')
+            return render(p, 'products.html',
+                          {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,
+                           'allt': allf})
+        elif allf2 == 'Rating':
+            maxsulot = mobile.objects.filter(Type=ty_m).order_by('-Rating')
+            maxsulot1 = mobile.objects.all().order_by('?')
+            maxsulot2 = appliance.objects.all().order_by('?')
+            maxsulot3 = computer.objects.all().order_by('?')
+            return render(p, 'products.html',
+                          {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,
+                           'allt': allf})
+        elif allf2 == 'low to high':
+            maxsulot = mobile.objects.filter(Type=ty_m).order_by('New_price')
+            maxsulot1 = mobile.objects.all().order_by('?')
+            maxsulot2 = appliance.objects.all().order_by('?')
+            maxsulot3 = computer.objects.all().order_by('?')
+            return render(p, 'products.html',
+                          {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,
+                           'allt': allf})
+        elif allf2 == 'high to low':
+            maxsulot = mobile.objects.filter(Type=ty_m).order_by('-New_price')
+            maxsulot1 = mobile.objects.all().order_by('?')
+            maxsulot2 = appliance.objects.all().order_by('?')
+            maxsulot3 = computer.objects.all().order_by('?')
+            return render(p, 'products.html',
+                          {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,
+                           'allt': allf})
+        elif allf2 == 'select_item_tab':
+            if 'select_item_tab' in p.POST:
+                sort = p.POST.get('select_item_tab')
+                if sort == "Default":
+                    maxsulot = mobile.objects.filter(Type=ty_m).order_by('Time')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    selects = 'Default'
+                    return render(p, 'products.html',
+                                  {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                                   'ch': chegirma, 'select': selects, 'allt': allf})
+                elif sort == "Rating":
+                    maxsulot = mobile.objects.filter(Type=ty_m).order_by('-Rating')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    selects = 'Rating'
+                    return render(p, 'products.html',
+                                  {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                                   'ch': chegirma, 'select': selects, 'allt': allf})
+                elif sort == "Newness":
+                    maxsulot = mobile.objects.filter(Type=ty_m).order_by('-Time')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    selects = 'Newness'
+                    return render(p, 'products.html',
+                                  {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                                   'ch': chegirma, 'select': selects, 'allt': allf})
+                elif sort == "low to high":
+                    maxsulot = mobile.objects.filter(Type=ty_m).order_by('New_price')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    selects = 'low to high'
+                    return render(p, 'products.html',
+                                  {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                                   'ch': chegirma, 'select': selects, 'allt': allf})
+                elif sort == "-high to low":
+                    maxsulot = mobile.objects.filter(Type=ty_m).order_by('-New_price')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    selects = '-high to low'
+                    return render(p, 'products.html',
+                                  {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                                   'ch': chegirma, 'select': selects, 'allt': allf})
+                else:
+                    maxsulot = mobile.objects.filter(Type=ty_m).order_by('?')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    return render(p, 'products.html',
+                                  {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                                   'ch': chegirma, 'allt': allf})
+        else:
+            maxsulot = mobile.objects.filter(Type=ty_m).order_by('?')
+            maxsulot1 = mobile.objects.all().order_by('?')
+            maxsulot2 = appliance.objects.all().order_by('?')
+            maxsulot3 = computer.objects.all().order_by('?')
+            return render(p, 'products.html',
+                          {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                           'ch': chegirma, 'allt': allf})
+
+    elif allf == 'Smart Watch':
+        chegirma = Discounts_mobile.objects.all().order_by('-id')[0:1]
+        ty_m = type_mobile.objects.get(Name=allf)
+        if allf2 == 'New':
+            maxsulot = mobile.objects.filter(Type=ty_m).order_by('-Time')
+            maxsulot1 = mobile.objects.all().order_by('?')
+            maxsulot2 = appliance.objects.all().order_by('?')
+            maxsulot3 = computer.objects.all().order_by('?')
+            return render(p, 'products.html',
+                          {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,
+                           'allt': allf})
+        elif allf2 == 'Rating':
+            maxsulot = mobile.objects.filter(Type=ty_m).order_by('-Rating')
+            maxsulot1 = mobile.objects.all().order_by('?')
+            maxsulot2 = appliance.objects.all().order_by('?')
+            maxsulot3 = computer.objects.all().order_by('?')
+            return render(p, 'products.html',
+                          {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,
+                           'allt': allf})
+        elif allf2 == 'low to high':
+            maxsulot = mobile.objects.filter(Type=ty_m).order_by('New_price')
+            maxsulot1 = mobile.objects.all().order_by('?')
+            maxsulot2 = appliance.objects.all().order_by('?')
+            maxsulot3 = computer.objects.all().order_by('?')
+            return render(p, 'products.html',
+                          {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,
+                           'allt': allf})
+        elif allf2 == 'high to low':
+            maxsulot = mobile.objects.filter(Type=ty_m).order_by('-New_price')
+            maxsulot1 = mobile.objects.all().order_by('?')
+            maxsulot2 = appliance.objects.all().order_by('?')
+            maxsulot3 = computer.objects.all().order_by('?')
+            return render(p, 'products.html',
+                          {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,
+                           'allt': allf})
+        elif allf2 == 'select_item_sma':
+            if 'select_item_sma' in p.POST:
+                sort = p.POST.get('select_item_sma')
+                if sort == "Default":
+                    maxsulot = mobile.objects.filter(Type=ty_m).order_by('Time')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    selects = 'Default'
+                    return render(p, 'products.html',
+                                  {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                                   'ch': chegirma, 'select': selects, 'allt': allf})
+                elif sort == "Rating":
+                    maxsulot = mobile.objects.filter(Type=ty_m).order_by('-Rating')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    selects = 'Rating'
+                    return render(p, 'products.html',
+                                  {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                                   'ch': chegirma, 'select': selects, 'allt': allf})
+                elif sort == "Newness":
+                    maxsulot = mobile.objects.filter(Type=ty_m).order_by('-Time')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    selects = 'Newness'
+                    return render(p, 'products.html',
+                                  {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                                   'ch': chegirma, 'select': selects, 'allt': allf})
+                elif sort == "low to high":
+                    maxsulot = mobile.objects.filter(Type=ty_m).order_by('New_price')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    selects = 'low to high'
+                    return render(p, 'products.html',
+                                  {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                                   'ch': chegirma, 'select': selects, 'allt': allf})
+                elif sort == "-high to low":
+                    maxsulot = mobile.objects.filter(Type=ty_m).order_by('-New_price')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    selects = '-high to low'
+                    return render(p, 'products.html',
+                                  {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                                   'ch': chegirma, 'select': selects, 'allt': allf})
+                else:
+                    maxsulot = mobile.objects.filter(Type=ty_m).order_by('?')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    return render(p, 'products.html',
+                                  {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                                   'ch': chegirma, 'allt': allf})
+        else:
+            maxsulot = mobile.objects.filter(Type=ty_m).order_by('?')
+            maxsulot1 = mobile.objects.all().order_by('?')
+            maxsulot2 = appliance.objects.all().order_by('?')
+            maxsulot3 = computer.objects.all().order_by('?')
+            return render(p, 'products.html',
+                          {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                           'ch': chegirma, 'allt': allf})
+# end pro ---------- ---------- ----------
+
+#  pro ---------- ---------- ----------
+def pro1_all(p, allf, allf2):
+    if p.method == "POST":
         Mail = p.POST.get('Mail')
         Time = p.POST.get('Time')
         email(Mail=Mail, Time=Time).save()
-
         'Filter----------------------------------------------|'
-    elif allf == 'Appliances Kitchen' or allf == 'Appliances Household' or allf == 'Camera' or allf == 'Mp3 Player':
-        tmf = type_appliance.objects.get(Name=allf)
-        maxsulot = mobile.objects.all()
-        maxsulot2 = appliance.objects.filter(Type=tmf.id)
-        maxsulot3 = computer.objects.all()
-        chegirma = Discounts_mobile.objects.all()
-        return render(p, 'products2.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma})
-    elif allf == 'New1':
-        maxsulot = mobile.objects.all()
-        maxsulot2 = appliance.objects.all().order_by('-Time')
-        maxsulot3 = computer.objects.all()
-        chegirma = Discounts_mobile.objects.all()
-        return render(p, 'products.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma})
-    elif allf == 'Rating1':
-        maxsulot = mobile.objects.all()
-        maxsulot2 = appliance.objects.all().order_by('-Rating')
-        maxsulot3 = computer.objects.all()
-        chegirma = Discounts_mobile.objects.all()
-        return render(p, 'products.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma})
-    elif allf == 'low to high1':
-        maxsulot = mobile.objects.all()
-        maxsulot2 = appliance.objects.all().order_by('New_price')
-        maxsulot3 = computer.objects.all()
-        chegirma = Discounts_mobile.objects.all()
-        return render(p, 'products.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma})
-    elif allf == 'high to low1':
-        maxsulot = mobile.objects.all()
-        maxsulot2 = appliance.objects.all().order_by('-New_price')
-        maxsulot3 = computer.objects.all()
-        chegirma = Discounts_mobile.objects.all()
-        return render(p, 'products.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma})
-    else:
-        maxsulot = mobile.objects.all()
-        maxsulot2 = appliance.objects.all()
-        maxsulot3 = computer.objects.all()
-        chegirma = Discounts_mobile.objects.all()
-        return render(p, 'products2.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma})
 
+    elif allf != '':
+        chegirma = Discounts_mobile.objects.all().order_by('-id')[0:1]
+        if allf2 == 'New':
+            maxsulot = computer.objects.all().order_by('-Time')
+            maxsulot1 = mobile.objects.all().order_by('?')
+            maxsulot2 = appliance.objects.all().order_by('?')
+            maxsulot3 = computer.objects.all().order_by('?')
+            return render(p, 'products1.html',
+                          {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,
+                           'allt': allf})
+        elif allf2 == 'Rating':
+            maxsulot = computer.objects.all().order_by('-Rating')
+            maxsulot1 = mobile.objects.all().order_by('?')
+            maxsulot2 = appliance.objects.all().order_by('?')
+            maxsulot3 = computer.objects.all().order_by('?')
+            return render(p, 'products1.html',
+                          {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,
+                           'allt': allf})
+        elif allf2 == 'low to high':
+            maxsulot = computer.objects.all().order_by('New_price')
+            maxsulot1 = mobile.objects.all().order_by('?')
+            maxsulot2 = appliance.objects.all().order_by('?')
+            maxsulot3 = computer.objects.all().order_by('?')
+            return render(p, 'products1.html',
+                          {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,
+                           'allt': allf})
+        elif allf2 == 'high to low':
+            maxsulot = computer.objects.all().order_by('-New_price')
+            maxsulot1 = mobile.objects.all().order_by('?')
+            maxsulot2 = appliance.objects.all().order_by('?')
+            maxsulot3 = computer.objects.all().order_by('?')
+            return render(p, 'products1.html',
+                          {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,
+                           'allt': allf})
+        elif allf2 == 'select_item_all':
+            if 'select_item_all' in p.POST:
+                sort = p.POST.get('select_item_all')
+                if sort == "Default":
+                    maxsulot = computer.objects.all().order_by('Time')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    selects = 'Default'
+                    return render(p, 'products1.html',
+                                  {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                                   'ch': chegirma, 'select': selects, 'allt': allf})
+                elif sort == "Rating":
+                    maxsulot = computer.objects.all().order_by('-Rating')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    selects = 'Rating'
+                    return render(p, 'products1.html',
+                                  {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                                   'ch': chegirma, 'select': selects, 'allt': allf})
+                elif sort == "Newness":
+                    maxsulot = computer.objects.all().order_by('-Time')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    selects = 'Newness'
+                    return render(p, 'products1.html',
+                                  {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                                   'ch': chegirma, 'select': selects, 'allt': allf})
+                elif sort == "low to high":
+                    maxsulot = computer.objects.all().order_by('New_price')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    selects = 'low to high'
+                    return render(p, 'products1.html',
+                                  {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                                   'ch': chegirma, 'select': selects, 'allt': allf})
+                elif sort == "-high to low":
+                    maxsulot = computer.objects.all().order_by('-New_price')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    selects = '-high to low'
+                    return render(p, 'products1.html',
+                                  {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                                   'ch': chegirma, 'select': selects, 'allt': allf})
+                else:
+                    maxsulot = computer.objects.all().order_by('?')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    return render(p, 'products1.html',
+                                  {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,
+                                   'allt': allf})
+        else:
+            maxsulot = computer.objects.all().order_by('?')
+            maxsulot1 = mobile.objects.all().order_by('?')
+            maxsulot2 = appliance.objects.all().order_by('?')
+            maxsulot3 = computer.objects.all().order_by('?')
+            return render(p, 'products1.html',
+                          {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,
+                           'allt': allf})
+
+    elif allf == 'Laptop':
+        chegirma = Discounts_mobile.objects.all().order_by('-id')[0:1]
+        ty_m = type_mobile.objects.get(Name=allf)
+        if allf2 == 'New':
+            maxsulot = computer.objects.filter(Type=ty_m).order_by('-Time')
+            maxsulot1 = mobile.objects.all().order_by('?')
+            maxsulot2 = appliance.objects.all().order_by('?')
+            maxsulot3 = computer.objects.all().order_by('?')
+            return render(p, 'products1.html',
+                          {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,
+                           'allt': allf})
+        elif allf2 == 'Rating':
+            maxsulot = computer.objects.filter(Type=ty_m).order_by('-Rating')
+            maxsulot1 = mobile.objects.all().order_by('?')
+            maxsulot2 = appliance.objects.all().order_by('?')
+            maxsulot3 = computer.objects.all().order_by('?')
+            return render(p, 'products1.html',
+                          {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,
+                           'allt': allf})
+        elif allf2 == 'low to high':
+            maxsulot = computer.objects.filter(Type=ty_m).order_by('New_price')
+            maxsulot1 = mobile.objects.all().order_by('?')
+            maxsulot2 = appliance.objects.all().order_by('?')
+            maxsulot3 = computer.objects.all().order_by('?')
+            return render(p, 'products1.html',
+                          {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,
+                           'allt': allf})
+        elif allf2 == 'high to low':
+            maxsulot = computer.objects.filter(Type=ty_m).order_by('-New_price')
+            maxsulot1 = mobile.objects.all().order_by('?')
+            maxsulot2 = appliance.objects.all().order_by('?')
+            maxsulot3 = computer.objects.all().order_by('?')
+            return render(p, 'products1.html',
+                          {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,
+                           'allt': allf})
+        elif allf2 == 'select_item_lap':
+            if 'select_item_lap' in p.POST:
+                sort = p.POST.get('select_item_lap')
+                if sort == "Default":
+                    maxsulot = computer.objects.filter(Type=ty_m).order_by('Time')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    selects = 'Default'
+                    return render(p, 'products1.html',
+                                  {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                                   'ch': chegirma, 'select': selects, 'allt': allf})
+                elif sort == "Rating":
+                    maxsulot = computer.objects.filter(Type=ty_m).order_by('-Rating')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    selects = 'Rating'
+                    return render(p, 'products1.html',
+                                  {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                                   'ch': chegirma, 'select': selects, 'allt': allf})
+                elif sort == "Newness":
+                    maxsulot = computer.objects.filter(Type=ty_m).order_by('-Time')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    selects = 'Newness'
+                    return render(p, 'products1.html',
+                                  {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                                   'ch': chegirma, 'select': selects, 'allt': allf})
+                elif sort == "low to high":
+                    maxsulot = computer.objects.filter(Type=ty_m).order_by('New_price')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    selects = 'low to high'
+                    return render(p, 'products1.html',
+                                  {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                                   'ch': chegirma, 'select': selects, 'allt': allf})
+                elif sort == "-high to low":
+                    maxsulot = computer.objects.filter(Type=ty_m).order_by('-New_price')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    selects = '-high to low'
+                    return render(p, 'products1.html',
+                                  {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                                   'ch': chegirma, 'select': selects, 'allt': allf})
+                else:
+                    maxsulot = computer.objects.filter(Type=ty_m).order_by('?')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    return render(p, 'products1.html',
+                                  {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                                   'ch': chegirma, 'allt': allf})
+        else:
+            maxsulot = computer.objects.filter(Type=ty_m).order_by('?')
+            maxsulot1 = mobile.objects.all().order_by('?')
+            maxsulot2 = appliance.objects.all().order_by('?')
+            maxsulot3 = computer.objects.all().order_by('?')
+            return render(p, 'products1.html',
+                          {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                           'ch': chegirma, 'allt': allf})
+
+    elif allf == 'Personal Computer':
+        chegirma = Discounts_mobile.objects.all().order_by('-id')[0:1]
+        ty_m = type_mobile.objects.get(Name=allf)
+        if allf2 == 'New':
+            maxsulot = computer.objects.filter(Type=ty_m).order_by('-Time')
+            maxsulot1 = mobile.objects.all().order_by('?')
+            maxsulot2 = appliance.objects.all().order_by('?')
+            maxsulot3 = computer.objects.all().order_by('?')
+            return render(p, 'products1.html',
+                          {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,
+                           'allt': allf})
+        elif allf2 == 'Rating':
+            maxsulot = computer.objects.filter(Type=ty_m).order_by('-Rating')
+            maxsulot1 = mobile.objects.all().order_by('?')
+            maxsulot2 = appliance.objects.all().order_by('?')
+            maxsulot3 = computer.objects.all().order_by('?')
+            return render(p, 'products1.html',
+                          {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,
+                           'allt': allf})
+        elif allf2 == 'low to high':
+            maxsulot = computer.objects.filter(Type=ty_m).order_by('New_price')
+            maxsulot1 = mobile.objects.all().order_by('?')
+            maxsulot2 = appliance.objects.all().order_by('?')
+            maxsulot3 = computer.objects.all().order_by('?')
+            return render(p, 'products1.html',
+                          {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,
+                           'allt': allf})
+        elif allf2 == 'high to low':
+            maxsulot = computer.objects.filter(Type=ty_m).order_by('-New_price')
+            maxsulot1 = mobile.objects.all().order_by('?')
+            maxsulot2 = appliance.objects.all().order_by('?')
+            maxsulot3 = computer.objects.all().order_by('?')
+            return render(p, 'products1.html',
+                          {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,
+                           'allt': allf})
+        elif allf2 == 'select_item_per':
+            if 'select_item_per' in p.POST:
+                sort = p.POST.get('select_item_per')
+                if sort == "Default":
+                    maxsulot = computer.objects.filter(Type=ty_m).order_by('Time')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    selects = 'Default'
+                    return render(p, 'products1.html',
+                                  {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                                   'ch': chegirma, 'select': selects, 'allt': allf})
+                elif sort == "Rating":
+                    maxsulot = computer.objects.filter(Type=ty_m).order_by('-Rating')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    selects = 'Rating'
+                    return render(p, 'products1.html',
+                                  {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                                   'ch': chegirma, 'select': selects, 'allt': allf})
+                elif sort == "Newness":
+                    maxsulot = computer.objects.filter(Type=ty_m).order_by('-Time')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    selects = 'Newness'
+                    return render(p, 'products1.html',
+                                  {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                                   'ch': chegirma, 'select': selects, 'allt': allf})
+                elif sort == "low to high":
+                    maxsulot = computer.objects.filter(Type=ty_m).order_by('New_price')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    selects = 'low to high'
+                    return render(p, 'products1.html',
+                                  {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                                   'ch': chegirma, 'select': selects, 'allt': allf})
+                elif sort == "-high to low":
+                    maxsulot = computer.objects.filter(Type=ty_m).order_by('-New_price')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    selects = '-high to low'
+                    return render(p, 'products1.html',
+                                  {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                                   'ch': chegirma, 'select': selects, 'allt': allf})
+                else:
+                    maxsulot = computer.objects.filter(Type=ty_m).order_by('?')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    return render(p, 'products1.html',
+                                  {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                                   'ch': chegirma, 'allt': allf})
+        else:
+            maxsulot = computer.objects.filter(Type=ty_m).order_by('?')
+            maxsulot1 = mobile.objects.all().order_by('?')
+            maxsulot2 = appliance.objects.all().order_by('?')
+            maxsulot3 = computer.objects.all().order_by('?')
+            return render(p, 'products1.html',
+                          {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                           'ch': chegirma, 'allt': allf})
+# end pro1 ---------- ---------- ----------
+
+#  pro2 ---------- ---------- ----------
+def pro2_all(p, allf, allf2):
+    if p.method == "POST":
+        Mail = p.POST.get('Mail')
+        Time = p.POST.get('Time')
+        email(Mail=Mail, Time=Time).save()
+        'Filter----------------------------------------------|'
+
+    elif allf != '':
+        chegirma = Discounts_mobile.objects.all().order_by('-id')[0:1]
+        if allf2 == 'New':
+            maxsulot = mobile.objects.all().order_by('-Time')
+            maxsulot1 = mobile.objects.all().order_by('?')
+            maxsulot2 = appliance.objects.all().order_by('?')
+            maxsulot3 = computer.objects.all().order_by('?')
+            return render(p, 'products2.html',
+                          {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,
+                           'allt': allf})
+        elif allf2 == 'Rating':
+            maxsulot = mobile.objects.all().order_by('-Rating')
+            maxsulot1 = mobile.objects.all().order_by('?')
+            maxsulot2 = appliance.objects.all().order_by('?')
+            maxsulot3 = computer.objects.all().order_by('?')
+            return render(p, 'products2.html',
+                          {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,
+                           'allt': allf})
+        elif allf2 == 'low to high':
+            maxsulot = mobile.objects.all().order_by('New_price')
+            maxsulot1 = mobile.objects.all().order_by('?')
+            maxsulot2 = appliance.objects.all().order_by('?')
+            maxsulot3 = computer.objects.all().order_by('?')
+            return render(p, 'products2.html',
+                          {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,
+                           'allt': allf})
+        elif allf2 == 'high to low':
+            maxsulot = mobile.objects.all().order_by('-New_price')
+            maxsulot1 = mobile.objects.all().order_by('?')
+            maxsulot2 = appliance.objects.all().order_by('?')
+            maxsulot3 = computer.objects.all().order_by('?')
+            return render(p, 'products2.html',
+                          {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,
+                           'allt': allf})
+        elif allf2 == 'select_item_all':
+            if 'select_item' in p.POST:
+                sort = p.POST.get('select_item')
+                if sort == "Default":
+                    maxsulot = mobile.objects.all().order_by('Time')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    selects = 'Default'
+                    return render(p, 'products2.html',
+                                  {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                                   'ch': chegirma, 'select': selects, 'allt': allf})
+                elif sort == "Rating":
+                    maxsulot = mobile.objects.all().order_by('-Rating')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    selects = 'Rating'
+                    return render(p, 'products2.html',
+                                  {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                                   'ch': chegirma, 'select': selects, 'allt': allf})
+                elif sort == "Newness":
+                    maxsulot = mobile.objects.all().order_by('-Time')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    selects = 'Newness'
+                    return render(p, 'products2.html',
+                                  {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                                   'ch': chegirma, 'select': selects, 'allt': allf})
+                elif sort == "low to high":
+                    maxsulot = mobile.objects.all().order_by('New_price')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    selects = 'low to high'
+                    return render(p, 'products2.html',
+                                  {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                                   'ch': chegirma, 'select': selects, 'allt': allf})
+                elif sort == "-high to low":
+                    maxsulot = mobile.objects.all().order_by('-New_price')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    selects = '-high to low'
+                    return render(p, 'products2.html',
+                                  {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                                   'ch': chegirma, 'select': selects, 'allt': allf})
+                else:
+                    maxsulot = mobile.objects.all().order_by('?')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    return render(p, 'products2.html',
+                                  {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,
+                                   'allt': allf})
+        else:
+            maxsulot = mobile.objects.all().order_by('?')
+            maxsulot1 = mobile.objects.all().order_by('?')
+            maxsulot2 = appliance.objects.all().order_by('?')
+            maxsulot3 = computer.objects.all().order_by('?')
+            return render(p, 'products2.html',
+                          {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,
+                           'allt': allf})
+
+    elif allf == 'Camera':
+        chegirma = Discounts_mobile.objects.all().order_by('-id')[0:1]
+        ty_m = type_mobile.objects.get(Name=allf)
+        if allf2 == 'New':
+            maxsulot = mobile.objects.filter(Type=ty_m).order_by('-Time')
+            maxsulot1 = mobile.objects.all().order_by('?')
+            maxsulot2 = appliance.objects.all().order_by('?')
+            maxsulot3 = computer.objects.all().order_by('?')
+            return render(p, 'products2.html',
+                          {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,
+                           'allt': allf})
+        elif allf2 == 'Rating':
+            maxsulot = mobile.objects.filter(Type=ty_m).order_by('-Rating')
+            maxsulot1 = mobile.objects.all().order_by('?')
+            maxsulot2 = appliance.objects.all().order_by('?')
+            maxsulot3 = computer.objects.all().order_by('?')
+            return render(p, 'products2.html',
+                          {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,
+                           'allt': allf})
+        elif allf2 == 'low to high':
+            maxsulot = mobile.objects.filter(Type=ty_m).order_by('New_price')
+            maxsulot1 = mobile.objects.all().order_by('?')
+            maxsulot2 = appliance.objects.all().order_by('?')
+            maxsulot3 = computer.objects.all().order_by('?')
+            return render(p, 'products2.html',
+                          {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,
+                           'allt': allf})
+        elif allf2 == 'high to low':
+            maxsulot = mobile.objects.filter(Type=ty_m).order_by('-New_price')
+            maxsulot1 = mobile.objects.all().order_by('?')
+            maxsulot2 = appliance.objects.all().order_by('?')
+            maxsulot3 = computer.objects.all().order_by('?')
+            return render(p, 'products2.html',
+                          {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,
+                           'allt': allf})
+        elif allf2 == 'select_item_mob':
+            if 'select_item_mob' in p.POST:
+                sort = p.POST.get('select_item')
+                if sort == "Default":
+                    maxsulot = mobile.objects.filter(Type=ty_m).order_by('Time')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    selects = 'Default'
+                    return render(p, 'products2.html',
+                                  {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                                   'ch': chegirma, 'select': selects, 'allt': allf})
+                elif sort == "Rating":
+                    maxsulot = mobile.objects.filter(Type=ty_m).order_by('-Rating')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    selects = 'Rating'
+                    return render(p, 'products2.html',
+                                  {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                                   'ch': chegirma, 'select': selects, 'allt': allf})
+                elif sort == "Newness":
+                    maxsulot = mobile.objects.filter(Type=ty_m).order_by('-Time')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    selects = 'Newness'
+                    return render(p, 'products2.html',
+                                  {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                                   'ch': chegirma, 'select': selects, 'allt': allf})
+                elif sort == "low to high":
+                    maxsulot = mobile.objects.filter(Type=ty_m).order_by('New_price')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    selects = 'low to high'
+                    return render(p, 'products2.html',
+                                  {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                                   'ch': chegirma, 'select': selects, 'allt': allf})
+                elif sort == "-high to low":
+                    maxsulot = mobile.objects.filter(Type=ty_m).order_by('-New_price')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    selects = '-high to low'
+                    return render(p, 'products2.html',
+                                  {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                                   'ch': chegirma, 'select': selects, 'allt': allf})
+                else:
+                    maxsulot = mobile.objects.filter(Type=ty_m).order_by('?')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    return render(p, 'products2.html',
+                                  {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                                   'ch': chegirma, 'allt': allf})
+        else:
+            maxsulot = mobile.objects.filter(Type=ty_m).order_by('?')
+            maxsulot1 = mobile.objects.all().order_by('?')
+            maxsulot2 = appliance.objects.all().order_by('?')
+            maxsulot3 = computer.objects.all().order_by('?')
+            return render(p, 'products2.html',
+                          {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                           'ch': chegirma, 'allt': allf})
+
+    elif allf == 'Mp3 Player':
+        chegirma = Discounts_mobile.objects.all().order_by('-id')[0:1]
+        ty_m = type_mobile.objects.get(Name=allf)
+        if allf2 == 'New':
+            maxsulot = mobile.objects.filter(Type=ty_m).order_by('-Time')
+            maxsulot1 = mobile.objects.all().order_by('?')
+            maxsulot2 = appliance.objects.all().order_by('?')
+            maxsulot3 = computer.objects.all().order_by('?')
+            return render(p, 'products2.html',
+                          {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,
+                           'allt': allf})
+        elif allf2 == 'Rating':
+            maxsulot = mobile.objects.filter(Type=ty_m).order_by('-Rating')
+            maxsulot1 = mobile.objects.all().order_by('?')
+            maxsulot2 = appliance.objects.all().order_by('?')
+            maxsulot3 = computer.objects.all().order_by('?')
+            return render(p, 'products2.html',
+                          {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,
+                           'allt': allf})
+        elif allf2 == 'low to high':
+            maxsulot = mobile.objects.filter(Type=ty_m).order_by('New_price')
+            maxsulot1 = mobile.objects.all().order_by('?')
+            maxsulot2 = appliance.objects.all().order_by('?')
+            maxsulot3 = computer.objects.all().order_by('?')
+            return render(p, 'products2.html',
+                          {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,
+                           'allt': allf})
+        elif allf2 == 'high to low':
+            maxsulot = mobile.objects.filter(Type=ty_m).order_by('-New_price')
+            maxsulot1 = mobile.objects.all().order_by('?')
+            maxsulot2 = appliance.objects.all().order_by('?')
+            maxsulot3 = computer.objects.all().order_by('?')
+            return render(p, 'products2.html',
+                          {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,
+                           'allt': allf})
+        elif allf2 == 'select_item_tab':
+            if 'select_item_tab' in p.POST:
+                sort = p.POST.get('select_item')
+                if sort == "Default":
+                    maxsulot = mobile.objects.filter(Type=ty_m).order_by('Time')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    selects = 'Default'
+                    return render(p, 'products2.html',
+                                  {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                                   'ch': chegirma, 'select': selects, 'allt': allf})
+                elif sort == "Rating":
+                    maxsulot = mobile.objects.filter(Type=ty_m).order_by('-Rating')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    selects = 'Rating'
+                    return render(p, 'products2.html',
+                                  {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                                   'ch': chegirma, 'select': selects, 'allt': allf})
+                elif sort == "Newness":
+                    maxsulot = mobile.objects.filter(Type=ty_m).order_by('-Time')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    selects = 'Newness'
+                    return render(p, 'products.html',
+                                  {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                                   'ch': chegirma, 'select': selects, 'allt': allf})
+                elif sort == "low to high":
+                    maxsulot = mobile.objects.filter(Type=ty_m).order_by('New_price')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    selects = 'low to high'
+                    return render(p, 'products2.html',
+                                  {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                                   'ch': chegirma, 'select': selects, 'allt': allf})
+                elif sort == "-high to low":
+                    maxsulot = mobile.objects.filter(Type=ty_m).order_by('-New_price')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    selects = '-high to low'
+                    return render(p, 'products2.html',
+                                  {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                                   'ch': chegirma, 'select': selects, 'allt': allf})
+                else:
+                    maxsulot = mobile.objects.filter(Type=ty_m).order_by('?')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    return render(p, 'products2.html',
+                                  {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                                   'ch': chegirma, 'allt': allf})
+        else:
+            maxsulot = mobile.objects.filter(Type=ty_m).order_by('?')
+            maxsulot1 = mobile.objects.all().order_by('?')
+            maxsulot2 = appliance.objects.all().order_by('?')
+            maxsulot3 = computer.objects.all().order_by('?')
+            return render(p, 'products2.html',
+                          {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                           'ch': chegirma, 'allt': allf})
+
+    elif allf == 'Appliance Kitchen':
+        chegirma = Discounts_mobile.objects.all().order_by('-id')[0:1]
+        ty_m = type_mobile.objects.get(Name=allf)
+        if allf2 == 'New':
+            maxsulot = mobile.objects.filter(Type=ty_m).order_by('-Time')
+            maxsulot1 = mobile.objects.all().order_by('?')
+            maxsulot2 = appliance.objects.all().order_by('?')
+            maxsulot3 = computer.objects.all().order_by('?')
+            return render(p, 'products2.html',
+                          {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,
+                           'allt': allf})
+        elif allf2 == 'Rating':
+            maxsulot = mobile.objects.filter(Type=ty_m).order_by('-Rating')
+            maxsulot1 = mobile.objects.all().order_by('?')
+            maxsulot2 = appliance.objects.all().order_by('?')
+            maxsulot3 = computer.objects.all().order_by('?')
+            return render(p, 'products2.html',
+                          {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,
+                           'allt': allf})
+        elif allf2 == 'low to high':
+            maxsulot = mobile.objects.filter(Type=ty_m).order_by('New_price')
+            maxsulot1 = mobile.objects.all().order_by('?')
+            maxsulot2 = appliance.objects.all().order_by('?')
+            maxsulot3 = computer.objects.all().order_by('?')
+            return render(p, 'products2.html',
+                          {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,
+                           'allt': allf})
+        elif allf2 == 'high to low':
+            maxsulot = mobile.objects.filter(Type=ty_m).order_by('-New_price')
+            maxsulot1 = mobile.objects.all().order_by('?')
+            maxsulot2 = appliance.objects.all().order_by('?')
+            maxsulot3 = computer.objects.all().order_by('?')
+            return render(p, 'products2.html',
+                          {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,
+                           'allt': allf})
+        elif allf2 == 'select_item_sma':
+            if 'select_item_sma' in p.POST:
+                sort = p.POST.get('select_item')
+                if sort == "Default":
+                    maxsulot = mobile.objects.filter(Type=ty_m).order_by('Time')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    selects = 'Default'
+                    return render(p, 'products2.html',
+                                  {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                                   'ch': chegirma, 'select': selects, 'allt': allf})
+                elif sort == "Rating":
+                    maxsulot = mobile.objects.filter(Type=ty_m).order_by('-Rating')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    selects = 'Rating'
+                    return render(p, 'products2.html',
+                                  {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                                   'ch': chegirma, 'select': selects, 'allt': allf})
+                elif sort == "Newness":
+                    maxsulot = mobile.objects.filter(Type=ty_m).order_by('-Time')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    selects = 'Newness'
+                    return render(p, 'products2.html',
+                                  {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                                   'ch': chegirma, 'select': selects, 'allt': allf})
+                elif sort == "low to high":
+                    maxsulot = mobile.objects.filter(Type=ty_m).order_by('New_price')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    selects = 'low to high'
+                    return render(p, 'products2.html',
+                                  {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                                   'ch': chegirma, 'select': selects, 'allt': allf})
+                elif sort == "-high to low":
+                    maxsulot = mobile.objects.filter(Type=ty_m).order_by('-New_price')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    selects = '-high to low'
+                    return render(p, 'products2.html',
+                                  {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                                   'ch': chegirma, 'select': selects, 'allt': allf})
+                else:
+                    maxsulot = mobile.objects.filter(Type=ty_m).order_by('?')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    return render(p, 'products22.html',
+                                  {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                                   'ch': chegirma, 'allt': allf})
+        else:
+            maxsulot = mobile.objects.filter(Type=ty_m).order_by('?')
+            maxsulot1 = mobile.objects.all().order_by('?')
+            maxsulot2 = appliance.objects.all().order_by('?')
+            maxsulot3 = computer.objects.all().order_by('?')
+            return render(p, 'products22.html',
+                          {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                           'ch': chegirma, 'allt': allf})
+
+    elif allf == 'Appliance Household':
+        chegirma = Discounts_mobile.objects.all().order_by('-id')[0:1]
+        ty_m = type_mobile.objects.get(Name=allf)
+        if allf2 == 'New':
+            maxsulot = mobile.objects.filter(Type=ty_m).order_by('-Time')
+            maxsulot1 = mobile.objects.all().order_by('?')
+            maxsulot2 = appliance.objects.all().order_by('?')
+            maxsulot3 = computer.objects.all().order_by('?')
+            return render(p, 'products2.html',
+                          {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,
+                           'allt': allf})
+        elif allf2 == 'Rating':
+            maxsulot = mobile.objects.filter(Type=ty_m).order_by('-Rating')
+            maxsulot1 = mobile.objects.all().order_by('?')
+            maxsulot2 = appliance.objects.all().order_by('?')
+            maxsulot3 = computer.objects.all().order_by('?')
+            return render(p, 'products2.html',
+                          {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,
+                           'allt': allf})
+        elif allf2 == 'low to high':
+            maxsulot = mobile.objects.filter(Type=ty_m).order_by('New_price')
+            maxsulot1 = mobile.objects.all().order_by('?')
+            maxsulot2 = appliance.objects.all().order_by('?')
+            maxsulot3 = computer.objects.all().order_by('?')
+            return render(p, 'products2.html',
+                          {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,
+                           'allt': allf})
+        elif allf2 == 'high to low':
+            maxsulot = mobile.objects.filter(Type=ty_m).order_by('-New_price')
+            maxsulot1 = mobile.objects.all().order_by('?')
+            maxsulot2 = appliance.objects.all().order_by('?')
+            maxsulot3 = computer.objects.all().order_by('?')
+            return render(p, 'products2.html',
+                          {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,
+                           'allt': allf})
+        elif allf2 == 'select_item_sma':
+            if 'select_item_sma' in p.POST:
+                sort = p.POST.get('select_item')
+                if sort == "Default":
+                    maxsulot = mobile.objects.filter(Type=ty_m).order_by('Time')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    selects = 'Default'
+                    return render(p, 'products2.html',
+                                  {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                                   'ch': chegirma, 'select': selects, 'allt': allf})
+                elif sort == "Rating":
+                    maxsulot = mobile.objects.filter(Type=ty_m).order_by('-Rating')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    selects = 'Rating'
+                    return render(p, 'products2.html',
+                                  {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                                   'ch': chegirma, 'select': selects, 'allt': allf})
+                elif sort == "Newness":
+                    maxsulot = mobile.objects.filter(Type=ty_m).order_by('-Time')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    selects = 'Newness'
+                    return render(p, 'products2.html',
+                                  {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                                   'ch': chegirma, 'select': selects, 'allt': allf})
+                elif sort == "low to high":
+                    maxsulot = mobile.objects.filter(Type=ty_m).order_by('New_price')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    selects = 'low to high'
+                    return render(p, 'products2.html',
+                                  {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                                   'ch': chegirma, 'select': selects, 'allt': allf})
+                elif sort == "-high to low":
+                    maxsulot = mobile.objects.filter(Type=ty_m).order_by('-New_price')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    selects = '-high to low'
+                    return render(p, 'products2.html',
+                                  {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                                   'ch': chegirma, 'select': selects, 'allt': allf})
+                else:
+                    maxsulot = mobile.objects.filter(Type=ty_m).order_by('?')
+                    maxsulot1 = mobile.objects.all().order_by('?')
+                    maxsulot2 = appliance.objects.all().order_by('?')
+                    maxsulot3 = computer.objects.all().order_by('?')
+                    return render(p, 'products22.html',
+                                  {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                                   'ch': chegirma, 'allt': allf})
+        else:
+            maxsulot = mobile.objects.filter(Type=ty_m).order_by('?')
+            maxsulot1 = mobile.objects.all().order_by('?')
+            maxsulot2 = appliance.objects.all().order_by('?')
+            maxsulot3 = computer.objects.all().order_by('?')
+            return render(p, 'products22.html',
+                          {'Max': maxsulot, 'Max1': maxsulot1, 'Max2': maxsulot2, 'Max3': maxsulot3,
+                           'ch': chegirma, 'allt': allf})
+# end pro ---------- ---------- ----------
 
 def single1(s):
     if 'Review' in s.POST:
@@ -449,16 +1399,16 @@ def single1(s):
         Time = s.POST.get('Time')
         email(Mail=Mail, Time=Time).save()
 
-    maxsulot = mobile.objects.all()
-    maxsulot2 = appliance.objects.all()
-    maxsulot3 = computer.objects.all()
+    maxsulot = mobile.objects.all().order_by('?')
+    maxsulot2 = appliance.objects.all().order_by('?')
+    maxsulot3 = computer.objects.all().order_by('?')
     chegirma = Discounts_mobile.objects.all()
     com = comment.objects.all()
     y = 0
     for st in com:
         y += 1
-    a = y
-    return render(s, 'single.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,'com':com,'y':a})
+    y=y
+    return render(s, 'single.html', {'Max': maxsulot, 'Max2': maxsulot2, 'Max3': maxsulot3, 'ch': chegirma,'com':com,'y':y})
 
 'single---------------------------------------------------------------------------'
 
@@ -479,9 +1429,9 @@ def single_mobile(s, id):
 
     css = mobile.objects.get(id=id)
     rams = ram_mobile.objects.all()
-    maxsulot = mobile.objects.all()
-    maxsulot2 = appliance.objects.all()
-    maxsulot3 = computer.objects.all()
+    maxsulot = mobile.objects.all().order_by('?')
+    maxsulot2 = appliance.objects.all().order_by('?')
+    maxsulot3 = computer.objects.all().order_by('?')
     chegirma = Discounts_mobile.objects.all()
     com = comment.objects.all()
     y = 0
@@ -509,9 +1459,9 @@ def single_compyuter(s, id):
     rams = ram_compyuter.objects.all()
     corei = core_i.objects.all()
     gens = gen.objects.all()
-    maxsulot = mobile.objects.all()
-    maxsulot2 = appliance.objects.all()
-    maxsulot3 = computer.objects.all()
+    maxsulot = mobile.objects.all().order_by('?')
+    maxsulot2 = appliance.objects.all().order_by('?')
+    maxsulot3 = computer.objects.all().order_by('?')
     chegirma = Discounts_mobile.objects.all()
     com = comment.objects.all()
     y = 0
@@ -536,9 +1486,9 @@ def single_appliance(s, id):
         email(Mail=Mail, Time=Time).save()
 
     css = appliance.objects.get(id=id)
-    maxsulot = mobile.objects.all()
-    maxsulot2 = appliance.objects.all()
-    maxsulot3 = computer.objects.all()
+    maxsulot = mobile.objects.all().order_by('?')
+    maxsulot2 = appliance.objects.all().order_by('?')
+    maxsulot3 = computer.objects.all().order_by('?')
     chegirma = Discounts_mobile.objects.all()
     com = comment.objects.all()
     y = 0
@@ -549,61 +1499,57 @@ def single_appliance(s, id):
 
 'color--prices---------------------------------------------------------------------'
 
+"""
+MyModel.objects.filter(field__gte=5)  # field ≥ 5
+MyModel.objects.filter(field__lte=5)  # field ≤ 5
+"""
+
 'p'
-def mobils(r, rang):
+def mobils(r,allf,rang):
     chegirma = Discounts_mobile.objects.all()
     if rang == 'Red' or rang == 'Brown' or rang == 'Yellow' or rang == 'Violet' or rang == 'Orange' or rang == 'Blue':
         col = color.objects.get(Name=rang)
-        colors = mobile.objects.filter(Color=col.id)
-        colors2 = appliance.objects.all()
-        colors3 = computer.objects.all()
-        return render(r, 'products.html', {'Max': colors, 'Max2': colors2, 'Max3': colors3, 'ch': chegirma})
+        colors = mobile.objects.filter(Color=col.id).order_by('?')
+        colors1 = mobile.objects.all().order_by('?')
+        colors2 = appliance.objects.all().order_by('?')
+        colors3 = computer.objects.all().order_by('?')
+        return render(r,'products.html', {'Max': colors,'Max1': colors1,'Max2': colors2, 'Max3': colors3, 'ch': chegirma})
     else:
         if rang == 'yk':
-            mobile_list = list(mobile.objects.all())
-            for prices in mobile_list:
-                if prices == 0 and prices < 100:
-                    prices = mobile.objects.filter(New_price=prices)
-                    prices2 = appliance.objects.all()
-                    prices3 = computer.objects.all()
-                    return render(r, 'products.html', {'Max': prices, 'Max2': prices2, 'Max3': prices3, 'ch': chegirma})
+            prices = mobile.objects.filter(field__gt=100).order_by('?')
+            prices1 = mobile.objects.all().order_by('?')
+            prices2 = appliance.objects.all().order_by('?')
+            prices3 = computer.objects.all().order_by('?')
+            return render(r,'products.html', {'Max': prices,'Max1':prices1,'Max2': prices2, 'Max3': prices3, 'ch': chegirma})
         elif rang == 'yb':
-            mobile_list = list(mobile.objects.all())
-            for prices in mobile_list:
-                if prices == 0 and prices < 100:
-                    prices = mobile.objects.filter(New_price=prices)
-                    prices2 = appliance.objects.all()
-                    prices3 = computer.objects.all()
-                    return render(r, 'products.html', {'Max': prices, 'Max2': prices2, 'Max3': prices3, 'ch': chegirma})
+            prices = mobile.objects.filter(field__gt=100, field__lt=500).order_by('?')
+            prices1 = mobile.objects.all().order_by('?')
+            prices2 = appliance.objects.all().order_by('?')
+            prices3 = computer.objects.all().order_by('?')
+            return render(r, 'products.html', {'Max': prices,'Max1':prices1,'Max2': prices2, 'Max3': prices3, 'ch': chegirma})
         elif rang == 'mom':
-            mobile_list = list(mobile.objects.all())
-            for prices in mobile_list:
-                if prices == 0 and prices < 100:
-                    prices = mobile.objects.filter(New_price=prices)
-                    prices2 = appliance.objects.all()
-                    prices3 = computer.objects.all()
-                    return render(r, 'products.html', {'Max': prices, 'Max2': prices2, 'Max3': prices3, 'ch': chegirma})
+            prices = mobile.objects.filter(field__gt=1000, field__lt=10000).order_by('?')
+            prices1 = mobile.objects.all().order_by('?')
+            prices2 = appliance.objects.all().order_by('?')
+            prices3 = computer.objects.all().order_by('?')
+            return render(r, 'products.html', {'Max': prices,'Max1':prices1,'Max2': prices2, 'Max3': prices3, 'ch': chegirma})
         elif rang == 'omym':
-            mobile_list = list(mobile.objects.all())
-            for prices in mobile_list:
-                if prices == 0 and prices < 100:
-                    prices = mobile.objects.filter(New_price=prices)
-                    prices2 = appliance.objects.all()
-                    prices3 = computer.objects.all()
-                    return render(r, 'products.html', {'Max': prices, 'Max2': prices2, 'Max3': prices3, 'ch': chegirma})
+            prices = mobile.objects.filter(field__gt=10000, field__lt=20000).order_by('?')
+            prices1 = mobile.objects.all().order_by('?')
+            prices2 = appliance.objects.all().order_by('?')
+            prices3 = computer.objects.all().order_by('?')
+            return render(r, 'products.html', {'Max': prices,'Max1':prices1,'Max2': prices2, 'Max3': prices3, 'ch': chegirma})
         elif rang == 'ymk':
-            mobile_list = list(mobile.objects.all())
-            for prices in mobile_list:
-                if prices == 0 and prices < 100:
-                    prices = mobile.objects.filter(New_price=prices)
-                    prices2 = appliance.objects.all()
-                    prices3 = computer.objects.all()
-                    return render(r, 'products.html', {'Max': prices, 'Max2': prices2, 'Max3': prices3, 'ch': chegirma})
+            prices = mobile.objects.filter(field__lt=20000).order_by('?')
+            prices1 = mobile.objects.all().order_by('?')
+            prices2 = appliance.objects.all().order_by('?')
+            prices3 = computer.objects.all().order_by('?')
+            return render(r, 'products.html', {'Max': prices,'Max1':prices1,'Max2': prices2, 'Max3': prices3, 'ch': chegirma})
         else:
-            prices = mobile.objects.all()
-            prices2 = appliance.objects.all()
-            prices3 = computer.objects.all()
-            return render(r, 'products.html', {'Max': prices, 'Max2': prices2, 'Max3': prices3, 'ch': chegirma})
+            prices = mobile.objects.all().order_by('?')
+            prices2 = appliance.objects.all().order_by('?')
+            prices3 = computer.objects.all().order_by('?')
+            return render(r, 'products.html', {'Max': prices,'Max1':prices1,'Max2': prices2, 'Max3': prices3, 'ch': chegirma})
 
 'p1'
 def Computer(r, rang1):

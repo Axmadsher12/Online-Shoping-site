@@ -12,7 +12,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!-- for-mobile-apps -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="Electronic Store Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+<meta name="keywords" content="Electronic Store Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
 	SmartPhone Compatible web template, free web designs for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
 	function hideURLbar(){ window.scrollTo(0,1); } </script>
@@ -29,22 +29,22 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!-- js -->
 <script src="{% static 'js/jquery.min.js' %}"></script>
 <link rel="stylesheet" href="{% static 'css/jquery.countdown.css' %}" /> <!-- countdown -->
-<!-- //js -->  
-<!-- web fonts --> 
+<!-- //js -->
+<!-- web fonts -->
 <link href='//fonts.googleapis.com/css?family=Glegoo:400,700' rel='stylesheet' type='text/css'>
 <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
-<!-- //web fonts -->  
+<!-- //web fonts -->
 <!-- start-smooth-scrolling -->
 <script type="text/javascript">
 	jQuery(document).ready(function($) {
-		$(".scroll").click(function(event){		
+		$(".scroll").click(function(event){
 			event.preventDefault();
 			$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
 		});
 	});
 </script>
-<!-- //end-smooth-scrolling --> 
-</head> 
+<!-- //end-smooth-scrolling -->
+</head>
 <body>
 	<!-- for bootstrap working -->
 	<script type="text/javascript" src="{% static 'js/bootstrap-3.1.1.min.js' %}"></script>
@@ -62,7 +62,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				<div class="modal-body modal-body-sub">
 					<div class="row">
 						<div class="col-md-8 modal_body_left modal_body_left1" style="border-right: 1px dotted #C2C2C2;padding-right:3em;">
-							<div class="sap_tabs">	
+							<div class="sap_tabs">
 								<div id="horizontalTab" style="display: block; width: 100%; margin: 0px;">
 									<ul>
 										<li class="resp-tab-item" aria-controls="tab_item-0"><span>Sign in</span></li>
@@ -83,7 +83,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 											{% for message in messages %}
 											    <p id="messages">{{message}}</p>
 											{% endfor %}
-										</div> 
+										</div>
 									</div>
 									<div class="tab-2 resp-tab-content" aria-labelledby="tab_item-1">
 										<div class="facts">
@@ -109,14 +109,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 											</div>
 											{{form1.errors}}
 										</div>
-									</div> 			        					            	      
+									</div>
 								</div>
 							</div>
 							<script src="{% static 'js/easyResponsiveTabs.js' %}" type="text/javascript"></script>
 							<script type="text/javascript">
 								$(document).ready(function () {
 									$('#horizontalTab').easyResponsiveTabs({
-										type: 'default', //Types: default, vertical, accordion           
+										type: 'default', //Types: default, vertical, accordion
 										width: 'auto', //auto or any width like 600px
 										fit: true   // 100% fit in a container
 									});
@@ -146,7 +146,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	</div>
 	<script>
 		$('#myModal88').modal('show');
-	</script>  
+	</script>
 	<!-- header modal -->
 	<!-- header -->
 	<div class="header" id="home1">
@@ -168,13 +168,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					</form>
 				</div>
 			</div>
-			<div class="cart cart box_1"> 
-				<form action="#" method="post" class="last"> 
+			<div class="cart cart box_1">
+				<form action="#" method="post" class="last">
 					<input type="hidden" name="cmd" value="_cart" />
 					<input type="hidden" name="display" value="1" />
 					<button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
-				</form>   
-			</div>  
+				</form>
+			</div>
 		</div>
 	</div>
 	<!-- //header -->
@@ -193,7 +193,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				</div>
 				<div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
 					<ul class="nav navbar-nav">
-						<li><a href="{% url 'index' " class="act">Home</a></li>
+						<li><a href="{% url 'index' %}" class="act">Home</a></li>
 						<!-- Mega Menu -->
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" >Products <b class="caret"></b></a>
@@ -245,7 +245,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 								<li><a href="{% url 'icons' %}">Web Icons</a></li>
 								<li><a href="{% url 'codes' %}">Short Codes</a></li>
 							</ul>
-						</li>  
+						</li>
 						<li><a href="{% url 'mail' %}">Mail Us</a></li>
 					</ul>
 				</div>
@@ -259,7 +259,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			<h3>Electronic Store, <span>Special Offers</span></h3>
 		</div>
 	</div>
-	<!-- //banner --> 
+	<!-- //banner -->
 	<!-- banner-bottom -->
 	<div class="banner-bottom">
 		<div class="container">
@@ -268,8 +268,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<a class="play-icon popup-with-zoom-anim" href="#small-dialog">
 						<span class="glyphicon glyphicon-expand" aria-hidden="true"></span>
 					</a>
-				</div> 
-					<!-- pop-up-box -->     
+				</div>
+					<!-- pop-up-box -->
 					<script src="{% static 'js/jquery.magnific-popup.js' %}" type="text/javascript"></script>
 					<!--//pop-up-box -->
 					<div id="small-dialog" class="mfp-hide">
@@ -288,7 +288,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 							removalDelay: 300,
 							mainClass: 'my-mfp-zoom-in'
 						});
-																						
+
 						});
 					</script>
 			</div>
@@ -304,7 +304,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<div id="myTabContent" class="tab-content">
 						<div role="tabpanel" class="tab-pane fade active in" id="home" aria-labelledby="home-tab">
 							<div class="agile_ecommerce_tabs">
-								{% for m in ms %}
+								{% for m in ms1 %}
 								<div class="col-md-4 agile_ecommerce_tab_left">
 									<div class="hs-wrapper">
 										<img src="{{m.Image.url}}" alt=" " class="img-responsive" />
@@ -312,24 +312,17 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 										<img src="{{m.Image3.url}}" alt=" " class="img-responsive" />
 										<img src="{{m.Image4.url}}" alt=" " class="img-responsive" />
 										<img src="{{m.Image5.url}}" alt=" " class="img-responsive" />
-										<div class="w3_hs_bottom">
-											<ul>
-												<li>
-													<a href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
-												</li>
-											</ul>
-										</div>
-									</div> 
+									</div>
 									<h5><a href="{% url 'single1' m.id %}">{{m.Name}}</a></h5>
 									<div class="simpleCart_shelfItem">
 										<p><span>${{m.Old_price}}</span> <i class="item_price">${{m.New_price}}</i></p>
 										<form action="#" method="post">
 											<input type="hidden" name="cmd" value="_cart" />
-											<input type="hidden" name="add" value="1" /> 
+											<input type="hidden" name="add" value="1" />
 											<input type="hidden" name="w3ls_item" value="{{m.Name}}" />
 											<input type="hidden" name="amount" value="{{m.New_price}}" />
 											<button type="submit" class="w3ls-cart">Add to cart</button>
-										</form>  
+										</form>
 									</div>
 								</div>
 								{% endfor %}
@@ -346,43 +339,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 										<img src="{{m.Image3.url}}" alt=" " class="img-responsive" />
 										<img src="{{m.Image4.url}}" alt=" " class="img-responsive" />
 										<img src="{{m.Image5.url}}" alt=" " class="img-responsive" />
-										<div class="w3_hs_bottom">
-											<ul>
-												<li>
-													<a href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
-												</li>
-											</ul>
-										</div>
-									</div>
-									<h5><a href="{% url 'single2' m.id %}">{{m.Name}}</a></h5>
-									<div class="simpleCart_shelfItem">
-										<p><span>${{m.Old_price}}</span> <i class="item_price">${{m.New_price}}</i></p>
-										<form action="#" method="post">
-											<input type="hidden" name="cmd" value="_cart" />
-											<input type="hidden" name="add" value="1" />
-											<input type="hidden" name="w3ls_item" value="{{m.Name}}" />
-											<input type="hidden" name="amount" value="{{m.New_price}}" />
-											<button type="submit" class="w3ls-cart">Add to cart</button>
-										</form>
-									</div>
-								</div>
-								{% endfor %}
-
-								{% for m in app2 %}
-								<div class="col-md-4 agile_ecommerce_tab_left">
-									<div class="hs-wrapper">
-										<img src="{{m.Image.url}}" alt=" " class="img-responsive" />
-										<img src="{{m.Image2.url}}" alt=" " class="img-responsive" />
-										<img src="{{m.Image3.url}}" alt=" " class="img-responsive" />
-										<img src="{{m.Image4.url}}" alt=" " class="img-responsive" />
-										<img src="{{m.Image5.url}}" alt=" " class="img-responsive" />
-										<div class="w3_hs_bottom">
-											<ul>
-												<li>
-													<a href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
-												</li>
-											</ul>
-										</div>
 									</div>
 									<h5><a href="{% url 'single2' m.id %}">{{m.Name}}</a></h5>
 									<div class="simpleCart_shelfItem">
@@ -410,13 +366,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 										<img src="{{m.Image3.url}}" alt=" " class="img-responsive" />
 										<img src="{{m.Image4.url}}" alt=" " class="img-responsive" />
 										<img src="{{m.Image5.url}}" alt=" " class="img-responsive" />
-										<div class="w3_hs_bottom">
-											<ul>
-												<li>
-													<a href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
-												</li>
-											</ul>
-										</div>
 									</div>
 									<h5><a href="{% url 'single3' m.id %}">{{m.Name}}</a></h5>
 									<div class="simpleCart_shelfItem">
@@ -444,13 +393,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 										<img src="{{m.Image3.url}}" alt=" " class="img-responsive" />
 										<img src="{{m.Image4.url}}" alt=" " class="img-responsive" />
 										<img src="{{m.Image5.url}}" alt=" " class="img-responsive" />
-										<div class="w3_hs_bottom">
-											<ul>
-												<li>
-													<a href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
-												</li>
-											</ul>
-										</div>
 									</div>
 									<h5><a href="{% url 'single2' m.id %}">{{m.Name}}</a></h5>
 									<div class="simpleCart_shelfItem">
@@ -478,13 +420,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 										<img src="{{m.Image3.url}}" alt=" " class="img-responsive" />
 										<img src="{{m.Image4.url}}" alt=" " class="img-responsive" />
 										<img src="{{m.Image5.url}}" alt=" " class="img-responsive" />
-										<div class="w3_hs_bottom">
-											<ul>
-												<li>
-													<a href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
-												</li>
-											</ul>
-										</div>
 									</div>
 									<h5><a href="{% url 'single2' m.id %}">{{m.Name}}</a></h5>
 									<div class="simpleCart_shelfItem">
@@ -503,440 +438,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 							</div>
 						</div>
 					</div>
-				</div> 
+				</div>
 			</div>
 			<div class="clearfix"> </div>
 		</div>
 	</div>
-	<!-- //banner-bottom --> 
-	<!-- modal-video -->
-	<div class="modal video-modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModal">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>						
-				</div>
-				<section>
-					<div class="modal-body">
-						<div class="col-md-5 modal_body_left">
-							<img src="{% static 'images/3.jpg' %}" alt=" " class="img-responsive" />
-						</div>
-						<div class="col-md-7 modal_body_right">
-							<h4>The Best Mobile Phone 3GB</h4>
-							<p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea 
-								commodo consequat.Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
-							<div class="rating">
-								<div class="rating-left">
-									<img src="{% static 'images/star-.png' %}" alt=" " class="img-responsive" />
-								</div>
-								<div class="rating-left">
-									<img src="{% static 'images/star-.png' %}" alt=" " class="img-responsive" />
-								</div>
-								<div class="rating-left">
-									<img src="{% static 'images/star-.png' %}" alt=" " class="img-responsive" />
-								</div>
-								<div class="rating-left">
-									<img src="{% static 'images/star.png' %}" alt=" " class="img-responsive" />
-								</div>
-								<div class="rating-left">
-									<img src="{% static 'images/star.png' %}" alt=" " class="img-responsive" />
-								</div>
-								<div class="clearfix"> </div>
-							</div>
-							<div class="modal_body_right_cart simpleCart_shelfItem">
-								<p><span>$380</span> <i class="item_price">$350</i></p>
-								<form action="#" method="post">
-									<input type="hidden" name="cmd" value="_cart">
-									<input type="hidden" name="add" value="1"> 
-									<input type="hidden" name="w3ls_item" value="Mobile Phone1"> 
-									<input type="hidden" name="amount" value="350.00">   
-									<button type="submit" class="w3ls-cart">Add to cart</button>
-								</form>
-							</div>
-							<h5>Color</h5>
-							<div class="color-quality">
-								<ul>
-									<li><a href="#"><span></span></a></li>
-									<li><a href="#" class="brown"><span></span></a></li>
-									<li><a href="#" class="purple"><span></span></a></li>
-									<li><a href="#" class="gray"><span></span></a></li>
-								</ul>
-							</div>
-						</div>
-						<div class="clearfix"> </div>
-					</div>
-				</section>
-			</div>
-		</div>
-	</div>
-	<div class="modal video-modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModal1">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>						
-				</div>
-				<section>
-					<div class="modal-body">
-						<div class="col-md-5 modal_body_left">
-							<img src="{% static 'images/9.jpg' %}" alt=" " class="img-responsive" />
-						</div>
-						<div class="col-md-7 modal_body_right">
-							<h4>Multimedia Home Accessories</h4>
-							<p>Ut enim ad minim veniam, quis nostrud 
-								exercitation ullamco laboris nisi ut aliquip ex ea 
-								commodo consequat.Duis aute irure dolor in 
-								reprehenderit in voluptate velit esse cillum dolore 
-								eu fugiat nulla pariatur. Excepteur sint occaecat 
-								cupidatat non proident, sunt in culpa qui officia 
-								deserunt mollit anim id est laborum.</p>
-							<div class="rating">
-								<div class="rating-left">
-									<img src="{% static 'images/star-.png' %}" alt=" " class="img-responsive" />
-								</div>
-								<div class="rating-left">
-									<img src="{% static 'images/star-.png' %}" alt=" " class="img-responsive" />
-								</div>
-								<div class="rating-left">
-									<img src="{% static 'images/star-.png' %}" alt=" " class="img-responsive" />
-								</div>
-								<div class="rating-left">
-									<img src="{% static 'images/star.png' %}" alt=" " class="img-responsive" />
-								</div>
-								<div class="rating-left">
-									<img src="{% static 'images/star.png' %}" alt=" " class="img-responsive" />
-								</div>
-								<div class="clearfix"> </div>
-							</div>
-							<div class="modal_body_right_cart simpleCart_shelfItem">
-								<p><span>$180</span> <i class="item_price">$150</i></p>
-								<form action="#" method="post">
-									<input type="hidden" name="cmd" value="_cart">
-									<input type="hidden" name="add" value="1"> 
-									<input type="hidden" name="w3ls_item" value="Headphones"> 
-									<input type="hidden" name="amount" value="150.00">   
-									<button type="submit" class="w3ls-cart">Add to cart</button>
-								</form>
-							</div>
-							<h5>Color</h5>
-							<div class="color-quality">
-								<ul>
-									<li><a href="#"><span></span></a></li>
-									<li><a href="#" class="brown"><span></span></a></li>
-									<li><a href="#" class="purple"><span></span></a></li>
-									<li><a href="#" class="gray"><span></span></a></li>
-								</ul>
-							</div>
-						</div>
-						<div class="clearfix"> </div>
-					</div>
-				</section>
-			</div>
-		</div>
-	</div>
-	<div class="modal video-modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModal2">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>						
-				</div>
-				<section>
-					<div class="modal-body">
-						<div class="col-md-5 modal_body_left">
-							<img src="{% static 'images/11.jpg' %}" alt=" " class="img-responsive" />
-						</div>
-						<div class="col-md-7 modal_body_right">
-							<h4>Quad Core Colorful Laptop</h4>
-							<p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute irure dolor in 
-								reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia  deserunt.</p>
-							<div class="rating">
-								<div class="rating-left">
-									<img src="{% static 'images/star-.png' %}" alt=" " class="img-responsive" />
-								</div>
-								<div class="rating-left">
-									<img src="{% static 'images/star-.png' %}" alt=" " class="img-responsive" />
-								</div>
-								<div class="rating-left">
-									<img src="{% static 'images/star-.png' %}" alt=" " class="img-responsive" />
-								</div>
-								<div class="rating-left">
-									<img src="{% static 'images/star-.png' %}" alt=" " class="img-responsive" />
-								</div>
-								<div class="rating-left">
-									<img src="{% static 'images/star.png' %}" alt=" " class="img-responsive" />
-								</div>
-								<div class="clearfix"> </div>
-							</div>
-							<div class="modal_body_right_cart simpleCart_shelfItem">
-								<p><span>$880</span> <i class="item_price">$850</i></p>
-								<form action="#" method="post">
-									<input type="hidden" name="cmd" value="_cart">
-									<input type="hidden" name="add" value="1"> 
-									<input type="hidden" name="w3ls_item" value="Laptop"> 
-									<input type="hidden" name="amount" value="850.00">   
-									<button type="submit" class="w3ls-cart">Add to cart</button>
-								</form>
-							</div>
-							<h5>Color</h5>
-							<div class="color-quality">
-								<ul>
-									<li><a href="#"><span></span></a></li>
-									<li><a href="#" class="brown"><span></span></a></li>
-									<li><a href="#" class="purple"><span></span></a></li>
-									<li><a href="#" class="gray"><span></span></a></li>
-								</ul>
-							</div>
-						</div>
-						<div class="clearfix"> </div>
-					</div>
-				</section>
-			</div>
-		</div>
-	</div>
-	<div class="modal video-modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModal3">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>						
-				</div>
-				<section>
-					<div class="modal-body">
-						<div class="col-md-5 modal_body_left">
-							<img src="{% static 'images/14.jpg' %}" alt=" " class="img-responsive" />
-						</div>
-						<div class="col-md-7 modal_body_right">
-							<h4>Cool Single Door Refrigerator </h4>
-							<p>Duis aute irure dolor inreprehenderit in voluptate velit esse cillum dolore 
-								eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-							<div class="rating">
-								<div class="rating-left">
-									<img src="{% static 'images/star-.png' %}" alt=" " class="img-responsive" />
-								</div>
-								<div class="rating-left">
-									<img src="{% static 'images/star-.png' %}" alt=" " class="img-responsive" />
-								</div>
-								<div class="rating-left">
-									<img src="{% static 'images/star-.png' %}" alt=" " class="img-responsive" />
-								</div>
-								<div class="rating-left">
-									<img src="{% static 'images/star.png' %}" alt=" " class="img-responsive" />
-								</div>
-								<div class="rating-left">
-									<img src="{% static 'images/star.png' %}" alt=" " class="img-responsive" />
-								</div>
-								<div class="clearfix"> </div>
-							</div>
-							<div class="modal_body_right_cart simpleCart_shelfItem">
-								<p><span>$950</span> <i class="item_price">$820</i></p>
-								<form action="#" method="post">
-									<input type="hidden" name="cmd" value="_cart">
-									<input type="hidden" name="add" value="1"> 
-									<input type="hidden" name="w3ls_item" value="Mobile Phone1"> 
-									<input type="hidden" name="amount" value="820.00">   
-									<button type="submit" class="w3ls-cart">Add to cart</button>
-								</form>
-							</div>
-							<h5>Color</h5>
-							<div class="color-quality">
-								<ul>
-									<li><a href="#"><span></span></a></li>
-									<li><a href="#" class="brown"><span></span></a></li>
-									<li><a href="#" class="purple"><span></span></a></li>
-									<li><a href="#" class="gray"><span></span></a></li>
-								</ul>
-							</div>
-						</div>
-						<div class="clearfix"> </div>
-					</div>
-				</section>
-			</div>
-		</div>
-	</div>
-	<div class="modal video-modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModal4">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>						
-				</div>
-				<section>
-					<div class="modal-body">
-						<div class="col-md-5 modal_body_left">
-							<img src="{% static 'images/17.jpg' %}" alt=" " class="img-responsive" />
-						</div>
-						<div class="col-md-7 modal_body_right">
-							<h4>New Model Mixer Grinder</h4>
-							<p>Excepteur sint occaecat laboris nisi ut aliquip ex ea 
-								commodo consequat.Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore 
-								eu fugiat nulla pariatur cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-							<div class="rating">
-								<div class="rating-left">
-									<img src="{% static 'images/star-.png' %}" alt=" " class="img-responsive" />
-								</div>
-								<div class="rating-left">
-									<img src="{% static 'images/star-.png' %}" alt=" " class="img-responsive" />
-								</div>
-								<div class="rating-left">
-									<img src="{% static 'images/star-.png' %}" alt=" " class="img-responsive" />
-								</div>
-								<div class="rating-left">
-									<img src="{% static 'images/star.png' %}" alt=" " class="img-responsive" />
-								</div>
-								<div class="rating-left">
-									<img src="{% static 'images/star.png' %}" alt=" " class="img-responsive" />
-								</div>
-								<div class="clearfix"> </div>
-							</div>
-							<div class="modal_body_right_cart simpleCart_shelfItem">
-								<p><span>$460</span> <i class="item_price">$450</i></p>
-								<form action="#" method="post">
-									<input type="hidden" name="cmd" value="_cart">
-									<input type="hidden" name="add" value="1"> 
-									<input type="hidden" name="w3ls_item" value="Mobile Phone1"> 
-									<input type="hidden" name="amount" value="450.00">   
-									<button type="submit" class="w3ls-cart">Add to cart</button>
-								</form>
-							</div>
-							<h5>Color</h5>
-							<div class="color-quality">
-								<ul>
-									<li><a href="#"><span></span></a></li>
-									<li><a href="#" class="brown"><span></span></a></li>
-									<li><a href="#" class="purple"><span></span></a></li>
-									<li><a href="#" class="gray"><span></span></a></li>
-								</ul>
-							</div>
-						</div>
-						<div class="clearfix"> </div>
-					</div>
-				</section>
-			</div>
-		</div>
-	</div>
-	<div class="modal video-modal fade" id="myModal5" tabindex="-1" role="dialog" aria-labelledby="myModal5">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>						
-				</div>
-				<section>
-					<div class="modal-body">
-						<div class="col-md-5 modal_body_left">
-							<img src="{% static 'images/36.jpg' %}" alt=" " class="img-responsive" />
-						</div>
-						<div class="col-md-7 modal_body_right">
-							<h4>Dry Vacuum Cleaner</h4>
-							<p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea 
-								commodo consequat.Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat 
-								cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-							<div class="rating">
-								<div class="rating-left">
-									<img src="{% static 'images/star-.png' %}" alt=" " class="img-responsive" />
-								</div>
-								<div class="rating-left">
-									<img src="{% static 'images/star-.png' %}" alt=" " class="img-responsive" />
-								</div>
-								<div class="rating-left">
-									<img src="{% static 'images/star-.png' %}" alt=" " class="img-responsive" />
-								</div>
-								<div class="rating-left">
-									<img src="{% static 'images/star.png' %}" alt=" " class="img-responsive" />
-								</div>
-								<div class="rating-left">
-									<img src="{% static 'images/star.png' %}" alt=" " class="img-responsive" />
-								</div>
-								<div class="clearfix"> </div>
-							</div>
-							<div class="modal_body_right_cart simpleCart_shelfItem">
-								<p><span>$960</span> <i class="item_price">$920</i></p>
-								<form action="#" method="post">
-									<input type="hidden" name="cmd" value="_cart">
-									<input type="hidden" name="add" value="1"> 
-									<input type="hidden" name="w3ls_item" value="Vacuum Cleaner"> 
-									<input type="hidden" name="amount" value="920.00">   
-									<button type="submit" class="w3ls-cart">Add to cart</button>
-								</form>
-							</div>
-							<h5>Color</h5>
-							<div class="color-quality">
-								<ul>
-									<li><a href="#"><span></span></a></li>
-									<li><a href="#" class="brown"><span></span></a></li>
-									<li><a href="#" class="purple"><span></span></a></li>
-									<li><a href="#" class="gray"><span></span></a></li>
-								</ul>
-							</div>
-						</div>
-						<div class="clearfix"> </div>
-					</div>
-				</section>
-			</div>
-		</div>
-	</div>
-	<div class="modal video-modal fade" id="myModal6" tabindex="-1" role="dialog" aria-labelledby="myModal6">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>						
-				</div>
-				<section>
-					<div class="modal-body">
-						<div class="col-md-5 modal_body_left">
-							<img src="{% static 'images/37.jpg' %}" alt=" " class="img-responsive" />
-						</div>
-						<div class="col-md-7 modal_body_right">
-							<h4>Kitchen & Dining Accessories</h4>
-							<p>Ut enim ad minim veniam, quis nostrud 
-								exercitation ullamco laboris nisi ut aliquip ex ea 
-								commodo consequat.Duis aute irure dolor in 
-								reprehenderit in voluptate velit esse cillum dolore 
-								eu fugiat nulla pariatur. Excepteur sint occaecat 
-								cupidatat non proident, sunt in culpa qui officia 
-								deserunt mollit anim id est laborum.</p>
-							<div class="rating">
-								<div class="rating-left">
-									<img src="{% static 'images/star-.png' %}" alt=" " class="img-responsive" />
-								</div>
-								<div class="rating-left">
-									<img src="{% static 'images/star-.png' %}" alt=" " class="img-responsive" />
-								</div>
-								<div class="rating-left">
-									<img src="{% static 'images/star-.png' %}" alt=" " class="img-responsive" />
-								</div>
-								<div class="rating-left">
-									<img src="{% static 'images/star.png' %}" alt=" " class="img-responsive" />
-								</div>
-								<div class="rating-left">
-									<img src="{% static 'images/star.png' %}" alt=" " class="img-responsive" />
-								</div>
-								<div class="clearfix"> </div>
-							</div>
-							<div class="modal_body_right_cart simpleCart_shelfItem">
-								<p><span>$280</span> <i class="item_price">$250</i></p>
-								<form action="#" method="post">
-									<input type="hidden" name="cmd" value="_cart">
-									<input type="hidden" name="add" value="1"> 
-									<input type="hidden" name="w3ls_item" value="Induction Stove"> 
-									<input type="hidden" name="amount" value="250.00">   
-									<button type="submit" class="w3ls-cart">Add to cart</button>
-								</form>
-							</div>
-							<h5>Color</h5>
-							<div class="color-quality">
-								<ul>
-									<li><a href="#"><span></span></a></li>
-									<li><a href="#" class="brown"><span></span></a></li>
-									<li><a href="#" class="purple"><span></span></a></li>
-									<li><a href="#" class="gray"><span></span></a></li>
-								</ul>
-							</div>
-						</div>
-						<div class="clearfix"> </div>
-					</div>
-				</section>
-			</div>
-		</div>
-	</div>
-	<!-- //modal-video -->
-	<!-- banner-bottom1 -->
+
 	<div class="banner-bottom1">
 		<div class="agileinfo_banner_bottom1_grids">
 			<div class="col-md-7 agileinfo_banner_bottom1_grid_left">
@@ -954,7 +461,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			<div class="clearfix"> </div>
 		</div>
 	</div>
-	<!-- //banner-bottom1 --> 
+	<!-- //banner-bottom1 -->
 	<!-- special-deals -->
 	<div class="special-deals">
 		<div class="container">
@@ -965,7 +472,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						<img src="{% static 'images/21.jpg' %}" alt=" " class="img-responsive" />
 						{% for c in ch %}
 						<div class="w3agile_special_deals_grid_left_grid_pos1">
-							<h5>{{c.Percent}}}%<span>Off/-</span></h5>
+							<h5>{{c.Percent}}%<span>Off/-</span></h5>
 						</div>
 						{% endfor %}
 						<div class="w3agile_special_deals_grid_left_grid_pos">
@@ -975,14 +482,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<div class="wmuSlider example1">
 						<div class="wmuSliderWrapper">
 							{% for c in comment %}
-							<article style="position: absolute; width: 100%; opacity: 0;"> 
+							<article style="position: absolute; width: 100%; opacity: 0;">
 								<div class="banner-wrap">
 									<div class="w3agile_special_deals_grid_left_grid1">
 										<div>
-											<h1></h1>
+											<h4></h4>
 										</div>
 										<p>{{c.Add_Yuor_Review}}</p>
-										<h4>{{c.Name}}</h4>
+										<h4>{{c.Name}}</h4><br>
 									</div>
 								</div>
 							</article>
@@ -991,8 +498,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					</div>
 						<script src="{% static 'js/jquery.wmuSlider.js' %}"></script>
 						<script>
-							$('.example1').wmuSlider();         
-						</script> 
+							$('.example1').wmuSlider();
+						</script>
 				</div>
 				<div class="col-md-5 w3agile_special_deals_grid_right">
 					<img src="{% static 'images/20.jpg' %}" alt=" " class="img-responsive" />
@@ -1014,26 +521,17 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				<!-- Mobiles -->
 				<div class="col-md-3 agileinfo_new_products_grid">
 					<div class="agile_ecommerce_tab_left agileinfo_new_products_grid1">
+						{% if t == 'T' %}
+						<!--<h5><a href="">This is not add product to type.</a></h5>-->
+				        {% else %}
 						<div class="hs-wrapper hs-wrapper1">
 							<img src="{{t.Image.url}}" alt=" " class="img-responsive" />
-							<img src="{{t.Image2.url}}" alt=" " class="img-responsive" />
-							<img src="{{t.Image3.url}}" alt=" " class="img-responsive" />
-							<img src="{{t.Image4.url}}" alt=" " class="img-responsive" />
-							<img src="{{t.Image5.url}}" alt=" " class="img-responsive" />
-							<div class="w3_hs_bottom w3_hs_bottom_sub">
-								<ul>
-									<li>
-										<a href="#" data-toggle="modal" data-target="#myModal2"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
-									</li>
-								</ul>
-							</div>
+							<img src="{{t.Image2.url}}" alt=" " class="img-responsive"/>
+							<img src="{{t.Image3.url}}" alt=" " class="img-responsive"/>
+							<img src="{{t.Image4.url}}" alt=" " class="img-responsive"/>
+							<img src="{{t.Image5.url}}" alt=" " class="img-responsive"/>
 						</div>
-						{% if t == None %}
-						<h5><a href="{% url 'single1' t.id %}">{{t.Name}}</a></h5>
-						{% else %}
-						<h5></h5>
-						<h5><a href="{% url 'single1' id=1 %}">{{t.Name}}</a></h5>
-						{% endif %}
+						<h5><a href="{% url 'single1' id=t.id %}">{{t.Name}}</a></h5>
 						<div class="simpleCart_shelfItem">
 							<p><span>${{t.Old_price}}</span> <i class="item_price">${{t.New_price}}</i></p>
 							<form action="#" method="post">
@@ -1044,30 +542,23 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 								<button type="submit" class="w3ls-cart">Add to cart</button>
 							</form>
 						</div>
+				    {% endif %}
 					</div>
 				</div>
-				<!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
+
 				<div class="col-md-3 agileinfo_new_products_grid">
 					<div class="agile_ecommerce_tab_left agileinfo_new_products_grid1">
+						{% if m == 'M' %}
+						<!--<h5><a href="">This is not add product to type.</a></h5>-->
+				        {% else %}
 						<div class="hs-wrapper hs-wrapper1">
 							<img src="{{m.Image.url}}" alt=" " class="img-responsive" />
 							<img src="{{m.Image2.url}}" alt=" " class="img-responsive" />
 							<img src="{{m.Image3.url}}" alt=" " class="img-responsive" />
 							<img src="{{m.Image4.url}}" alt=" " class="img-responsive" />
 							<img src="{{m.Image5.url}}" alt=" " class="img-responsive" />
-							<div class="w3_hs_bottom w3_hs_bottom_sub">
-								<ul>
-									<li>
-										<a href="#" data-toggle="modal" data-target="#myModal2"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
-									</li>
-								</ul>
-							</div>
 						</div>
-						{% if m == None %}
 						<h5><a href="{% url 'single1' m.id %}">{{m.Name}}</a></h5>
-						{% else %}
-						<h5><a href="{% url 'single1' id=1 %}">{{m.Name}}</a></h5>
-						{% endif %}
 						<div class="simpleCart_shelfItem">
 							<p><span>${{m.Old_price}}</span> <i class="item_price">${{m.New_price}}</i></p>
 							<form action="#" method="post">
@@ -1078,30 +569,23 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 								<button type="submit" class="w3ls-cart">Add to cart</button>
 							</form>
 						</div>
+						{% endif %}
 					</div>
 				</div>
-				<!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
+
 				<div class="col-md-3 agileinfo_new_products_grid">
 					<div class="agile_ecommerce_tab_left agileinfo_new_products_grid1">
+						{% if w == 'W' %}
+						<!--<h5><a href="">This is not add product to type.</a></h5>-->
+				        {% else %}
 						<div class="hs-wrapper hs-wrapper1">
 							<img src="{{w.Image.url}}" alt=" " class="img-responsive" />
 							<img src="{{w.Image2.url}}" alt=" " class="img-responsive" />
 							<img src="{{w.Image3.url}}" alt=" " class="img-responsive" />
 							<img src="{{w.Image4.url}}" alt=" " class="img-responsive" />
 							<img src="{{w.Image5.url}}" alt=" " class="img-responsive" />
-							<div class="w3_hs_bottom w3_hs_bottom_sub">
-								<ul>
-									<li>
-										<a href="#" data-toggle="modal" data-target="#myModal2"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
-									</li>
-								</ul>
-							</div>
 						</div>
-						{% if w == None %}
 						<h5><a href="{% url 'single1' w.id %}">{{w.Name}}</a></h5>
-						{% else %}
-						<h5><a href="{% url 'single1' id=1 %}">{{w.Name}}</a></h5>
-						{% endif %}
 						<div class="simpleCart_shelfItem">
 							<p><span>${{w.Old_price}}</span> <i class="item_price">${{w.New_price}}</i></p>
 							<form action="#" method="post">
@@ -1112,31 +596,25 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 								<button type="submit" class="w3ls-cart">Add to cart</button>
 							</form>
 						</div>
+						{% endif %}
 					</div>
 				</div>
 				<!-- Mobiles end -->
+
 				<!-- Laptop -->
 				<div class="col-md-3 agileinfo_new_products_grid">
 					<div class="agile_ecommerce_tab_left agileinfo_new_products_grid1">
+						{% if l == 'L' %}
+						<!--<h5><a href="">This is not add product to type.</a></h5>-->
+				        {% else %}
 						<div class="hs-wrapper hs-wrapper1">
 							<img src="{{l.Image.url}}" alt=" " class="img-responsive" />
 							<img src="{{l.Image2.url}}" alt=" " class="img-responsive" />
 							<img src="{{l.Image3.url}}" alt=" " class="img-responsive" />
 							<img src="{{l.Image4.url}}" alt=" " class="img-responsive" />
 							<img src="{{l.Image5.url}}" alt=" " class="img-responsive" />
-							<div class="w3_hs_bottom w3_hs_bottom_sub">
-								<ul>
-									<li>
-										<a href="#" data-toggle="modal" data-target="#myModal2"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
-									</li>
-								</ul>
-							</div>
 						</div>
-						{% if l == None %}
 						<h5><a href="{% url 'single3' l.id %}">{{l.Name}}</a></h5>
-						{% else %}
-						<h5><a href="{% url 'single3' id=1 %}">{{l.Name}}</a></h5>
-						{% endif %}
 						<div class="simpleCart_shelfItem">
 							<p><span>${{l.Old_price}}</span> <i class="item_price">${{l.New_price}}</i></p>
 							<form action="#" method="post">
@@ -1147,31 +625,26 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 								<button type="submit" class="w3ls-cart">Add to cart</button>
 							</form>
 						</div>
+				        {% endif %}
 					</div>
 				</div>
+				<div class="clearfix"> </div>
 				<!-- Laptop end -->
+
 				<!-- Appliances -->
 				<div class="col-md-3 agileinfo_new_products_grid">
 					<div class="agile_ecommerce_tab_left agileinfo_new_products_grid1">
+						{% if h == 'H' %}
+						<!--<h5><a href="">This is not add product to type.</a></h5>-->
+				        {% else %}
 						<div class="hs-wrapper hs-wrapper1">
 							<img src="{{h.Image.url}}" alt=" " class="img-responsive" />
 							<img src="{{h.Image2.url}}" alt=" " class="img-responsive" />
 							<img src="{{h.Image3.url}}" alt=" " class="img-responsive" />
 							<img src="{{h.Image4.url}}" alt=" " class="img-responsive" />
 							<img src="{{h.Image5.url}}" alt=" " class="img-responsive" />
-							<div class="w3_hs_bottom w3_hs_bottom_sub">
-								<ul>
-									<li>
-										<a href="#" data-toggle="modal" data-target="#myModal2"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
-									</li>
-								</ul>
-							</div>
 						</div>
-						{% if h == None %}
 						<h5><a href="{% url 'single2' h.id %}">{{h.Name}}</a></h5>
-						{% else %}
-						<h5><a href="{% url 'single2' id=1 %}">{{h.Name}}</a></h5>
-						{% endif %}
 						<div class="simpleCart_shelfItem">
 							<p><span>${{h.Old_price}}</span> <i class="item_price">${{h.New_price}}</i></p>
 							<form action="#" method="post">
@@ -1182,30 +655,23 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 								<button type="submit" class="w3ls-cart">Add to cart</button>
 							</form>
 						</div>
+				        {% endif %}
 					</div>
 				</div>
-				<!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
+
 				<div class="col-md-3 agileinfo_new_products_grid">
 					<div class="agile_ecommerce_tab_left agileinfo_new_products_grid1">
+						{% if k == 'K' %}
+						<!--<h5><a href="">This is not add product to type.</a></h5>-->
+				        {% else %}
 						<div class="hs-wrapper hs-wrapper1">
 							<img src="{{k.Image.url}}" alt=" " class="img-responsive" />
 							<img src="{{k.Image2.url}}" alt=" " class="img-responsive" />
 							<img src="{{k.Image3.url}}" alt=" " class="img-responsive" />
 							<img src="{{k.Image4.url}}" alt=" " class="img-responsive" />
 							<img src="{{k.Image5.url}}" alt=" " class="img-responsive" />
-							<div class="w3_hs_bottom w3_hs_bottom_sub">
-								<ul>
-									<li>
-										<a href="#" data-toggle="modal" data-target="#myModal2"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
-									</li>
-								</ul>
-							</div>
 						</div>
-						{% if k == None %}
 						<h5><a href="{% url 'single2' k.id %}">{{k.Name}}</a></h5>
-						{% else %}
-						<h5><a href="{% url 'single2' id=1 %}">{{k.Name}}</a></h5>
-						{% endif %}
 						<div class="simpleCart_shelfItem">
 							<p><span>${{k.Old_price}}</span> <i class="item_price">${{k.New_price}}</i></p>
 							<form action="#" method="post">
@@ -1216,30 +682,23 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 								<button type="submit" class="w3ls-cart">Add to cart</button>
 							</form>
 						</div>
+				        {% endif %}
 					</div>
 				</div>
 				<!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
 				<div class="col-md-3 agileinfo_new_products_grid">
 					<div class="agile_ecommerce_tab_left agileinfo_new_products_grid1">
+						{% if c == 'C' %}
+						<!--<h5><a href="">This is not add product to type.</a></h5>-->
+				        {% else %}
 						<div class="hs-wrapper hs-wrapper1">
 							<img src="{{c.Image.url}}" alt=" " class="img-responsive" />
 							<img src="{{c.Image2.url}}" alt=" " class="img-responsive" />
 							<img src="{{c.Image3.url}}" alt=" " class="img-responsive" />
 							<img src="{{c.Image4.url}}" alt=" " class="img-responsive" />
 							<img src="{{c.Image5.url}}" alt=" " class="img-responsive" />
-							<div class="w3_hs_bottom w3_hs_bottom_sub">
-								<ul>
-									<li>
-										<a href="#" data-toggle="modal" data-target="#myModal2"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
-									</li>
-								</ul>
-							</div>
 						</div>
-						{% if c == None %}
 						<h5><a href="{% url 'single2' c.id %}">{{c.Name}}</a></h5>
-						{% else %}
-						<h5><a href="{% url 'single2' id=1 %}">{{c.Name}}</a></h5>
-						{% endif %}
 						<div class="simpleCart_shelfItem">
 							<p><span>${{c.Old_price}}</span> <i class="item_price">${{c.New_price}}</i></p>
 							<form action="#" method="post">
@@ -1250,30 +709,23 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 								<button type="submit" class="w3ls-cart">Add to cart</button>
 							</form>
 						</div>
+				        {% endif %}
 					</div>
 				</div>
 				<!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
 				<div class="col-md-3 agileinfo_new_products_grid">
 					<div class="agile_ecommerce_tab_left agileinfo_new_products_grid1">
+						{% if p == 'P' %}
+						<!--<h5><a href="">This is not add product to type.</a></h5>-->
+				        {% else %}
 						<div class="hs-wrapper hs-wrapper1">
 							<img src="{{p.Image.url}}" alt=" " class="img-responsive" />
 							<img src="{{p.Image2.url}}" alt=" " class="img-responsive" />
 							<img src="{{p.Image3.url}}" alt=" " class="img-responsive" />
 							<img src="{{p.Image4.url}}" alt=" " class="img-responsive" />
 							<img src="{{p.Image5.url}}" alt=" " class="img-responsive" />
-							<div class="w3_hs_bottom w3_hs_bottom_sub">
-								<ul>
-									<li>
-										<a href="#" data-toggle="modal" data-target="#myModal2"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
-									</li>
-								</ul>
-							</div>
 						</div>
-						{% if p == None %}
 						<h5><a href="{% url 'single2' p.id %}">{{p.Name}}</a></h5>
-						{% else %}
-						<h5><a href="{% url 'single2' id=1 %}">{{p.Name}}</a></h5>
-						{% endif %}
 						<div class="simpleCart_shelfItem">
 							<p><span>${{p.Old_price}}</span> <i class="item_price">${{p.New_price}}</i></p>
 							<form action="#" method="post">
@@ -1284,6 +736,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 								<button type="submit" class="w3ls-cart">Add to cart</button>
 							</form>
 						</div>
+						{% endif %}
 					</div>
 				</div>
 				<!-- Appliances end -->
@@ -1313,31 +766,31 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 							visibleItems: 4,
 							animationSpeed: 1000,
 							autoPlay: true,
-							autoPlaySpeed: 3000,    		
+							autoPlaySpeed: 3000,
 							pauseOnHover: true,
 							enableResponsiveBreakpoints: true,
-							responsiveBreakpoints: { 
-								portrait: { 
+							responsiveBreakpoints: {
+								portrait: {
 									changePoint:480,
 									visibleItems: 1
-								}, 
-								landscape: { 
+								},
+								landscape: {
 									changePoint:640,
 									visibleItems:2
 								},
-								tablet: { 
+								tablet: {
 									changePoint:768,
 									visibleItems: 3
 								}
 							}
 						});
-						
+
 					});
 			</script>
 			<script type="text/javascript" src="{% static 'js/jquery.flexisel.js' %}"></script>
 		</div>
 	</div>
-	<!-- //top-brands --> 
+	<!-- //top-brands -->
 	<!-- newsletter -->
 	<div class="newsletter">
 		<div class="container">
@@ -1371,7 +824,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				</div>
 				<div class="col-md-3 w3_footer_grid">
 					<h3>Information</h3>
-					<ul class="info"> 
+					<ul class="info">
 						<li><a href="{% url 'about' %}">About Us</a></li>
 						<li><a href="{% url 'mail' %}">Contact Us</a></li>
 						<li><a href="{% url 'codes' %}">Short Codes</a></li>
@@ -1380,7 +833,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				</div>
 				<div class="col-md-3 w3_footer_grid">
 					<h3>Category</h3>
-					<ul class="info"> 
+					<ul class="info">
 						<li><a href="{% url 'products' allf='Mobile Phone' %}">Mobiles</a></li>
 						<li><a href="{% url 'products1' allf='Laptop' %}">Laptops</a></li>
 						<li><a href="{% url 'products' allf='Smart Watch' %}">Smart Watchs</a></li>
@@ -1391,7 +844,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				</div>
 				<div class="col-md-3 w3_footer_grid">
 					<h3>Profile</h3>
-					<ul class="info"> 
+					<ul class="info">
 						<li><a href="{% url 'index' %}">Home</a></li>
 					</ul>
 					<h4>Follow Us</h4>
@@ -1418,7 +871,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			</div>
 		</div>
 	</div>
-	<!-- //footer --> 
+	<!-- //footer -->
 	<!-- cart-js -->
 	<script src="{% static 'js/minicart.js' %}"></script>
 	<script>
@@ -1430,11 +883,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         	if (this.subtotal() > 0) {
         		items = this.items();
 
-        		for (i = 0, len = items.length; i < len; i++) { 
+        		for (i = 0, len = items.length; i < len; i++) {
         		}
         	}
         });
-    </script>  
-	<!-- //cart-js -->   
+    </script>
+	<!-- //cart-js -->
 </body>
 </html>

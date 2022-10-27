@@ -143,3 +143,4 @@ class Discounts_mobile(models.Model):
     comment = models.TextField(null=True, blank=True)
     Time = models.DateTimeField(auto_now=True)
 
+#Profil

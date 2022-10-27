@@ -23,23 +23,32 @@ from django.conf.urls import static
 '-------------'
 
 urlpatterns = [
-    path('logout/',logout_wiev,name='logout'),
-    path('signin/',signin_wiev,name='signin'),
     #$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     path('admin/', admin.site.urls),
-    path('about/',about,name='about'),
+    path('about',about,name='about'),
     path('codes/',codes,name='codes'),
     path('faq/',faq,name='faq'),
     path('icons/',icons,name='icons'),
     path('',index,name='index'),
     path('mail/',mail,name='mail'),
-    path('mobiles/<allf>/',pro,name='products'),
-    path('gadgets/<allf>/',pro1,name='products1'),
-    path('appliances/<allf>/',pro2,name='products2'),
     path('single/',single1,name='single'),
 
-    path('mobile/<rang>/',mobils, name='mobiles'),
-    path('computer/<rang1>/',Computer,name='compyuter'),
+    # Mobile Type
+    path('mobiles/<allf>/<allf2>',pro_all,name='products'),
+    # Mobile Type end
+
+    path('gadgets/<allf>/',pro1_all,name='products1'),
+    path('Gadgets1/<allf>/<allf2>/',ComSort1,name='comsort1'),
+    path('Gadgets2/<allf>/<allf2>/',ComSort2,name='comsort2'),
+    path('Gadgets3/<allf>/<allf2>/',ComSort3,name='comsort3'),
+
+    path('appliances/<allf>/', pro2_all, name='products2'),
+    path('Appliances1/<allf>/<allf2>/', AppSort1, name='appsort1'),
+    path('Appliances2/<allf>/<allf2>/', AppSort2, name='appsort2'),
+    path('Appliances3/<allf>/<allf2>/', AppSort3, name='appsort3'),
+
+    path('mobile/<allf>/<rang>/',mobils, name='mobiles'),
+    path('gadget/<rang1>/',Computer,name='compyuter'),
     path('appliance/<rang2>/',appliances,name='appliances'),
 
     path('single1/<id>/',single_mobile,name='single1'),

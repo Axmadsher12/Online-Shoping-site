@@ -55,7 +55,7 @@ class admin_ram_compyuter(admin.ModelAdmin):
     list_display = ['id','Ram']
 
 class admin_Discounts_mobile(admin.ModelAdmin):
-    list_display = ['id','Percent','comment','Time']
+    list_display = ['id','Time']
 
 
 admin.site.register(mobile,admin_mobile)
